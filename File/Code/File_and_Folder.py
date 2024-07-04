@@ -1,57 +1,161 @@
 import random
 import os
 import uuid
+import datetime
 
 from ESXi_config import generate_random_string
 from ESXi_config import create_config_file
 from ESXi_config import create_vmware_lic
 from ESXi_config import create_vmdk_file
-from ESXi_config import create_bin
-from ESXi_config import create_dev
-from ESXi_config import create_include
-from ESXi_config import create_lib
-from ESXi_config import create_lib64
-from ESXi_config import create_opt
 from ESXi_config import create_passwd_file
 from ESXi_config import create_fake_datastore
 from ESXi_config import create_hosts_file
 from ESXi_config import create_ssh_keys
 from ESXi_config import create_sshd_config
-from ESXi_config import create_proc
-from ESXi_config import create_usr
-from ESXi_config import create_vmimages
 from ESXi_config import create_vmx_file
-from ESXi_config import create_tardisks
-from ESXi_config import create_tardisks_noauto
 from ESXi_config import create_log_file
 from ESXi_config import create_flat_vmdk
+from ESXi_config import create_directory
+
+def create_esx_bin(base_path="/ESXI 7/bin"):
+    bin_file = {
+        "[": 45,
+        "[[": 4,
+        "ash": 86,
+        "amldump": 86,
+        "apiForwarder": 454786,
+        "apply-host-profiles": 4763,
+        "applyHostProfile": 964,
+        "applyHostProfileWrapper": 964,
+        "authd": 964,
+        "auto-backup": 964,
+        "backup-check.sh": 964,
+        "backup.sh": 964,
+        "BootModuleConfig.sh": 964,
+        "chardevlogger": 964,
+        "check_serial": 964,
+        "chkconfig": 964,
+        "cim_host_powerops": 964,
+        "cim-diagnostic.sh": 964,
+        "cmmds-tool": 964,
+        "crx-cli": 964,
+        "crypto-util": 964,
+        "dcbd": 964,
+        "dcui": 964,
+        "dcuiweasel": 964,
+        "df": 964,
+        "dhclient-uw": 964,
+        "dmesg": 45,
+        "doat": 248,
+        "dosfsck": 14,
+        "enum_instances": 426,
+        "esxcfg-advcfg": 64,
+        "esxcfg-dumppart": 913,
+        "esxcfg-info": 28,
+        "esxcfg-init": 46,
+        "esxcfg-ipsec": 123,
+        "esxcfg-module": 486,
+        "mpath": 746,
+        "esxcli.py": 964,
+        "esxhpcli": 54,
+        "esxhpedit": 524,
+        "esxupdate": 456,
+        "firmwareConfig.py": 964,
+        "generate-certificates": 426,
+        "getAccessToken": 123,
+        "grabCIMData": 453,
+        "host_reboot.sh": 530,
+        "host_shutdown.sh": 264,
+        "hostd-probe.sh": 432,
+        "init-launcher": 44,
+        "initSystemStorage": 145,
+        "initterm.sh": 1768,
+        "install": 34,
+        "lldpnetmap": 43,
+        "loadESXEnable": 176,
+        "lockfile": 425,
+        "netdbg.py": 2351,
+        "nologin": 453,
+        "pmemGC": 453,
+        "powerOffVms": 12,
+        "schedsnapshot": 335,
+        "services.sh": 452,
+        "sharedStorageHostProfile.sh": 52,
+        "shutdown.sh": 12,
+        "slpd": 954,
+        "smartd": 921,
+        "sntp": 453,
+        "storageRM": 454,
+        "summarize-dvfilter": 243,
+        "techsupport.sh": 453,
+        "tmpwatch.py": 475,
+        "vm-support": 452,
+        "vmfs-support": 452,
+        "vmfsfilelockinfo": 4,
+        "VmfsLatencyStats.py": 964,
+        "vmware-autostart.sh": 94,
+        "vmware-vimdump": 64,
+        "vmx": 58,
+        "vmx-buildtype": 96,
+        "vprobe": 527,
+        "watchdog.sh": 964,
+    }
+
+    for name, size in bin_file.items():
+        create_config_file(base_path,name,generate_random_string(size))
 
 
 
+def create_esx_dev(base_path="/ESXI 7/dev"):
+    cbt_path = os.path.join(base_path,"cbt")
+    create_config_file(cbt_path,"control",generate_random_string(15))
 
-def create_esx_config_files(base_path="/ESXI 7"):
-    """Tạo các file cấu hình ESXi 7."""
+    cdrom_path = '/ESXI 7/dev/cdrom/'
+    create_directory(cdrom_path)
 
-#Tạo file trong thư mục chính 
-    Databootbank_1 = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\VM\BOOTBANK1.txt"
-    with open(Databootbank_1, 'r', encoding='utf-8') as f:
-        boot_cfg_content_1 = f.read()  # Đọc nội dung file vào biến chuỗi
-    create_config_file(base_path,"bootbank",boot_cfg_content_1)
+    char_devmgr_path = '/ESXI 7/dev/char/devmgr/'
+    char_mem_path = '/ESXI 7/dev/char/mem/'
+    char_pty_path = '/ESXI 7/dev/char/pty/'
+    char_scsi_trace_path = '/ESXI 7/dev/char/scsi-trace/'
+    char_serial_path = '/ESXI 7/dev/char/serial/'
+    char_tty_path = '/ESXI 7/dev/char/tty/'
+    char_vmkdriver_path = '/ESXI 7/dev/char/vmkdriver/'
+    char_vob_path = '/ESXI 7/dev/char/vob/'
+    char_vscsi_filters_path = '/ESXI 7/dev/char/vscsi-filters/'
+    char_vsoc_path = '/ESXI 7/dev/char/vsoc/'
+    create_directory(char_devmgr_path)
+    create_directory(char_mem_path)
+    create_directory(char_pty_path)
+    create_directory(char_scsi_trace_path)
+    create_directory(char_serial_path)
+    create_directory(char_tty_path)
+    create_directory(char_vmkdriver_path)
+    create_directory(char_vob_path)
+    create_directory(char_vscsi_filters_path)
+    create_directory(char_vsoc_path)
 
-    create_config_file(base_path,"altbootbank",generate_random_string(2))
-    create_config_file(base_path,"bootpart.gz",generate_random_string(80))
-    create_config_file(base_path,"bootpart4kn.gz",generate_random_string(70))
-    create_config_file(base_path,"local.tgz",generate_random_string(15))
-    create_config_file(base_path,"local.tgz.ve",generate_random_string(20))
-    create_config_file(base_path,"locker",generate_random_string(2))
-    create_config_file(base_path,"productLocker",generate_random_string(2))
-    create_config_file(base_path,"sbin",generate_random_string(2))
-    create_config_file(base_path,"scratch",generate_random_string(2))
-    create_config_file(base_path,"store",generate_random_string(2))
+    deltadisks_path = os.path.join(base_path,"deltadisks")
+    create_config_file(deltadisks_path,"control",generate_random_string(15))
 
+    disks_path = os.path.join(base_path,"disks")
+    Disks = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\dev_disks.txt"
+    with open(Disks, 'r', encoding='utf-8') as f:
+        disks_content = f.read()  # Đọc nội dung file vào biến chuỗi
+    create_config_file(disks_path,"disks",disks_content)
 
+    PMemDisk_path = '/ESXI 7/dev/PMemDisk'
+    PMemDS_path = '/ESXI 7/dev/PMemDS'
+    PMemNamespaces_path = '/ESXI 7/dev/PMemNamespaces'
+    PMemVolumes_path = '/ESXI 7/dev/PMemVolumes'
+    vflash_path = '/ESXI 7/dev/vflash'
+    create_directory(PMemDisk_path)
+    create_directory(PMemDS_path)
+    create_directory(PMemNamespaces_path)
+    create_directory(PMemVolumes_path)
+    create_directory(vflash_path)
 
-# Thư mục /etc/vmware
+def create_esx_etc(base_path="/ESXI 7"):
+    # Thư mục /etc/vmware
     vmware_path = os.path.join(base_path, "etc", "vmware")
 
     # Tạo file esx.conf
@@ -299,7 +403,6 @@ def create_esx_config_files(base_path="/ESXI 7"):
     create_config_file(vmware_path, "license.cfg", license_cfg_content)
 
     # Tạo file vmware.lic
-    vmware_path = os.path.join(base_path, "etc", "vmware")
     create_vmware_lic(vmware_path)
 
 #Thư mục /etc
@@ -323,58 +426,11 @@ def create_esx_config_files(base_path="/ESXI 7"):
     create_config_file(ssh_path,".#ssh_host_rsa_key.pub",generate_random_string(12))
 
     #các file trong thư mục etc
-    Datashadow = "S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\shadow"
+    Datashadow = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\shadow"
     with open(Datashadow, 'r', encoding='utf-8') as f:
         content_shadow = f.read()  # Đọc nội dung file vào biến chuỗi 
     create_config_file(etc_path,"shadow",content_shadow)
     create_config_file(etc_path,"rc.local",generate_random_string(50))
-
-    #Tạo /bin
-    bin_path = os.path.join(base_path,"bin")
-    create_bin(bin_path)
-
-    #Tạo /dev
-    dev_path = os.path.join(base_path,"dev")
-    create_dev(dev_path)
-
-    #Tạo /include
-    include_path = os.path.join(base_path,"include")
-    create_include(include_path)
-
-    #Tạo /lib
-    lib_path = os.path.join(base_path,"lib")
-    create_lib(lib_path)
-
-    #Tạo /lib64
-    lib64_path = os.path.join(base_path,"lib64")
-    create_lib64(lib64_path)
-
-    #Tạo /opt
-    opt_path = os.path.join(base_path,"opt")
-    create_opt(opt_path)
-
-    #Tạo /proc
-    proc_path = os.path.join(base_path,"proc")
-    create_proc(proc_path)
-
-    #Tạo /usr
-    usr_path = os.path.join(base_path,"usr")
-    create_usr(usr_path)
-    # create_config_file(usr_path,"bin",)
-
-    #Tạo /vmimages
-    vmimages_path = os.path.join(base_path,"vmimages")
-    create_vmimages(vmimages_path)
-    # Tạo /tardisks
-    tardisks_path = os.path.join(base_path, "tardisks")
-    create_tardisks(tardisks_path)
-
-    # Tạo /tardisks.noauto
-    tardisks_noauto_path = os.path.join(base_path, "tardisks.noauto")
-    create_tardisks_noauto(tardisks_noauto_path)
-
-    # Tạo datastore giả mạo
-    create_fake_datastore(base_path, "NVmeDataStore",80 )
 
     # Tạo file vmkiscsid/iscsid.conf
     vmkiscsid_path = os.path.join(vmware_path, "vmkiscsid")
@@ -422,7 +478,6 @@ def create_esx_config_files(base_path="/ESXI 7"):
     create_config_file(network_path, "vnic.conf", vnic_conf_content)
 
     # Tạo file passwd
-    vmware_path = os.path.join(base_path, "etc", "vmware")
     create_passwd_file(etc_path)
 
     # Tạo file system/custom_config.xml
@@ -476,20 +531,251 @@ def create_esx_config_files(base_path="/ESXI 7"):
     """
     create_config_file(vmware_path, "vsanmgmtd.conf", vsanmgmtd_conf_content)
 
-# Thư mục vmfs
+def create_esx_include(base_path="/ESXI 7/include"):
+    include_path = os.path.join(base_path,"python3.8")
+    create_config_file(include_path,"pyconfig.h",generate_random_string(1024))
+
+def create_esx_lib(security_path="/ESXI 7/lib/security"):
+    create_directory(security_path)
+
+def create_esx_lib64():
+    pcsc_path = '/ESXI 7/lib64/pcsc/drivers/ifd-ccid.bundle/Contents/'
+    pcsc_linux_path = '/ESXI 7/lib64/pcsc/drivers/ifd-ccid.bundle/Contents/Linux/'
+    create_config_file(pcsc_path,"Info.plist",generate_random_string(1024))
+    create_config_file(pcsc_linux_path,"libccid.so",generate_random_string(1024))
+
+    python3_5_path = '/ESXI 7/lib64/python3.5/site-packages/loadesxLive/borautils/'
+    create_config_file(python3_5_path,"elfbin.pyc",generate_random_string(14))
+    create_config_file(python3_5_path,"exception.pyc",generate_random_string(1))
+    create_config_file(python3_5_path,"libelf.so",generate_random_string(130))
+
+    python_load_path = '/ESXI 7/lib64/python3.5/site-packages/loadesxLive/'
+    create_config_file(python_load_path,"__init__.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"bootInfo.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"common.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"device.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"driverList.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"kernel.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"runLoadEsx.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"secureBoot.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"stmCompList.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"utils.pyc",generate_random_string(1024))
+    create_config_file(python_load_path,"vimutils.pyc",generate_random_string(1024))
+
+    python_vmware_path = '/ESXI 7/lib64/python3.5/site-packages/vmware/'
+    create_config_file(python_vmware_path,"esximage",generate_random_string(1024))
+    
+def create_esx_opt():
+    opt_nvme = '/ESXI 7/opt/vmware/nvme/'
+    create_config_file(opt_nvme,"esxcli-nvme-plugin",generate_random_string(1024))
+
+    opt_vmware = '/ESXI 7/opt/vmware/vpxa/vpx/'
+    create_config_file(opt_vmware,"bundleversion.xml",generate_random_string(1024))
+    create_config_file(opt_vmware,"vpxResultFilter.xml",generate_random_string(1024))
+
+def create_esx_proc(proc="/ESXI 7/proc/"):
+    create_directory(proc)
+
+
+def create_esx_tardisks(tardisks_path='/ESXI 7/tardisks/'):
+    """Tạo thư mục và file giả mạo trong /tardisks."""
+    os.makedirs(tardisks_path, exist_ok=True)
+
+    # File metadata giả mạo
+    metadata_content = f"""
+    {{
+        "created": "{datetime.datetime.now().isoformat()}",
+        "patches": [
+            {{
+                "name": "fake-patch-1",
+                "version": "1.2.3",
+                "status": "installed"
+            }},
+            {{
+                "name": "fake-patch-2",
+                "version": "4.5.6",
+                "status": "staged"
+            }}
+        ]
+    }}
+    """
+    create_config_file(tardisks_path, "metadata.json", metadata_content)
+    # File patch giả mạo
+    create_config_file(tardisks_path, "fake-patch-1.vib", generate_random_string(1024))
+
+    # Các file giả mạo ESXi
+    esxi_files = {
+        "atlantic.v00": 1414,
+        "basemisc.tgz": 11430,
+        "bnxtnet.v00": 919,
+        "brcmfcoe.v00": 2227,
+        "elx_esx_.v00": 2317,
+        "elxiscsi.v00": 565,
+        "esx_ui.v00": 22641,
+        "esxupdt.v00": 2292,
+        "iavmd.v00": 742,
+        "gc.v00": 1024,
+        "irdman.v00": 1024,
+        "loadesx.v00": 3586,
+        "lpfc.v00": 3009,
+        "lpnic.v00": 635,
+        "vmkata.v00": 163431,
+        "vmkata.v00": 202,
+        "vmw_ahci.v00": 348,
+        "vmware_e.v00": 199,
+        "vmx.v00": 122337,
+        "vsan.v00": 41470,
+        "vsanheal.v00": 8356,
+        "vsanmgmt.v00": 26437,
+        "weaselin.v00": 2701,
+        "xorg.v00": 3438,
+    }
+    for filename, size in esxi_files.items():
+        create_config_file(tardisks_path, filename, generate_random_string(size))
+
+def create_esx_tardisks_noauto(base_path="/ESXI 7"):
+    noauto = '/ESXI 7/tardisks_noauto/'
+    create_directory(noauto)
+
+def create_esx_tmp():
+    tmp_folder = {
+        '/ESXI 7/tmp/vmware-root/',
+        '/ESXI 7/tmp/vmware-root_68260-1619746241/',
+        '/ESXI 7/tmp/vmware-uid_0/',
+        '/ESXI 7/tmp/vmware-root_85464_5645446546/',
+        '/ESXI 7/tmp/vmware-root_54545_8454548451/',
+    }
+    for path in tmp_folder:
+        create_directory(path)
+
+
+def create_esx_usr(usr ="/ESXI 7/usr"):
+    create_config_file(usr,"bin",generate_random_string(561))
+    create_config_file(usr,"sbin",generate_random_string(561))
+
+    lib64 = '/ESXI 7/usr/lib64/'
+    create_directory(lib64)
+
+    libexec = '/ESXI 7/usr/libexec/'
+    create_directory(libexec)
+
+
+    share = '/ESXI 7/usr/share/'
+    create_directory(share)
+
+
+
+    lib = os.path.join(usr,"lib")
+    create_config_file(lib,"libboost_zlib-gcc48-mt-1_55.so.1.55.0",generate_random_string(1024))
+    create_config_file(lib,"libboost_zlib-gcc48-mt-d-1_55.so.1.55.0",generate_random_string(1024))
+
+    lib_ssl = os.path.join(usr,"lib","ssl")
+    create_config_file(lib_ssl,"cert.pem",generate_random_string(2541))
+    create_config_file(lib_ssl,"certs",generate_random_string(2541))
+    create_config_file(lib_ssl,"openssl.cnf",generate_random_string(2541))
+
+    lib_vmware = os.path.join(usr,"lib","vmware")
+    create_config_file(lib_vmware,"esxcli-software",generate_random_string(545))
+
+    lib_locale = os.path.join(usr,"lib","locale")
+    create_config_file(lib_locale,"locale-archive",generate_random_string(954))
+
+def create_esx_var(base_path="/ESXI 7/var"):
+    esximg = '/ESXI 7/var/db/esximg/'
+    create_directory(esximg)
+
+    payload = '/ESXI 7/var/db/payloads/'
+    create_directory(payload)
+
+    vm = '/ESXI 7/var/lib/vmware/'
+    create_directory(vm)
+
+    sfcb = '/ESXI 7/var/lib/sfcb/registration/'
+    create_directory(sfcb)
+
+    installer = '/ESXI 7/var/lib/initenvs/installer/'
+    create_directory(installer)
+
+    dhcp = '/ESXI 7/var/lib/dhcp/'
+    create_directory(dhcp)
+
+    token = '/ESXI 7/var/lock/eToken/'
+    create_directory(token)
+
+    lock = '/ESXI 7/var/lock/iscsi/'
+    create_config_file(lock,"lock",generate_random_string(55))
+
+    opt = '/ESXI 7/var/opt/'
+    create_directory(opt)
+
+    cron = '/ESXI 7/var/spool/cron/crontabs/'
+    create_config_file(cron,".#root",generate_random_string(65))
+    create_config_file(cron,"root",generate_random_string(65))
+
+    # Thư mục /var/log/vmware
+    log_vmware = '/ESXI 7/var/log/vmware/journal/'
+    create_directory(log_vmware)
+
+    log_path = '/ESXI 7/var/log/'
+    log_file = {
+        ".vmsyslogd.err": 1,
+        "apiForwarder.log": 50,
+        "attestd.log": 30,
+        "auth.log": 25,
+        "boot.gz": 65,
+        "clusterAgent.log": 1,
+        "cmmdsd.log": 1,
+        "cmmdsTimeMachine.log": 1,
+        "cmmdsTimeMachineDump.log": 1,
+        "configRP.log": 52,
+        "configstore-boot.log": 12,
+        "dhclient.log": 1,
+        "dpd.log": 1,
+        "esxcli.log": 1,
+        "epd.log": 1,
+        "esxgdpd.log": 1,
+        "esxtokend.log": 1,
+        "esxupdate.log": 1,
+        "hostd.log": 1,
+        "init.log": 1,
+        "vmkernel.log": 1,
+    }
+    for filename, size in log_file.items():
+        create_config_file(log_path,filename,generate_random_string(size))
+    
+    var_file = {
+        "cache": 56,
+        "core": 45,
+        "tmp": 65,
+        "vmware":32,
+    }
+    for name, varsize in var_file.items():
+        create_config_file(base_path,name,generate_random_string(varsize))
+
+
+
+    # Thư mục /var/db/vmware
+    var_db_vmware_path = os.path.join(base_path, "db", "vmware")
+    create_config_file(var_db_vmware_path, "vmInventory.db", "")
+    create_config_file(var_db_vmware_path, "vpxd.db", "")
+
+def create_esx_vmfs(base_path="/ESXI 7"):
+    # Thư mục vmfs
+    # Tạo datastore giả mạo
+    create_fake_datastore(base_path, "NVmeDataStore",80 )
     # Thư mục vmfs/volumes/bootbank
     bootbank_path = os.path.join(base_path, "vmfs", "volumes")
-    Databootbank_1 = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\VM\BOOTBANK1.txt"
+    Databootbank_1 = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\BOOTBANK1.txt"
     with open(Databootbank_1, 'r', encoding='utf-8') as f:
         boot_cfg_content_1 = f.read()  # Đọc nội dung file vào biến chuỗi
-    Databootbank_2 = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\VM\BOOTBANK2.txt"
+    Databootbank_2 = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\BOOTBANK2.txt"
     with open(Databootbank_2, 'r', encoding='utf-8') as f:
         boot_cfg_content_2 = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(bootbank_path, "BOOTBANK1", boot_cfg_content_1)
     create_config_file(bootbank_path, "BOOTBANK2", boot_cfg_content_2)
 
     #Tạo OSDATA
-    OSDA = "S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\OSDATA.txt"
+    OSDA = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\OSDATA.txt"
     with open(OSDA, 'r', encoding='utf-8') as f:
         content = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(bootbank_path,f"OSDATA-{str(uuid.uuid4())}",content)
@@ -499,23 +785,17 @@ def create_esx_config_files(base_path="/ESXI 7"):
 
     #Thư mục vmfs/devices
     device_path = os.path.join(base_path,"vmfs")
-    devices_content = "S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\device.txt"
+    devices_content = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\device.txt"
     with open(devices_content, 'r', encoding='utf-8') as f:
         data_devices_content = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(device_path,"devices",data_devices_content)
-
-    # Thư mục /var/log/vmware
-    var_log_vmware_path = os.path.join(base_path, "var", "log", "vmware")
-    create_config_file(var_log_vmware_path, "hostd.log", "")
-    create_config_file(var_log_vmware_path, "vpxa.log", "")
-
 
     # Tạo cấu trúc máy ảo Windows, Kali-Linux và Ubuntu
     domain = "example.com"
     for _ in range(10):
         # Chọn ngẫu nhiên loại máy ảo
         vm_type = random.choice(["Windows", "Kali-Linux","Ubuntu"])
-        # vm_type = "Window"
+        vm = "Window"
         vm_name = f"{vm_type}"
         version_window = random.choice(["7","8","10","11"])
         number = f"{version_window}"
@@ -523,8 +803,8 @@ def create_esx_config_files(base_path="/ESXI 7"):
         name = "vmware"
 
         # Tạo thư mục VM
-        if vm_type == "Window":
-            Datawindow = "S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\Window 10.vmx"
+        if vm == "Window":
+            Datawindow = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\Window 10.vmx"
             with open(Datawindow, 'r', encoding='utf-8') as f:
                 vmx_content = f.read()  # Đọc nội dung file vào biến chuỗi
             vm_path = os.path.join(base_path, 'vmfs', 'volumes','NVmeDataStore', vm_name_Window)
@@ -549,7 +829,7 @@ def create_esx_config_files(base_path="/ESXI 7"):
 
 
         elif vm_type == "Kali-Linux":
-            DataLinux = "S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\Window 10.vmx"
+            DataLinux = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\Window 10.vmx"
             with open(DataLinux, 'r', encoding='utf-8') as f:
                 vmx_content = f.read()  # Đọc nội dung file vào biến chuỗi
             vm_path = os.path.join(base_path, 'vmfs', 'volumes','NVmeDataStore', vm_name)
@@ -557,7 +837,6 @@ def create_esx_config_files(base_path="/ESXI 7"):
             # Tạo file VMX
             vmx_file = create_vmx_file(domain, vm_path, vm_name)
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
-            print(f"File VMX giả mạo cho {vm_name} đã được tạo: {vmx_file}")
             # Tạo file log
             create_log_file(vm_path,name + ".log")
             # Tạo file VMDK
@@ -577,7 +856,7 @@ def create_esx_config_files(base_path="/ESXI 7"):
 
 
         elif vm_type == "Ubuntu":
-            DataUbuntu = "S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\Window 10.vmx"
+            DataUbuntu = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\Window 10.vmx"
             with open(DataUbuntu, 'r', encoding='utf-8') as f:
                 vmx_content = f.read()  # Đọc nội dung file vào biến chuỗi
             vm_path = os.path.join(base_path, 'vmfs', 'volumes','NVmeDataStore', vm_name)
@@ -597,22 +876,55 @@ def create_esx_config_files(base_path="/ESXI 7"):
             #Tạo file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
             
+def create_esx_vmimages(vmimages ="/ESXI 7/vmimages"):
+    create_config_file(vmimages,"floppies",generate_random_string(15))
+    create_config_file(vmimages,"tools-isoimages",generate_random_string(15))
 
+def create_esx_config_files(base_path="/ESXI 7"):
+    """Tạo các file cấu hình ESXi 7."""
 
-    # Thư mục /tmp
-    tmp_path = os.path.join(base_path, "tmp")
-    tmp_content = generate_random_string(1024)
-    create_config_file(tmp_path, "tmp_file.txt", tmp_content)
+#Tạo file trong thư mục chính 
+    Databootbank_1 = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\BOOTBANK1.txt"
+    with open(Databootbank_1, 'r', encoding='utf-8') as f:
+        boot_cfg_content_1 = f.read()  # Đọc nội dung file vào biến chuỗi
+    create_config_file(base_path,"bootbank",boot_cfg_content_1)
 
-    # Thư mục /var/db/vmware
-    var_db_vmware_path = os.path.join(base_path, "var", "db", "vmware")
-    create_config_file(var_db_vmware_path, "vmInventory.db", "")
-    create_config_file(var_db_vmware_path, "vpxd.db", "")
+    create_config_file(base_path,".#encryption.info",generate_random_string(2))
+    create_config_file(base_path,".mtoolsrc",generate_random_string(2))
+    create_config_file(base_path,"altbootbank",generate_random_string(2))
+    create_config_file(base_path,"bootpart.gz",generate_random_string(80))
+    create_config_file(base_path,"bootpart4kn.gz",generate_random_string(70))
+    create_config_file(base_path,"local.tgz",generate_random_string(15))
+    create_config_file(base_path,"local.tgz.ve",generate_random_string(20))
+    create_config_file(base_path,"locker",generate_random_string(2))
+    create_config_file(base_path,"productLocker",generate_random_string(2))
+    create_config_file(base_path,"sbin",generate_random_string(2))
+    create_config_file(base_path,"scratch",generate_random_string(2))
+    create_config_file(base_path,"store",generate_random_string(2))
 
 
 if __name__ == "__main__":
     create_esx_config_files()
+    create_esx_bin()
+    create_esx_dev()
+    create_esx_etc()
+    create_esx_include()
+    create_esx_lib()
+    create_esx_lib64()
+    create_esx_opt()
+    create_esx_proc()
+    create_esx_tardisks()
+    create_esx_tardisks_noauto()
+    create_esx_tmp()
+    create_esx_usr()
+    create_esx_var()
+    create_esx_vmfs()
+    create_esx_vmimages()
     print("Các file cấu hình ESXi 7 đã được tạo thành công!")
+
+
+
+
     # while True:
     #     lua_chon = input("Bạn có muốn chạy chương trình? (Yes/No): ").lower()
     #     if lua_chon in ["Y","y"]:
