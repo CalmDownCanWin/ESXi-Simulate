@@ -1,0 +1,21 @@
+2024-07-08 03:04:19,383 - INFO - [TELNET] Connection from ('192.168.79.133', 53822)
+2024-07-08 03:08:22,146 - INFO - [TELNET] Connection from ('192.168.79.133', 55484)
+2024-07-08 03:12:29,049 - INFO - [TELNET] Connection from ('127.0.0.1', 40428)
+2024-07-08 03:15:05,379 - INFO - [TELNET] Connection from ('127.0.0.1', 40282)
+2024-07-08 03:15:14,018 - INFO - [TELNET] ('127.0.0.1', 40282) - Username: usertest, Password: 123456
+2024-07-08 03:15:14,019 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:15:26,680 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:15:29,159 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:16:06,398 - INFO - [TELNET] Connection from ('192.168.79.133', 60298)
+2024-07-08 03:29:35,993 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:35:07,776 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:53:21,618 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:54:37,589 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:56:06,682 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 03:58:15,402 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 04:02:13,727 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 04:05:36,876 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 04:06:35,042 - ERROR - [!] Lỗi kết nối đến SOC.
+2024-07-08 04:36:42,230 - INFO - [TELNET] Connection from ('127.0.0.1', 33276)
+2024-07-08 04:37:11,112 - INFO - [TELNET] ('127.0.0.1', 33276) - Username: usertest, Password: 123456
+2024-07-08 04:51:27,659 - INFO - [TELNET] Connection from ('127.0.0.1', 39404)
