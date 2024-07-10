@@ -6,12 +6,8 @@ import datetime
 import uuid
 import subprocess
 
-def read_text_files(directory_path):
-  """Đọc dữ liệu từ tất cả các file text trong thư mục.
 
-  Args:
-    directory_path: Đường dẫn đến thư mục chứa các file text.
-  """
+def read_text_files(directory_path):
   for filename in os.listdir(directory_path):
     if filename.endswith(".txt"):  # Kiểm tra đuôi file
       full_path = os.path.join(directory_path, filename)
@@ -29,67 +25,16 @@ def generate_random_string(length):
 def create_config_file(path, filename, content):
     """Tạo file cấu hình với nội dung ngẫu nhiên."""
     # Tạo thư mục nếu chưa tồn tại
-    os.makedirs(path, exist_ok=True)
+    if not os.path.exists(path):
+        os.makedirs(path, exist_ok=True)
     with open(os.path.join(path, filename), 'w', encoding='utf-8') as f:
         f.write(content)
 
-def create_tardisks(path):
-    """Tạo thư mục và file giả mạo trong /tardisks."""
-    os.makedirs(path, exist_ok=True)
-    
-    # File metadata giả mạo
-    metadata_content = f"""
-    {{
-        "created": "{datetime.datetime.now().isoformat()}",
-        "patches": [
-            {{
-                "name": "fake-patch-1",
-                "version": "1.2.3",
-                "status": "installed"
-            }},
-            {{
-                "name": "fake-patch-2",
-                "version": "4.5.6",
-                "status": "staged"
-            }}
-        ]
-    }}
-    """
-    create_config_file(path, "metadata.json", metadata_content)
-
-    # File patch giả mạo
-    fake_patch_content = generate_random_string(1024) # Nội dung giả
-    create_config_file(path, "fake-patch-1.vib", fake_patch_content)
-def create_tardisks_noauto(path):
-    """Tạo thư mục /tardisks.noauto (thường trống)."""
-    os.makedirs(path, exist_ok=True)
-def create_bin(path):
-    """Tạo thư mục /bin"""
-    os.makedirs(path, exist_ok=True)
-def create_dev(path):
-    """Tạo thư mục /dev"""
-    os.makedirs(path, exist_ok=True)
-def create_include(path):
-    """Tạo thư mục /inculde"""
-    os.makedirs(path, exist_ok=True)
-def create_lib(path):
-    """Tạo thư mục /lib"""
-    os.makedirs(path, exist_ok=True)
-def create_lib64(path):
-    """Tạo thư mục /lib64"""
-    os.makedirs(path, exist_ok=True)
-def create_opt(path):
-    """Tạo thư mục /opt"""
-    os.makedirs(path, exist_ok=True)
-def create_proc(path):
-    """Tạo thư mục /proc"""
-    os.makedirs(path, exist_ok=True) 
-def create_usr(path):
-    """Tạo thư mục /usr"""
-    os.makedirs(path, exist_ok=True)
-def create_vmimages(path):
-    """Tạo thư mục /vmimages"""
-    os.makedirs(path, exist_ok=True)
+def create_directory(path):
+  try:
+    os.makedirs(path, exist_ok=True)  
+  except OSError as e:
+    print(f"Lỗi khi tạo thư mục: {e}")
 
 def create_passwd_file(path):
     """Tạo file /etc/vmware/passwd giả mạo."""
@@ -169,7 +114,6 @@ def create_fake_datastore(base_path, datastore_name,size_gb):
     filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
     with open(os.path.join(datastore_path, filename), 'w') as f:
         f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
-    print(f"[+] Đã tạo datastore giả mạo: {datastore_path}")
 
 def create_sshd_config(path, fake_port=None, allowed_ips=None):
     """Tạo file /etc/ssh/sshd_config giả mạo."""
@@ -277,8 +221,6 @@ def create_ssh_keys(path):
         subprocess.run(["ssh-keygen", "-t", "rsa", "-b", "4096", "-f", rsa_key_path, "-N", ""], check=True)
         # Tạo ECDSA key
         subprocess.run(["ssh-keygen", "-t", "ecdsa", "-b", "521", "-f", ecdsa_key_path, "-N", ""], check=True)
-
-        print(f"Đã tạo các key SSH tại: {path}")
     else:
         print(f"Các key SSH đã tồn tại tại: {path}")
 
@@ -332,7 +274,7 @@ def create_flat_vmdk(path, vm_name, size_gb=100):
     """
     create_config_file(path, filename, content)
 
-def create_vmx_file(domain, path, vm_name_window, template_path="S:\Summer2024\IAP491_G2\Code\Luaga\File_Example\Window 10.vmx"):
+def create_vmx_file(domain, path, vm_name_window, template_path="S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\Window 10.vmx"):
     """Tạo file VMX giả mạo với token ẩn."""
     file_id = str(uuid.uuid4()).replace("-", "")
     vmx_name = f"{vm_name_window}.vmx"
