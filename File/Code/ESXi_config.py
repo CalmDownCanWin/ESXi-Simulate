@@ -40,9 +40,10 @@ def create_passwd_file(path):
     """Tạo file /etc/vmware/passwd giả mạo."""
     content = """
     # Thông tin tài khoản người dùng (Deception)
-    root:x:0:0:root:/root:/bin/bash
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
     daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-    bin:x:2:2:bin:/bin:/usr/sbin/nologin
     sys:x:3:3:sys:/dev:/usr/sbin/nologin
     adm:x:4:4:adm:/var/adm:/usr/sbin/nologin
     lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
@@ -52,12 +53,10 @@ def create_passwd_file(path):
     games:x:12:100:games:/usr/games:/usr/sbin/nologin
     gopher:x:13:30:gopher:/usr/lib/gopher-data:/usr/sbin/nologin
     ftp:x:14:50:FTP User:/var/ftp:/usr/sbin/nologin
-    nobody:x:99:99:Nobody:/:/usr/sbin/nologin
     vcsa:x:69:69:virtual console:/dev:/sbin/nologin
     ntp:x:38:38::/etc/ntp:/sbin/nologin
     nscd:x:28:28:NSCD Daemon:/:/usr/sbin/nologin
     dbus:x:81:81:System message bus:/:/usr/sbin/nologin
-    haldaemon:x:68:68:HAL daemon:/:/usr/sbin/nologin
     avahi:x:70:70:Avahi daemon:/:/usr/sbin/nologin
     rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/usr/sbin/nologin
     nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/usr/sbin/nologin
