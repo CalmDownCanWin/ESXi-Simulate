@@ -7,17 +7,6 @@ import uuid
 import subprocess
 
 
-def read_text_files(directory_path):
-  for filename in os.listdir(directory_path):
-    if filename.endswith(".txt"):  # Kiểm tra đuôi file
-      full_path = os.path.join(directory_path, filename)
-      try:
-        with open(full_path, 'r', encoding='utf-8') as f:
-          data = f.read()
-          print(f"Nội dung file {filename}:\n{data}\n")
-      except Exception as e:
-        print(f"Lỗi khi đọc file {filename}: {e}")
-
 def generate_random_string(length):
     """Tạo một chuỗi ký tự ngẫu nhiên."""
     return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(length))
