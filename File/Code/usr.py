@@ -5,9 +5,32 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 
 def create_esx_usr(usr ="/ESXI 7/usr"):
+#File trong folder usr
     create_config_file(usr,"bin",generate_random_string(561))
     create_config_file(usr,"sbin",generate_random_string(561))
 
+#Folder /usr/lib
+    lib = os.path.join(usr,"lib")
+    create_config_file(lib,"libboost_zlib-gcc48-mt-1_55.so.1.55.0",generate_random_string(1024))
+    create_config_file(lib,"libboost_zlib-gcc48-mt-d-1_55.so.1.55.0",generate_random_string(1024))
+    #Folder ssl
+    lib_ssl = os.path.join(lib,"ssl")
+    create_config_file(lib_ssl,"cert.pem",generate_random_string(2541))
+    create_config_file(lib_ssl,"certs",generate_random_string(2541))
+    create_config_file(lib_ssl,"openssl.cnf",generate_random_string(2541))
+    #Folder vmware
+    lib_vmware = os.path.join(lib,"vmware")
+    create_config_file(lib_vmware,"esxcli-software",generate_random_string(545))
+    #Tạo file /usr/lib/vmware/hostd/docroot/ui/index.html
+    ui = '/ESXI 7/usr/lib/vmware/hostd/docroot/ui/'
+    create_config_file(ui,"index.html",generate_random_string(1024))
+
+    #Folder locale
+    lib_locale = os.path.join(lib,"locale")
+    create_config_file(lib_locale,"locale-archive",generate_random_string(954))
+
+
+#Folder /usr/lib64/
     lib64 = '/ESXI 7/usr/lib64/'
     create_directory(os.path.join(lib64,"cim"))
 
@@ -38,7 +61,7 @@ def create_esx_usr(usr ="/ESXI 7/usr"):
     for lin,lis in li_file.items():
         create_config_file(lib64,lin,generate_random_string(lis))
     
-
+#Folder /usr/libexec
     libexec = '/ESXI 7/usr/libexec/'
     create_config_file(libexec,"pci-info",generate_random_string(1))
 
@@ -47,7 +70,7 @@ def create_esx_usr(usr ="/ESXI 7/usr"):
 
     create_directory(os.path.join(libexec,"vmwauth","lib64"))
 
-
+#Folder //usr/share
     share = '/ESXI 7/usr/share/'
     sha_folder = {
         "certs",
@@ -65,18 +88,3 @@ def create_esx_usr(usr ="/ESXI 7/usr"):
         create_directory(os.path.join(share,shan))
 
 
-
-    lib = os.path.join(usr,"lib")
-    create_config_file(lib,"libboost_zlib-gcc48-mt-1_55.so.1.55.0",generate_random_string(1024))
-    create_config_file(lib,"libboost_zlib-gcc48-mt-d-1_55.so.1.55.0",generate_random_string(1024))
-
-    lib_ssl = os.path.join(usr,"lib","ssl")
-    create_config_file(lib_ssl,"cert.pem",generate_random_string(2541))
-    create_config_file(lib_ssl,"certs",generate_random_string(2541))
-    create_config_file(lib_ssl,"openssl.cnf",generate_random_string(2541))
-
-    lib_vmware = os.path.join(usr,"lib","vmware")
-    create_config_file(lib_vmware,"esxcli-software",generate_random_string(545))
-
-    lib_locale = os.path.join(usr,"lib","locale")
-    create_config_file(lib_locale,"locale-archive",generate_random_string(954))
