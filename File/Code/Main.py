@@ -65,36 +65,23 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
 
 
 if __name__ == "__main__":
-    # create_esx_config_files()
-    # create_esx_bin()
-    # create_esx_dev()
-    # create_esx_etc()
-    # create_esx_include()
-    # create_esx_lib()
-    # create_esx_lib64()
-    # create_esx_opt()
-    # create_esx_proc()
-    # create_esx_tardisks()
-    # create_esx_tardisks_noauto()
-    # create_esx_tmp()
-    # create_esx_usr()
-    # create_esx_var()
+    create_esx_config_files()
+    create_esx_bin()
+    create_esx_dev()
+    create_esx_etc()
+    create_esx_include()
+    create_esx_lib()
+    create_esx_lib64()
+    create_esx_opt()
+    create_esx_proc()
+    create_esx_tardisks()
+    create_esx_tardisks_noauto()
+    create_esx_tmp()
+    create_esx_usr()
+    create_esx_var()
     create_esx_vmfs()
-    # create_esx_vmimages()
+    create_esx_vmimages()
 
-    # # start_Luaga()
-    # monitor_Luaga_log()
+    start_Luaga()
+    monitor_Luaga_log()
     print("Các file cấu hình ESXi 7 đã được tạo thành công!")
-
-
-    # while True:
-    #     lua_chon = input("Bạn có muốn chạy chương trình? (Yes/No): ").lower()
-    #     if lua_chon in ["Y","y"]:
-    #         create_esx_config_files()
-    #         print("Các file cấu hình ESXi 7 đã được tạo thành công!")
-    #         break  # Thoát khỏi vòng lặp sau khi chạy
-    #     elif lua_chon in ["N", "n"]:
-    #         print("Đã hủy chạy chương trình.")
-    #         break  # Thoát khỏi vòng lặp
-    #     else:
-    #         print("Lựa chọn không hợp lệ. Vui lòng nhập 'có' hoặc 'không'.")
