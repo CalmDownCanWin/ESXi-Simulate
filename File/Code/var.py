@@ -1,8 +1,13 @@
 import os
+import random
 
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
+from ESXi_config import generate_log_entry
+
+
+
 
 def create_esx_var(base_path="/ESXI 7/var"):
     esximg = '/ESXI 7/var/db/esximg/'
@@ -74,7 +79,6 @@ def create_esx_var(base_path="/ESXI 7/var"):
         ".vmsyslogd.err": 1,
         "apiForwarder.log": 50,
         "attestd.log": 30,
-        "auth.log": 25,
         "boot.gz": 65,
         "clusterAgent.log": 1,
         "cmmdsd.log": 1,
@@ -124,6 +128,15 @@ def create_esx_var(base_path="/ESXI 7/var"):
     }
     for filename, size in log_file.items():
         create_config_file(log_path,filename,generate_random_string(size))
+
+    auth_file = '/ESXI 7/var/log/auth.log'
+    attacker_ips = ["192.168.1.1", "192.168.1.2", "192.168.1.162", "192.168.1.16", "192.168.1.24"]
+    with open(auth_file, "w") as f:
+        for _ in range(2):
+            attacker_ip = random.choice(attacker_ips)
+            log_entry = generate_log_entry(attacker_ip)
+            f.write(f"{log_entry}\n")
+    
     
     var_file = {
         "cache": 56,

@@ -30,11 +30,12 @@ def create_esx_vmfs(base_path="/ESXI 7"):
     OSDA = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\OSDATA.txt"
     with open(OSDA, 'r', encoding='utf-8') as f:
         content = f.read()  # Đọc nội dung file vào biến chuỗi
+    # Kiểm tra xem đã có file OSDATA trong thư mục hay chưa
+    for filename in os.listdir(bootbank_path):
+        if filename.startswith("OSDATA"):
+            return  # Nếu có file OSDATA rồi thì thoát khỏi hàm
     create_config_file(bootbank_path,f"OSDATA-{str(uuid.uuid4())}",content)
-
-    #Tạo các folder với tên uuid 
-
-
+ 
     #Thư mục vmfs/devices
     device_path = os.path.join(base_path,"vmfs")
     devices_content = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\device.txt"

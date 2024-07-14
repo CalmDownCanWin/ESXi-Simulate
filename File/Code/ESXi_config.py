@@ -1,11 +1,10 @@
 import os
 import random
 import string
-import xml.etree.ElementTree as ET
 import datetime
 import uuid
 import subprocess
-
+import shutil
 
 def generate_random_string(length):
     """Tạo một chuỗi ký tự ngẫu nhiên."""
@@ -99,6 +98,9 @@ def create_fake_datastore(base_path, datastore_name,size_gb):
     """Mô phỏng datastore bằng cách tạo thư mục và file."""
     datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
     os.makedirs(datastore_path, exist_ok=True)
+    # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
+    if os.listdir(datastore_path):
+        return 
     filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
     with open(os.path.join(datastore_path, filename), 'w') as f:
         f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
@@ -301,3 +303,29 @@ def create_script(path, filename):
     with open(os.path.join(path, filename), 'w') as f:
         f.write("# This is a sample script\n")
         f.write("echo \"Hello, world!\"\n")
+
+
+def generate_log_entry(attacker_ip, timestamp=None):
+    """Tạo một dòng log Cowrie giả mạo."""
+    if timestamp is None:
+        timestamp = datetime.datetime.now().isoformat()
+
+    # Tạo các thông tin ngẫu nhiên cho dòng log
+    event_type = random.choice(["SSH"])
+    event_action = random.choice(["login", "command", "disconnect"])
+    username = random.choice(["admin", "root", "user"])
+    command = random.choice(["ls", "pwd", "whoami", "uname -a", "date"])
+
+    # Tạo dòng log
+    log_entry = f"{timestamp} {event_type} {event_action} from {attacker_ip} as {username} [{command}]"
+    return log_entry
+
+def delete_esx_files(base_path):
+    """Xóa file và folder đã được tạo trước đó."""
+    try:
+        shutil.rmtree(base_path)
+        print(f"Đã xóa tất cả file và folder trong: {base_path}")
+    except FileNotFoundError:
+        print(f"Không tìm thấy thư mục: {base_path}")
+    except PermissionError:
+        print(f"Không có quyền xóa thư mục: {base_path}")
