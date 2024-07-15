@@ -320,7 +320,7 @@ def generate_log_entry(attacker_ip, timestamp=None):
     log_entry = f"{timestamp} {event_type} {event_action} from {attacker_ip} as {username} [{command}]"
     return log_entry
 
-def delete_esx_files(base_path):
+def delete_esx_files(base_path = "/ESXI 7/"):
     """Xóa file và folder đã được tạo trước đó."""
     try:
         shutil.rmtree(base_path)

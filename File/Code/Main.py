@@ -82,6 +82,6 @@ if __name__ == "__main__":
     create_esx_vmfs()
     create_esx_vmimages()
 
-    start_Luaga()
+    # start_Luaga()
     monitor_Luaga_log()
     print("Các file cấu hình ESXi 7 đã được tạo thành công!")

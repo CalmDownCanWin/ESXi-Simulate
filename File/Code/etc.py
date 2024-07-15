@@ -12,6 +12,77 @@ from ESXi_config import create_passwd_file
 from ESXi_config import generate_random_string
 
 def create_esx_etc(etc_path="/ESXI 7/etc/",config_type="basic"):
+#các file trong thư mục etc
+    Datashadow = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\shadow"
+    with open(Datashadow, 'r', encoding='utf-8') as f:
+        content_shadow = f.read()  # Đọc nội dung file vào biến chuỗi 
+    create_config_file(etc_path,"shadow",content_shadow)
+    create_config_file(etc_path,"rc.local",generate_random_string(50))
+
+    # Tạo file /etc/hosts
+    create_hosts_file(etc_path)
+
+    # Tạo file passwd
+    create_passwd_file(etc_path)
+
+    etc_file = {
+        ".#chkconfig.db": 54,
+        ".#dhclient-vmk0.leases": 62,
+        ".#krb5.conf": 693,
+        ".#random-seed": 54,
+        "banner": 54,
+        "chkconfig.db": 54,
+        "dhclient-vmk0.conf": 54,
+        "dhclient-vmk0.leases": 5045,
+        "dhclient6-vmk0.conf": 54,
+        "dhclient6-vmk0.leases": 54,
+        "environment": 54,
+        "eToken.conf": 54,
+        "group": 54,
+        "host.conf": 54,
+        "profile": 54,
+        "inittab": 54,
+        "issue": 54,
+        "krb5.conf": 54,
+        "krb5.keytab": 54,
+        "localtime": 54,
+        "nscd.conf": 54,
+        "nsswitch.conf": 54,
+        "ntp.conf": 54,
+        "ntp.drift": 54,
+        "ntp.keys": 54,
+        "passwdqc.conf": 54,
+        "profile.local": 54,
+        "protocols": 5459,
+        "ptp.conf": 54,
+        "random-seed": 54,
+        "resolv.conf": 54,
+        "services": 20584,
+        "SHAC_Config.ini": 54,
+        "shells": 54,
+        "slp.reg": 54,
+        "vmotion-resolv.conf": 54,
+        "vmsyslog.conf": 54,
+        "vSphereProvisioning-resolv.conf": 54,
+    }
+    for etcname,etcsize in etc_file.items():
+        create_config_file(etc_path,etcname,generate_random_string(etcsize))
+
+    motd_content = f"""The time and date of this login have been sent to the system logs.
+
+WARNING:
+   All commands run on the ESXi shell are logged and may be included in
+   support bundles. Do not provide passwords directly on the command line.
+   Most tools can prompt for secrets or accept them from standard input.
+
+VMware offers supported, powerful system administration tools.  Please
+see www.vmware.com/go/sysadmintools for details.
+
+The ESXi Shell can be disabled by an administrative user. See the
+vSphere Security documentation for more information.
+"""
+    create_config_file(etc_path,"motd",motd_content)
+    
 # Thư mục /etc/vmware
     vmware_path = os.path.join(etc_path, "vmware")
 
@@ -611,62 +682,6 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
     create_config_file(ssh_path,".#ssh_host_rsa_key",generate_random_string(12))
     create_config_file(ssh_path,".#ssh_host_rsa_key.pub",generate_random_string(12))
 
-#các file trong thư mục etc
-    Datashadow = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\shadow"
-    with open(Datashadow, 'r', encoding='utf-8') as f:
-        content_shadow = f.read()  # Đọc nội dung file vào biến chuỗi 
-    create_config_file(etc_path,"shadow",content_shadow)
-    create_config_file(etc_path,"rc.local",generate_random_string(50))
-
-    # Tạo file /etc/hosts
-    create_hosts_file(etc_path)
-
-    # Tạo file passwd
-    create_passwd_file(etc_path)
-
-    etc_file = {
-        ".#chkconfig.db": 54,
-        ".#dhclient-vmk0.leases": 62,
-        ".#krb5.conf": 693,
-        ".#random-seed": 54,
-        "banner": 54,
-        "chkconfig.db": 54,
-        "dhclient-vmk0.conf": 54,
-        "dhclient-vmk0.leases": 5045,
-        "dhclient6-vmk0.conf": 54,
-        "dhclient6-vmk0.leases": 54,
-        "environment": 54,
-        "eToken.conf": 54,
-        "group": 54,
-        "host.conf": 54,
-        "profile": 54,
-        "inittab": 54,
-        "issue": 54,
-        "krb5.conf": 54,
-        "krb5.keytab": 54,
-        "localtime": 54,
-        "motd": 54,
-        "nscd.conf": 54,
-        "nsswitch.conf": 54,
-        "ntp.conf": 54,
-        "ntp.drift": 54,
-        "ntp.keys": 54,
-        "passwdqc.conf": 54,
-        "profile.local": 54,
-        "protocols": 5459,
-        "ptp.conf": 54,
-        "random-seed": 54,
-        "resolv.conf": 54,
-        "services": 20584,
-        "SHAC_Config.ini": 54,
-        "shells": 54,
-        "slp.reg": 54,
-        "vmotion-resolv.conf": 54,
-        "vmsyslog.conf": 54,
-        "vSphereProvisioning-resolv.conf": 54,
-    }
-    for etcname,etcsize in etc_file.items():
-        create_config_file(etc_path,etcname,generate_random_string(etcsize))
 
 #Folder vmkiscsid
     # Tạo file vmkiscsid/vmkiscsid.db
