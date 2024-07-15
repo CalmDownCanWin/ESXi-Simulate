@@ -5,8 +5,8 @@ import datetime
 from log import log_filesystem_change
 
 # --- Cấu hình ---
-ESXI_ROOT = "/ESXI 7"  # Thư mục gốc của hệ thống file ESXi giả mạo
-MONITOR_INTERVAL = 60  # Khoảng thời gian kiểm tra thay đổi (giây)
+ESXI_ROOT = "/home/testserver/Desktop/ESXI 7/"  # Thư mục gốc của hệ thống file ESXi giả mạo
+MONITOR_INTERVAL = 0.1  # Khoảng thời gian kiểm tra thay đổi (giây)
 
 # --- Hàm hỗ trợ ---
 def calculate_file_hash(filename):
