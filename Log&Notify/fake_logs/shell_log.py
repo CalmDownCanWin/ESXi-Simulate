@@ -4,7 +4,7 @@ import time
 import os
 
 # Cấu hình
-LOG_FILE = "logs/shell.log"
+LOG_FILE = "var/log/shell.log"
 MESSAGES = [
     "SSH[{id}]: SSH login {status}",
     "ESXShell[{id}]: ESXi shell login {status}",

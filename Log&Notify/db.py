@@ -2,13 +2,20 @@ import sqlite3
 
 DB_FILE = "honeypot.db"
 
+def create_table(conn, create_table_sql):
+    """Tạo bảng trong database."""
+    try:
+        cursor = conn.cursor()
+        cursor.execute(create_table_sql)
+    except Exception as e:
+        print(f"Lỗi khi tạo bảng: {e}")
+
 def create_database():
     """Tạo database và các bảng nếu chưa tồn tại."""
     conn = sqlite3.connect(DB_FILE)
-    cursor = conn.cursor()
 
-    # Bảng HTTP logs
-    cursor.execute("""
+    # Tạo các bảng log
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS http_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -18,9 +25,7 @@ def create_database():
             query_params TEXT
         )
     """)
-
-    # Bảng SSH logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS ssh_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -28,9 +33,7 @@ def create_database():
             command TEXT
         )
     """)
-
-    # Bảng Telnet logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS telnet_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -38,9 +41,7 @@ def create_database():
             command TEXT
         )
     """)
-
-    # Bảng DCUI logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS dcui_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -50,9 +51,7 @@ def create_database():
             command TEXT
         )
     """)
-
-    # Bảng Syslog logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS syslog_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -60,26 +59,21 @@ def create_database():
             message TEXT
         )
     """)
-
-    # Bảng vMotion logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS vmotion_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             client_ip TEXT
         )
     """)
-
-    # Bảng iSCSI logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS iscsi_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             client_ip TEXT
         )
     """)
-    # Bảng esxcli logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS esxcli_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -87,9 +81,7 @@ def create_database():
             command TEXT
         )
     """)
-
-    # Bảng vimcmd logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS vimcmd_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -97,9 +89,7 @@ def create_database():
             command TEXT
         )
     """)
-
-    # Bảng vmdumper logs
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS vmdumper_logs (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
@@ -107,19 +97,21 @@ def create_database():
             command TEXT
         )
     """)
-
-    cursor.execute("""
+    create_table(conn, """
         CREATE TABLE IF NOT EXISTS filesystem_changes (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
             action TEXT,
             filename TEXT,
             size INTEGER,
-            hash TEXT
+            hash TEXT,
+            permissions TEXT,
+            previous_permissions TEXT,
+            previous_size INTEGER,
+            previous_hash TEXT
         )
     """)
-    
-    conn.commit()
+
     conn.close()
 
 # Khởi tạo database khi module được import

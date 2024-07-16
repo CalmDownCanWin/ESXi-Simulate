@@ -1,7 +1,7 @@
 import datetime
 import os
 import sqlite3
-from db import DB_FILE  # Import DB_FILE từ database.py
+from db import DB_FILE
 
 # --- Hàm hỗ trợ ---
 
@@ -28,7 +28,8 @@ def log_access(client_ip, method, path, query_params, log_dir="http_logs"):
 
     _log_to_file(log_entry, log_file)
     _log_to_database(
-        "INSERT INTO http_logs (timestamp, client_ip, method, path, query_params) VALUES (?, ?, ?, ?, ?)",
+        """INSERT INTO http_logs (timestamp, client_ip, method, path, query_params) 
+           VALUES (?, ?, ?, ?, ?)""",
         (timestamp, client_ip, method, path, str(query_params))
     )
 
@@ -140,10 +141,25 @@ def log_vmdumper_command(client_ip, command, log_dir="vmdumper_logs"):
 def log_filesystem_change(action, file_info, log_dir="filesystem_changes"):
     """Ghi log thay đổi trong hệ thống file vào file và database."""
     timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    log_entry = f"{timestamp} - {action}: {file_info['filename']} (size: {file_info['size']}, hash: {file_info['hash']})"
+    filename = file_info['filename']
+    size = file_info['size']
+    hash = file_info['hash']
+    permissions = file_info['permissions']
+
+    # Lấy thông tin trước đó (nếu có)
+    previous_permissions = file_info.get('previous', {}).get('permissions', '')
+    previous_size = file_info.get('previous', {}).get('size', -1)
+    previous_hash = file_info.get('previous', {}).get('hash', '')
+
+    log_entry = f"{timestamp} - {action}: {filename} (size: {size}, hash: {hash}, permissions: {permissions})"
+
+    if action == "modified":
+        log_entry += (f" - Previous (size: {previous_size}, hash: {previous_hash}, permissions: {previous_permissions})")
 
     _log_to_file(log_entry, os.path.join(log_dir, "filesystem_changes.log"))
     _log_to_database(
-        "INSERT INTO filesystem_changes (timestamp, action, filename, size, hash) VALUES (?, ?, ?, ?, ?)",
-        (timestamp, action, file_info['filename'], file_info['size'], file_info['hash'])
+        """INSERT INTO filesystem_changes (timestamp, action, filename, size, hash, permissions, 
+                                       previous_permissions, previous_size, previous_hash) 
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+        (timestamp, action, filename, size, hash, permissions, previous_permissions, previous_size, previous_hash)
     )

@@ -1,0 +1,19 @@
+thông tin thay đổi đang bị lặp2024-07-16 14:28:22 - Thư mục bị xóa: D:/ZALO\New folder - 
+2024-07-16 14:28:25 - Thư mục mới: D:/ZALO\New folder - 
+2024-07-16 14:28:29 - created: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 0, Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+2024-07-16 14:28:29 - created: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 0, Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+2024-07-16 14:28:29 - created: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 0, Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+2024-07-16 14:28:29 - created: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 0, Hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+2024-07-16 14:28:41 - modified: D:/ZALO\New folder\New Text Document.txt - Quyền cũ: 666, Quyền mới: 666, Kích thước cũ: 0, Kích thước mới: 3, Hash cũ: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, Hash mới: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:41 - modified: D:/ZALO\New folder\New Text Document.txt - Quyền cũ: 666, Quyền mới: 666, Kích thước cũ: 0, Kích thước mới: 3, Hash cũ: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, Hash mới: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:41 - modified: D:/ZALO\New folder\New Text Document.txt - Quyền cũ: 666, Quyền mới: 666, Kích thước cũ: 0, Kích thước mới: 3, Hash cũ: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, Hash mới: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:41 - modified: D:/ZALO\New folder\New Text Document.txt - Quyền cũ: 666, Quyền mới: 666, Kích thước cũ: 0, Kích thước mới: 3, Hash cũ: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855, Hash mới: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:49 - deleted: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 3, Hash: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:49 - deleted: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 3, Hash: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:49 - deleted: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 3, Hash: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:49 - deleted: D:/ZALO\New folder\New Text Document.txt - Quyền: 666, Kích thước: 3, Hash: a74247278cad7882bc66ecbfd0ffd62c7ab7c92774a68d4888d375abce9d1155
+2024-07-16 14:28:54 - Thư mục bị xóa: D:/ZALO\New folder - 
+2024-07-16 14:28:58 - Thư mục mới: D:/ZALO\New Text Document.txt - 
+2024-07-16 14:29:04 - Thư mục mới: D:/ZALO\abc.txt - 
+2024-07-16 14:29:04 - Thư mục bị xóa: D:/ZALO\New Text Document.txt - 
+2024-07-16 14:29:36 - Thư mục bị xóa: D:/ZALO\abc.txt - 

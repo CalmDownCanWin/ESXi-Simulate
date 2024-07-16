@@ -4,7 +4,7 @@ import time
 import os
 
 # Cấu hình
-LOG_FILE = "logs/auth.log"
+LOG_FILE = "var/log/auth.log"
 MESSAGES = [
     "Connection from {ip} port {port}",
     "Accepted keyboard-interactive/pam for root from {ip} port {port} ssh2",
