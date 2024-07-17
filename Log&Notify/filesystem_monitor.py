@@ -6,13 +6,10 @@ from log import log_filesystem_change
 from concurrent.futures import ThreadPoolExecutor
 import threading
 import queue
+from configure import ESXI_ROOT, MONITOR_INTERVAL, FOLDER_LOG_FILE, NUM_THREADS
 
-# --- Cấu hình ---
-ESXI_ROOT = "/home/testserver/Desktop/ESXI 7/"
-MONITOR_INTERVAL = 1
-FOLDER_LOG_FILE = "folder_changes.txt"
-NUM_THREADS = 4
-CHANGE_QUEUE = queue.Queue()  # Queue để lưu trữ thay đổi
+# --- Queue để lưu trữ thay đổi ---
+CHANGE_QUEUE = queue.Queue()
 
 # --- Hàm hỗ trợ ---
 
@@ -76,6 +73,7 @@ def log_folder_change(timestamp, folder_path, change_type, details=""):
 
 def monitor_folders(directory, initial_state):
     """Giám sát thay đổi trong thư mục."""
+    global CHANGE_QUEUE
     print(f"Bắt đầu giám sát thư mục: {directory}")
     previous_folders = initial_state
 
@@ -102,6 +100,7 @@ def monitor_folders(directory, initial_state):
 
 def monitor_folder_content(folder_path):
     """Giám sát thay đổi nội dung của một thư mục."""
+    global CHANGE_QUEUE
     print(f"Giám sát nội dung thư mục: {folder_path}")
     previous_files = scan_filesystem(folder_path)
     print(f"Quét file ban đầu trong thư mục {folder_path} hoàn tất.")
@@ -127,12 +126,18 @@ def monitor_folder_content(folder_path):
                 CHANGE_QUEUE.put((timestamp, filepath, change['action'], details))  
         previous_files = current_files
 
+# Hàm xử lý thay đổi
+def handle_change(timestamp, filepath, action, details):
+    """Xử lý thay đổi và ghi log."""
+    log_folder_change(timestamp.strftime("%Y-%m-%d %H:%M:%S"), filepath, action, details)
+
 # Hàm ghi log từ queue
 def log_changes_from_queue():
     """Đọc thay đổi từ queue và ghi log."""
     while True:
         timestamp, filepath, action, details = CHANGE_QUEUE.get()
-        log_folder_change(timestamp.strftime("%Y-%m-%d %H:%M:%S"), filepath, action, details)
+        # Sử dụng thread để xử lý ghi log
+        threading.Thread(target=handle_change, args=(timestamp, filepath, action, details)).start()
 
 # --- Vòng lặp theo dõi ---
 

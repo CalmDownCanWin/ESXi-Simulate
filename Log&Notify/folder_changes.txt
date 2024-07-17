@@ -17,3 +17,4 @@ thông tin thay đổi đang bị lặp2024-07-16 14:28:22 - Thư mục bị xó
 2024-07-16 14:29:04 - Thư mục mới: D:/ZALO\abc.txt - 
 2024-07-16 14:29:04 - Thư mục bị xóa: D:/ZALO\New Text Document.txt - 
 2024-07-16 14:29:36 - Thư mục bị xóa: D:/ZALO\abc.txt - 
+hoàn thiện file main để thực thi file monitor và log.py ghi vào honeypot.db
