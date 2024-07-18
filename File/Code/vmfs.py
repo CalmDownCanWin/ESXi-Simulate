@@ -182,6 +182,7 @@ usb_xhci:4.parent = "-1"
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 8)
         # Tạo file VMDK
         create_vmdk_file(vm_path, vm_name_Window)
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmdk"),1024 * 1024 * 1024 * 30)
         # Tạo file flat.VMDK
         create_flat_vmdk(vm_path, vm_name_Window, size_gb= 100)
         # Tạo file .vmx.bak (có thể được sử dụng trong quá trình restore)
@@ -215,26 +216,36 @@ usb_xhci:4.parent = "-1"
             os.makedirs(vm_path, exist_ok=True)
             # Tạo file VMX
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
             # Tạo file log
             create_log_file(vm_path,name + ".log")
+            create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
             # Tạo file VMDK
             create_vmdk_file(vm_path, vm_name)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 9)
             # Tạo file flat.VMDK
             create_flat_vmdk(vm_path, vm_name, size_gb= 100)
             #Tạo file vmx.lck
             create_config_file(vm_path, f"{vm_name}.vmx.lck", vmx_content)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx.lck"),1024 * 1024 * 1024 * 9)
             #Tạo file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
             #Tạo file vswp
             create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vswp",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
             #Tạo file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 9)
             #Tạo file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
 
 
 
@@ -244,20 +255,27 @@ usb_xhci:4.parent = "-1"
             os.makedirs(vm_path, exist_ok=True)
             # Tạo file VMX
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
             # Tạo file log
             create_log_file(vm_path,name + ".log")
+            create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
             # Tạo file VMDK
             create_vmdk_file(vm_path, vm_name)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 27)
             # Tạo file flat.VMDK
             create_flat_vmdk(vm_path, vm_name, size_gb= 100)
             #Tạo file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
             #Tạo file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 9)
             #Tạo file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
-
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
