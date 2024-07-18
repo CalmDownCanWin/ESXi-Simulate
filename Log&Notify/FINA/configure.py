@@ -1,14 +1,10 @@
-# config.py
-
-# config.py
-
 # ESXi Root Directory
 ESXI_ROOT = "D:\ZALO"
 
 # Filesystem Monitoring Configuration
 MONITOR_INTERVAL = 1  # Giây
-FOLDER_LOG_FILE = "folder_changes.txt"
-NUM_THREADS = 4
+LOG_FILE = "filesystem_monitor.log"
+DATABASE_FILE = "filesystem_changes.db" 
 
 # Auth Log Configuration
 AUTH_LOG_FILE = "logs/auth.log"
