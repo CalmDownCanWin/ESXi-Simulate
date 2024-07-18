@@ -235,34 +235,11 @@ def create_vmdk_file(path, vm_name):
             token = f"http://example.com/{uuid.uuid4()}.aspx"
             f.write(f"token = {token}\n")
 
-def create_flat_vmdk(path, vm_name, size_gb=100):
-
-    filename= f"{vm_name}-flat.vmdk"
-    """Tạo file flat.vmdk giả mạo."""
-    content = f"""
-    # Fake VMDK descriptor
-    version=1
-    CID={uuid.uuid4()}
-    parentCID=ffffffff
-    createType="monolithicFlat"
-
-    # Extent description
-    RW {size_gb}GB FLAT "{filename}" 0
-
-    # The Disk Data Base 
-    #DDB
-
-    ddb.virtualHWVersion = "19"
-    ddb.adapterType = "lsilogic"
-    ddb.geometry.cylinders = "16383"
-    ddb.geometry.heads = "16"
-    ddb.geometry.sectors = "63"
-    ddb.uuid.image = "{uuid.uuid4()}"
-    ddb.uuid.modification = "{uuid.uuid4()}"
-    ddb.uuid.parent = "00000000-0000-0000-0000-000000000000"
-    ddb.uuid.parentmodification = "00000000-0000-0000-0000-000000000000"
-    """
-    create_config_file(path, filename, content)
+def create_flat_vmdk(path, vm_name, size_gb):
+    """Tạo file VMDK ảo với kích thước mong muốn."""
+    file_path = os.path.join(path, f"{vm_name}-flat.vmdk")
+    with open(file_path, 'wb') as f:
+        f.truncate(size_gb * 1024 * 1024 * 1024)  # 1GB = 1024MB = 1024*1024KB = 1024*1024*1024B
 
 def create_vmx_file(domain, path, vm_name_window, template_path="S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\Window 10.vmx"):
     """Tạo file VMX giả mạo với token ẩn."""
@@ -329,3 +306,23 @@ def delete_esx_files(base_path = "/ESXI 7/"):
         print(f"Không tìm thấy thư mục: {base_path}")
     except PermissionError:
         print(f"Không có quyền xóa thư mục: {base_path}")
+
+def create_fake_file(file_path, file_size_in_bytes):
+    """Tạo file giả mạo với kích thước lớn trên Linux."""
+    # Chuyển đổi file_size_in_bytes thành định dạng cho truncate (ví dụ: 1G, 100M)
+    file_size_str = f"{file_size_in_bytes // (1024 * 1024)}M"  # Giả sử kích thước tính bằng MB
+    try:
+        subprocess.run(["truncate", "-s", file_size_str, file_path])
+        print(f"Đã tạo file giả mạo: {file_path} với kích thước {file_size_str}.")
+    except FileNotFoundError:
+        print(f"Công cụ 'truncate' không được tìm thấy. Vui lòng cài đặt 'truncate' trước khi chạy.")
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        

@@ -71,7 +71,7 @@ def start_Luaga():
 
 def monitor_Luaga_log():
     """Giám sát log của Luaga để phát hiện kết nối SSH."""
-    log_file = "S:/ESXI 7/var/log/auth.log" #file log chứa dữ liệu để nhận bt ssh
+    log_file = "S:/ESXI 7/var/log/shell.log" #file log chứa dữ liệu để nhận bt ssh
     last_line = None
     while True:
         time.sleep(1)  # Kiểm tra log mỗi giây
