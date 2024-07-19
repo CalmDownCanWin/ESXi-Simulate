@@ -3,6 +3,8 @@ import os
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_directory
+from ESXi_config import create_symlinks
+
 
 
 
@@ -173,4 +175,47 @@ def create_esx_lib64():
     }
     for lib64n,lib64s in li_file.items():
         create_config_file(lib64,lib64n,generate_random_string(lib64s))
+
+    my_symlinks = {
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "libbz2.so": "libbz2.so.1.0",
+        "libbz2.so.1.0": "libbz2.so.1.0.8",
+        "libc.so.6": "libc-2.17.so",
+        "libconfigstore.so": "libconfigstore.so.0.1",
+        "libconfigstore.so.0": "libconfigstore.so.0.1",
+        "libcrypt.so.1": "libcrypt.so.1.0",
+        "libcrypt.so": "libcrypt.so.1.0.2",
+        "libcurl.so": "libcurl.so.4.7.0",
+        "libcurl.so.4": "libcurl.so.4.7.0",
+        "libdatafilectl.so": "libdatafilectl.so.0.1",
+        "libdatafilectl.so.0": "libdatafilectl.so.0.1",
+        "libdl.so.2": "libdl-2.17.so",
+        "libdouble-conversion.so": "libdouble-conversion.so.3.0.0",
+        "libedit.so": "libedit.so.0.0.41",
+        "libedit.so.0": "libedit.so.0.0.41",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        "ld-linux-x86-64.so.2": "ld-2.17.so",
+        }
+    create_symlinks(lib64,my_symlinks)
 

@@ -5,6 +5,7 @@ from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import generate_log_entry
+from ESXi_config import create_symlinks
 
 
 
@@ -57,7 +58,6 @@ def create_esx_var(base_path="/ESXI 7/var"):
         "dhcp-vmk0.pid",
         "inetd.conf",
         "inetd.pid",
-        "log",
         "nonSchemaFiles",
         "sdrsInjector.pid",
         "storageRM.pid",
@@ -65,6 +65,9 @@ def create_esx_var(base_path="/ESXI 7/var"):
     }
     for rfilen in r_file:
         create_config_file(run,rfilen,generate_random_string(1))
+
+    run_symlinks = {"log": "/scratch/log",}
+    create_symlinks(run,run_symlinks)
 
     cron = '/ESXI 7/var/spool/cron/crontabs/'
     create_config_file(cron,".#root",generate_random_string(65))
@@ -129,15 +132,14 @@ def create_esx_var(base_path="/ESXI 7/var"):
     for filename, size in log_file.items():
         create_config_file(log_path,filename,generate_random_string(size))
     
-    
-    var_file = {
-        "cache": 56,
-        "core": 45,
-        "tmp": 65,
-        "vmware":32,
+    my_symlinks = {
+        "cache": "/var/lib/vmware/osdata/cache",
+        "core": "/scratch/core",
+        "tmp": "/scratch/var/tmp/",
+        "vmware": "/scratch/vmware",
     }
-    for name, varsize in var_file.items():
-        create_config_file(base_path,name,generate_random_string(varsize))
+    
+    create_symlinks(base_path,my_symlinks)
 
 
 
