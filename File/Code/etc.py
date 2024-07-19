@@ -10,12 +10,32 @@ from ESXi_config import create_hosts_file
 from ESXi_config import create_vmware_lic
 from ESXi_config import create_passwd_file
 from ESXi_config import generate_random_string
+from ESXi_config import create_symlinks
 
 def create_esx_etc(etc_path="/ESXI 7/etc/",config_type="basic"):
 #các file trong thư mục etc
-    Datashadow = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\shadow"
-    with open(Datashadow, 'r', encoding='utf-8') as f:
-        content_shadow = f.read()  # Đọc nội dung file vào biến chuỗi 
+    content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+daemon:*:15800:0:99999:7:::
+bin:*:15800:0:99999:7:::
+sys:*:15800:0:99999:7:::
+sync:*:15800:0:99999:7:::
+games:*:15800:0:99999:7:::
+man:*:15800:0:99999:7:::
+lp:*:15800:0:99999:7:::
+mail:*:15800:0:99999:7:::
+news:*:15800:0:99999:7:::
+uucp:*:15800:0:99999:7:::
+proxy:*:15800:0:99999:7:::
+www-data:*:15800:0:99999:7:::
+backup:*:15800:0:99999:7:::
+list:*:15800:0:99999:7:::
+irc:*:15800:0:99999:7:::
+gnats:*:15800:0:99999:7:::
+nobody:*:15800:0:99999:7:::
+libuuid:!:15800:0:99999:7:::
+sshd:*:15800:0:99999:7:::
+dcui:*:13358:0:99999:7:::
+vpxuser:*:14875:0:99999:7:::"""
     create_config_file(etc_path,"shadow",content_shadow)
     create_config_file(etc_path,"rc.local",generate_random_string(50))
 
@@ -68,6 +88,7 @@ def create_esx_etc(etc_path="/ESXI 7/etc/",config_type="basic"):
     for etcname,etcsize in etc_file.items():
         create_config_file(etc_path,etcname,generate_random_string(etcsize))
 
+
     motd_content = f"""The time and date of this login have been sent to the system logs.
 
 WARNING:
@@ -85,6 +106,10 @@ vSphere Security documentation for more information.
     
 # Thư mục /etc/vmware
     vmware_path = os.path.join(etc_path, "vmware")
+    my_symlinks = {
+        "pci.ids": "/usr/share/hwdata/pci.ids",
+        }
+    create_symlinks(vmware_path,my_symlinks)
 
     #Folder vmwauth
     vmwauth_path = '/ESXI 7/etc/vmware/vmwauth/'
@@ -322,7 +347,7 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
 
     # Tạo file vmware/firewall/service.xml
     firewall_path = os.path.join(vmware_path, "firewall")
-    firewal_content = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\Firewall.txt"
+    firewal_content = "Firewall.txt"
     with open(firewal_content, 'r', encoding='utf-8') as f:
         firewall_xml_content = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(firewall_path, "service.xml", firewall_xml_content)
@@ -747,6 +772,9 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
 #Folder init.d
     init = '/ESXI 7/etc/init.d/'
     init_file = {
+        "DCUI": 654,
+        "ESXShell": 654,
+        "SSH": 654,
         "apiForwarder": 654,
         "attestd": 758,
         "cdp": 52,
@@ -791,9 +819,51 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
         create_config_file(init,initname,generate_random_string(initsize))
 
 #Folder vmsyslog
+    vmsyslog_file = {
+        "LogEFI.conf": 654,
+        "apiForwarder": 654,
+        "attestd": 758,
+        "cdp": 52,
+        "clomd": 2,
+        "cmmdsd": 452,
+        "cmmdsTimeMachine": 24,
+        "dcbd": 24,
+        "DCUI": 52,
+        "dpd": 452,
+        "epd": 52,
+        "esxgdpd": 5,
+        "ESXShell": 52,
+        "esxTokenCPS": 52,
+        "esxui": 52,
+        "fsvmsockrelay": 3,
+        "gstored": 38,
+        "health": 57,
+        "hostd": 82,
+        "hostdCgiServer": 8,
+        "iofilterd-spm": 8,
+        "iofilterd-vmwarevmcrypt": 2,
+        "iofiltervpd": 28,
+        "kmxa": 75,
+        "kmxd": 52,
+        "lacp": 58,
+        "lbtd": 53,
+        "loadESX": 1,
+        "lsud": 158,
+        "lwsmd": 15,
+        "nicmgmtd": 4,
+        "pmemGarbageCollection": 14,
+        "sfcbd-watchdog": 1,
+        "vsandevicemonitord": 633,
+        "vsanmgmtd": 85,
+        "vsanObserver": 7,
+        "vsantraced": 599,
+        "vvold": 18,
+        "wsman": 15,
+        "xorg": 85,
+    }
     vmsyslog = '/ESXI 7/etc/vmsyslog.conf.d/'
-    for initname, initsize in init_file.items():
-        create_config_file(vmsyslog,initname,generate_random_string(initsize))
+    for vmsname, vmssize in vmsyslog_file.items():
+        create_config_file(vmsyslog,vmsname,generate_random_string(vmssize))
 
 #Folder likewise
     like = '/ESXI 7/etc/likewise/'

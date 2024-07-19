@@ -5,6 +5,7 @@ from Create_File_and_Folder import monitor_Luaga_log
 from ESXi_config import generate_random_string
 from ESXi_config import create_config_file
 from ESXi_config import create_directory
+from ESXi_config import create_symlinks
 from bin import create_esx_bin
 from dev import create_esx_dev
 from etc import create_esx_etc
@@ -17,6 +18,7 @@ from tmp import create_esx_tmp
 from usr import create_esx_usr
 from var import create_esx_var
 from vmfs import create_esx_vmfs
+
 
     
 def create_esx_proc(proc="/ESXI 7/proc/"):
@@ -48,19 +50,26 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
     boot_file = {
         ".#encryption.info": 584,
         ".mtoolsrc": 452,
-        "altbootbank": 455,
-        "bootpart.gz": 45,
         "bootpart4kn.gz": 2147,
         "local.tgz": 2452,
         "local.tgz.ve": 245,
-        "locker": 264,
-        "productLocker": 314,
-        "sbin": 941,
-        "scratch": 45,
-        "store": 43,
     }
     for bname, bsize in boot_file.items():
         create_config_file(base_path,bname,generate_random_string(bsize))
+
+    my_symlinks = {
+        "locker": "/var/lib/vmware/osdata/locker",
+        "productLocker": "/locker/packages/vmtoolsRepo",
+        "scratch": "/var/lib/vmware/osdata",
+        "store": "/var/lib/vmware/osdata/store",
+        "altbootbank": "/vmfs/volumes/f9d5c73b-6342cf19-18aa-76fbe3100cb8",
+        "bootbank": "/vmfs/volumes/486b39d0-3b4db665-e593-83a193fc5192",
+        "sbin": "/bin",
+        
+        
+        
+        }
+    create_symlinks(base_path,my_symlinks)
 
 
 
@@ -83,5 +92,5 @@ if __name__ == "__main__":
     create_esx_vmimages()
 
     # start_Luaga()
-    monitor_Luaga_log()
+    # monitor_Luaga_log()
     print("Các file cấu hình ESXi 7 đã được tạo thành công!")

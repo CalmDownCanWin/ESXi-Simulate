@@ -90,7 +90,7 @@ def create_esx_dev(base_path="/ESXI 7/dev"):
     create_config_file(deltadisks_path,"control",generate_random_string(15))
 
     disks_path = os.path.join(base_path,"disks")
-    Disks = "S:\Summer2024\IAP491_G2\Code\Luaga\Engine\Code\ESXi\dev_disks.txt"
+    Disks = "dev_disks.txt"
     with open(Disks, 'r', encoding='utf-8') as f:
         disks_content = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(disks_path,"disks",disks_content)

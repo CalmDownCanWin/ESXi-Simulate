@@ -283,7 +283,7 @@ def create_script(path, filename):
 
 
 def generate_log_entry(attacker_ip, timestamp=None):
-    """Tạo một dòng log Cowrie giả mạo."""
+    """Tạo một dòng log Luaga giả mạo."""
     if timestamp is None:
         timestamp = datetime.datetime.now().isoformat()
 
@@ -317,7 +317,31 @@ def create_fake_file(file_path, file_size_in_bytes):
     except FileNotFoundError:
         print(f"Công cụ 'truncate' không được tìm thấy. Vui lòng cài đặt 'truncate' trước khi chạy.")
         
-        
+
+def create_symlinks(base_path, symlinks):
+    """Tạo các liên kết tượng trưng trong một thư mục.
+
+    Args:
+        base_path: Đường dẫn đến thư mục gốc để tạo liên kết.
+        symlinks: Từ điển chứa các cặp `link_name`: `target`, 
+                  trong đó `link_name` là tên liên kết tượng trưng 
+                  và `target` là đường dẫn đến mục tiêu.
+    """
+    for link_name, target in symlinks.items():
+        link_path = os.path.join(base_path, link_name)
+        target_path = os.path.join(base_path, target)
+
+        # Kiểm tra xem liên kết đã tồn tại chưa
+        if os.path.exists(link_path):
+            print(f"Liên kết '{link_name}' đã tồn tại.")
+            continue
+
+        try:
+            os.symlink(target_path, link_path)
+            print(f"Đã tạo liên kết '{link_name}' trỏ đến '{target}'.")
+        except OSError as e:
+            print(f"Lỗi khi tạo liên kết '{link_name}': {e}")
+
         
         
         
