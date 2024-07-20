@@ -1,42 +1,64 @@
 import socket
 import threading
-from config import SYSLOG_PORT
-from utils import send_message_to_soc, log_event
+import random
+import time
+import logging
+from config import TELNET_PORT, TELNET_BANNER, VALID_USERS
+from utils import send_message_to_soc
 
-def handle_syslog_message(data, address):
-    """Xử lý thông điệp syslog giả mạo."""
-    try:
-        message = data.decode('utf-8')
-        print(f"[Syslog] Nhận thông điệp từ {address}: {message}")
-        send_message_to_soc(f"[Syslog] Nhận thông điệp từ {address}: {message}")
+# Configure logging
+logging.basicConfig(
+    filename='honeypot.log',
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+)
 
-        # --- Deception (Tùy chọn) ---
-        # Ví dụ: Tạo message syslog giả mạo
-        # fake_message = f"<134>1 192.168.1.10 fakehost - - [origin software=\"sshd\" swVersion=\"OpenSSH_7.6p1 Ubuntu-4ubuntu0.5\"] Invalid user test from 192.168.1.2 port 52484"
-        # send_message_to_soc(f"[Syslog] Gửi message giả mạo đến {address}: {fake_message}")
-        # sock.sendto(fake_message.encode(), address)
+def log_event(message, level=logging.INFO):
+    """Log an event to the log file and console."""
+    logging.log(level, message)
+    print(message)
 
-    except UnicodeDecodeError as e:
-        log_event(f"[Syslog] Lỗi khi decode thông điệp từ {address}: {e}", level=logging.ERROR)
-    except Exception as e:
-        log_event(f"[Syslog] Lỗi khi xử lý thông điệp từ {address}: {e}", level=logging.ERROR)
+def handle_telnet_client(client_socket, address):
+    """Handle Telnet connection."""
+    log_event(f"[TELNET] Connection from {address}")
+    send_message_to_soc(f"[TELNET] Connection from {address}")
 
-def run_syslog_server():
-    """Khởi động syslog server giả mạo."""
-    with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as sock:
-        try:
-            sock.bind(('', SYSLOG_PORT))
-            print(f"[Syslog] Syslog server giả mạo đang lắng nghe trên cổng {SYSLOG_PORT}")
-        except Exception as e:
-            log_event(f"[Syslog] Lỗi khi bind cổng {SYSLOG_PORT}: {e}", level=logging.ERROR)
-            return
+    client_socket.send(TELNET_BANNER)
+    time.sleep(random.uniform(0.1, 0.5))  # Simulate delay
+    client_socket.send(b"login: ")
+    username = client_socket.recv(1024).decode().strip()
+    time.sleep(random.uniform(0.1, 0.5))  # Simulate delay
+    client_socket.send(b"Password: ")
+    password = client_socket.recv(1024).decode().strip()
 
+    log_event(f"[TELNET] {address} - Username: {username}, Password: {password}")
+    send_message_to_soc(f"[TELNET] {address} - Username: {username}, Password: {password}")
+
+    # Validate username and password
+    if VALID_USERS.get(username) == password:
+        client_socket.send(b"Login successful\r\n")
+        send_message_to_soc(f"[TELNET] {address} - Login successful for user: {username}")
+        # Optionally handle successful login, e.g., enter a fake shell
+    else:
+        client_socket.send(b"Login incorrect\r\n")
+        time.sleep(random.uniform(0.5, 1.5))  # Simulate delay
+        # Deception: Show fake banner again
+        client_socket.send(TELNET_BANNER)
+        time.sleep(random.uniform(0.1, 0.5))  # Simulate delay
+        client_socket.send(b"login: ")
+
+    # Close connection after the second failed login attempt
+    client_socket.close()
+
+def run_telnet_server():
+    """Start the fake Telnet server."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+        sock.bind(('', TELNET_PORT))
+        sock.listen()
+        log_event(f"[TELNET] Honeypot Telnet listening on port {TELNET_PORT}")
         while True:
-            try:
-                data, address = sock.recvfrom(1024)
-                threading.Thread(target=handle_syslog_message, args=(data, address)).start()
-            except Exception as e:
-                log_event(f"[Syslog] Lỗi khi nhận dữ liệu: {e}", level=logging.ERROR)
+            client_socket, address = sock.accept()
+            threading.Thread(target=handle_telnet_client, args=(client_socket, address)).start()
 
 if __name__ == "__main__":
-    run_syslog_server()
+    run_telnet_server()
