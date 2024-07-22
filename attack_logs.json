@@ -1,0 +1,116 @@
+{"timestamp": "2024-07-22 11:32:17,220", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:17,222", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:17,248", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:17,249", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:28,109", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:28,110", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:28,130", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:28,131", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:29,100", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,101", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:29,125", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,126", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:29,229", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,230", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:29,248", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,248", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:29,475", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,476", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:29,494", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,494", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:29,634", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,635", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:29,658", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,659", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:29,866", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,866", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:29,885", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:29,885", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:32:30,063", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:30,064", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:32:30,083", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:32:30,083", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:33:55,647", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:33:55,647", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:33:55,734", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:33:55,734", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:02,539", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:02,540", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:02,566", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:02,566", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:03,080", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,080", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:03,105", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,105", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:03,370", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,371", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:03,389", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,390", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:03,545", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,546", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:03,565", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,565", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:03,748", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,748", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:03,771", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,772", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:03,991", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:03,991", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:04,009", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,009", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:04,185", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,185", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:04,204", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,204", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:04,368", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,369", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:04,386", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,387", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:04,549", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,549", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:04,568", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,569", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 11:34:04,750", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,751", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 11:34:04,770", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
+{"timestamp": "2024-07-22 11:34:04,770", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:24,491", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:24,492", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:24,501", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:24,501", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:26,595", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:26,595", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:26,608", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:26,608", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:27,063", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,063", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:27,073", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,073", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:27,242", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,242", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:27,254", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,254", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:27,452", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,453", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:27,468", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,468", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:27,647", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,648", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:27,657", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,657", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:13:27,935", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,935", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:13:27,951", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:13:27,951", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:15:02,412", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:15:02,413", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:15:02,487", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
+{"timestamp": "2024-07-22 14:15:02,487", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:18:03,321", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
+{"timestamp": "2024-07-22 14:18:03,322", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:18:03,374", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
+{"timestamp": "2024-07-22 14:18:03,374", "level": "INFO", "event": Logged event: ssh_error}
+{"timestamp": "2024-07-22 14:18:07,940", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
+{"timestamp": "2024-07-22 14:18:07,941", "level": "INFO", "event": Logged event: ssh_connection}
+{"timestamp": "2024-07-22 14:18:07,994", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
+{"timestamp": "2024-07-22 14:18:07,995", "level": "INFO", "event": Logged event: ssh_error}
