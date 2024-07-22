@@ -2,6 +2,7 @@ import os
 import time
 import hashlib
 from configure import ESXI_ROOT, MONITOR_INTERVAL
+from LOG_TO_SPLUNK import log_attack  # Import hàm log_attack
 
 def calculate_file_hash(filename, algorithm="sha256", chunk_size=1024 * 1024):
     """Tính toán hash của file."""
@@ -33,22 +34,25 @@ def scan_filesystem(directory):
     return filesystem_state
 
 def detect_changes(previous_state, current_state):
-    """Phát hiện thay đổi trong hệ thống file."""
+    """Phát hiện thay đổi trong hệ thống file và ghi log."""
     changes = []
     for path, current_info in current_state.items():
         if path not in previous_state:
             changes.append({"action": "created", "path": path, "details": current_info})
+            log_attack(event_type="filesystem_change", action="created", path=path, details=current_info)
         elif previous_state.get(path, {}).get("type") == current_info.get("type"):
             if current_info["type"] == "directory":
                 changes.extend(detect_changes(previous_state[path]["contents"], current_info["contents"]))
             elif previous_state[path] != current_info:
-                # Chỉ ghi nhận thay đổi nội dung, bỏ qua đổi tên
                 changes.append({"action": "modified", "path": path, "details": current_info})
+                log_attack(event_type="filesystem_change", action="modified", path=path, details=current_info)
         else:
             changes.append({"action": "type_changed", "path": path, "details": current_info})
+            log_attack(event_type="filesystem_change", action="type_changed", path=path, details=current_info)
 
     for path in set(previous_state.keys()) - set(current_state.keys()):
         changes.append({"action": "deleted", "path": path, "details": previous_state[path]})
+        log_attack(event_type="filesystem_change", action="deleted", path=path, details=previous_state[path])
 
     return changes
 
@@ -60,8 +64,5 @@ def monitor_filesystem():
         time.sleep(MONITOR_INTERVAL)
         current_state = scan_filesystem(ESXI_ROOT)
         changes = detect_changes(previous_state, current_state)
-        if changes:
-            for change in changes:
-                print(f"Thay đổi: {change['action']} - {change['path']}")
-                yield change
+        # Không cần print change ở đây nữa vì đã ghi log trong detect_changes
         previous_state = current_state

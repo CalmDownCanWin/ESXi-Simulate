@@ -1,10 +1,24 @@
+import os
 # ESXi Root Directory
 ESXI_ROOT = "D:\ZALO"
 
 # Filesystem Monitoring Configuration
 MONITOR_INTERVAL = 1  # Giây
-LOG_FILE = "filesystem_monitor.log"
-DATABASE_FILE = "filesystem_changes.db" 
+LOG_FILE_SYSTEM = "filesystem_monitor.log"
+DATABASE_FILE_SYSTEM = "filesystem_changes.db" 
+
+# === CẤU HÌNH ===
+LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
+LOG_FILE = "attack_logs.json"
+MAX_QUEUE_SIZE = 10000
+
+# Cấu hình Splunk HEC
+SPLUNK_HEC_URL = os.environ.get("SPLUNK_HEC_URL", "") 
+SPLUNK_HEC_TOKEN = os.environ.get("SPLUNK_HEC_TOKEN", "")
+SPLUNK_HEC_INDEX = os.environ.get("SPLUNK_HEC_INDEX", "main")
+SPLUNK_HEC_SOURCE = os.environ.get("SPLUNK_HEC_SOURCE", "esxi_honeypot")
+
+
 
 # Auth Log Configuration
 AUTH_LOG_FILE = "logs/auth.log"

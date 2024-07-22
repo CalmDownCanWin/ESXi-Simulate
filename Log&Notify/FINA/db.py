@@ -1,10 +1,10 @@
 import sqlite3
 import datetime
-from configure import DATABASE_FILE
+from configure import DATABASE_FILE_SYSTEM
 
 def create_database():
     """Tạo database và bảng nếu chưa tồn tại."""
-    conn = sqlite3.connect(DATABASE_FILE)
+    conn = sqlite3.connect(DATABASE_FILE_SYSTEM)
     cursor = conn.cursor()
 
     cursor.execute('''
@@ -24,7 +24,7 @@ def create_database():
 
 def log_filesystem_change(action, details):
     """Ghi log thay đổi hệ thống file vào database SQLite."""
-    conn = sqlite3.connect(DATABASE_FILE)
+    conn = sqlite3.connect(DATABASE_FILE_SYSTEM)
     cursor = conn.cursor()
 
     cursor.execute('''

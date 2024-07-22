@@ -1,10 +1,10 @@
 import sqlite3
 import datetime
-from configure import DATABASE_FILE 
+from configure import DATABASE_FILE_SYSTEM 
 
 def generate_daily_report():
     """Tạo báo cáo thay đổi hệ thống file hàng ngày."""
-    conn = sqlite3.connect(DATABASE_FILE)
+    conn = sqlite3.connect(DATABASE_FILE_SYSTEM)
     cursor = conn.cursor()
 
     cursor.execute('''
