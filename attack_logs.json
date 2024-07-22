@@ -1,176 +1,39 @@
-{"timestamp": "2024-07-22 11:32:17,220", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:17,222", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:17,248", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:17,249", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:28,109", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:28,110", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:28,130", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:28,131", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:29,100", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,101", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:29,125", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,126", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:29,229", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,230", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:29,248", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,248", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:29,475", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,476", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:29,494", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,494", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:29,634", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,635", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:29,658", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,659", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:29,866", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,866", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:29,885", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:29,885", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:32:30,063", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:30,064", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:32:30,083", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:32:30,083", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:33:55,647", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:33:55,647", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:33:55,734", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:33:55,734", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:02,539", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:02,540", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:02,566", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:02,566", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:03,080", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,080", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:03,105", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,105", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:03,370", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,371", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:03,389", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,390", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:03,545", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,546", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:03,565", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,565", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:03,748", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,748", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:03,771", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,772", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:03,991", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:03,991", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:04,009", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,009", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:04,185", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,185", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:04,204", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,204", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:04,368", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,369", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:04,386", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,387", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:04,549", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,549", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:04,568", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,569", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 11:34:04,750", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,751", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 11:34:04,770", "level": "ERROR", "event": Error sending event to Splunk: 404 Client Error: Not Found for url: http://127.0.0.1:8000/en-US/manager/splunk_monitoring_console/http-eventcollector}
-{"timestamp": "2024-07-22 11:34:04,770", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:24,491", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:24,492", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:24,501", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:24,501", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:26,595", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:26,595", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:26,608", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:26,608", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:27,063", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,063", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:27,073", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,073", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:27,242", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,242", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:27,254", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,254", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:27,452", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,453", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:27,468", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,468", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:27,647", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,648", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:27,657", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,657", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:13:27,935", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,935", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:13:27,951", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:13:27,951", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:15:02,412", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:15:02,413", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:15:02,487", "level": "ERROR", "event": Error sending event to Splunk: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))}
-{"timestamp": "2024-07-22 14:15:02,487", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:18:03,321", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
-{"timestamp": "2024-07-22 14:18:03,322", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:18:03,374", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
-{"timestamp": "2024-07-22 14:18:03,374", "level": "INFO", "event": Logged event: ssh_error}
-{"timestamp": "2024-07-22 14:18:07,940", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
-{"timestamp": "2024-07-22 14:18:07,941", "level": "INFO", "event": Logged event: ssh_connection}
-{"timestamp": "2024-07-22 14:18:07,994", "level": "ERROR", "event": Database error: 'LogThread' object has no attribute 'send_to_splunk'}
-{"timestamp": "2024-07-22 14:18:07,995", "level": "INFO", "event": Logged event: ssh_error}
-2024-07-22 15:10:43,711 - INFO - <queue.Queue object at 0x000001F8D505DE90>
-2024-07-22 15:16:31,000 - INFO - <queue.Queue object at 0x0000026C2DA5F6D0>
-2024-07-22 15:32:01,683 - INFO - <queue.Queue object at 0x00000173A62356D0>
-2024-07-22 15:32:20,566 - INFO - {"timestamp": "2024-07-22T08:32:20.564427", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 58564}
-2024-07-22 15:32:20,654 - INFO - {"timestamp": "2024-07-22T08:32:20.654371", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0x9a in position 6: invalid start byte", "attacker_address": "208.100.26.1", "attacker_port": 58564}
-2024-07-22 15:36:10,834 - INFO - <queue.Queue object at 0x0000026C9C1868D0>
-2024-07-22 15:36:17,238 - INFO - {"timestamp": "2024-07-22T08:36:17.237600", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 58932}
-2024-07-22 15:36:40,467 - INFO - {"timestamp": "2024-07-22T08:36:40.467340", "event_type": "ssh_disconnect", "attacker_address": "208.100.26.1"}
-2024-07-22 15:36:56,160 - INFO - {"timestamp": "2024-07-22T08:36:56.160542", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 58995}
-2024-07-22 15:37:43,823 - INFO - {"timestamp": "2024-07-22T08:37:43.823862", "event_type": "ssh_disconnect", "attacker_address": "208.100.26.1"}
-2024-07-22 15:38:01,171 - INFO - <queue.Queue object at 0x000002157C261F90>
-2024-07-22 15:38:05,053 - INFO - {"timestamp": "2024-07-22T08:38:05.052780", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59102}
-2024-07-22 15:38:05,153 - INFO - {"timestamp": "2024-07-22T08:38:05.153169", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0xe8 in position 13: invalid continuation byte", "attacker_address": "208.100.26.1", "attacker_port": 59102}
-2024-07-22 15:38:46,121 - INFO - {"timestamp": "2024-07-22T08:38:46.121860", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59169}
-2024-07-22 15:38:46,127 - INFO - {"timestamp": "2024-07-22T08:38:46.127319", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0x8d in position 7: invalid start byte", "attacker_address": "208.100.26.1", "attacker_port": 59169}
-2024-07-22 15:38:46,417 - INFO - {"timestamp": "2024-07-22T08:38:46.417324", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59170}
-2024-07-22 15:38:46,423 - INFO - {"timestamp": "2024-07-22T08:38:46.423277", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0x9c in position 7: invalid start byte", "attacker_address": "208.100.26.1", "attacker_port": 59170}
-2024-07-22 15:38:46,637 - INFO - {"timestamp": "2024-07-22T08:38:46.637383", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59171}
-2024-07-22 15:38:46,642 - INFO - {"timestamp": "2024-07-22T08:38:46.642845", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0xe9 in position 7: invalid continuation byte", "attacker_address": "208.100.26.1", "attacker_port": 59171}
-2024-07-22 15:38:46,795 - INFO - {"timestamp": "2024-07-22T08:38:46.795262", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59172}
-2024-07-22 15:38:46,801 - INFO - {"timestamp": "2024-07-22T08:38:46.801708", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0xef in position 9: invalid continuation byte", "attacker_address": "208.100.26.1", "attacker_port": 59172}
-2024-07-22 15:38:46,934 - INFO - {"timestamp": "2024-07-22T08:38:46.933960", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59173}
-2024-07-22 15:38:46,939 - INFO - {"timestamp": "2024-07-22T08:38:46.939065", "event_type": "ssh_error", "error": "'utf-8' codec can't decode byte 0x8f in position 6: invalid start byte", "attacker_address": "208.100.26.1", "attacker_port": 59173}
-2024-07-22 15:39:00,705 - INFO - <queue.Queue object at 0x0000027882AFE910>
-2024-07-22 15:41:31,432 - INFO - <queue.Queue object at 0x00000212FAAB6910>
-2024-07-22 15:41:34,978 - INFO - {"timestamp": "2024-07-22T08:41:34.977767", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59446}
-2024-07-22 15:45:00,852 - INFO - <queue.Queue object at 0x000001A06E8ADA50>
-2024-07-22 15:45:04,483 - INFO - {"timestamp": "2024-07-22T08:45:04.482612", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59799}
-2024-07-22 15:45:04,558 - INFO - {"timestamp": "2024-07-22T08:45:04.558374", "event_type": "ssh_login_attempt", "username": "SSH-2.0-MoTTY_Release_0.81", "password": "\u0000\u0000\u0006L\u0007\u0014OwzVkW\\o\u0010_\u0000\u0000\u0001sntrup761x25519-sha512@openssh.com,curve448-sha512,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group18-sha512,diffie-hellman-group17-sha512,diffie-hellman-group16-sha512,diffie-hellman-group15-sha512,diffie-hellman-group14-sha256,diffie-hellman-group14-sha1,rsa2048-sha256,rsa1024-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com\u0000\u0000\u0000{ssh-ed448,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-dss\u0000\u0000\u0000aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-ctr,aes192-cbc,aes128-ctr,aes128-cbc,chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,3des-ctr,3des-cbc,blowfish-ctr,blowfish-cbc,arcfour256,arcfour128\u0000\u0000\u0000aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-ctr,aes192-cbc,aes128-ctr,aes128-cbc,chacha20-poly1305@openssh.com,aes12", "attacker_address": "208.100.26.1", "attacker_port": 59799}
-2024-07-22 15:45:04,558 - INFO - {"timestamp": "2024-07-22T08:45:04.558842", "event_type": "ssh_login_failed", "username": "SSH-2.0-MoTTY_Release_0.81", "attacker_address": "208.100.26.1", "attacker_port": 59799}
-2024-07-22 15:45:04,559 - INFO - {"timestamp": "2024-07-22T08:45:04.559337", "event_type": "ssh_error", "error": "[WinError 10054] An existing connection was forcibly closed by the remote host", "attacker_address": "208.100.26.1", "attacker_port": 59799}
-2024-07-22 15:45:04,559 - INFO - {"timestamp": "2024-07-22T08:45:04.559337", "event_type": "ssh_disconnect", "attacker_address": "208.100.26.1"}
-2024-07-22 15:45:10,933 - INFO - {"timestamp": "2024-07-22T08:45:10.933710", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 59817}
-2024-07-22 15:45:10,988 - INFO - {"timestamp": "2024-07-22T08:45:10.987525", "event_type": "ssh_login_attempt", "username": "SSH-2.0-MoTTY_Release_0.81", "password": "\u0000\u0000\u0006L\u0007\u0014n=\u001c\u00186W\bp \u0000\u0000\u0001sntrup761x25519-sha512@openssh.com,curve448-sha512,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group18-sha512,diffie-hellman-group17-sha512,diffie-hellman-group16-sha512,diffie-hellman-group15-sha512,diffie-hellman-group14-sha256,diffie-hellman-group14-sha1,rsa2048-sha256,rsa1024-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com\u0000\u0000\u0000{ssh-ed448,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-dss\u0000\u0000\u0000aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-ctr,aes192-cbc,aes128-ctr,aes128-cbc,chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,3des-ctr,3des-cbc,blowfish-ctr,blowfish-cbc,arcfour256,arcfour128\u0000\u0000\u0000aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-ctr,aes192-cbc,aes128-ctr,aes128-cbc,chacha20-poly1305@openssh.com,aes12", "attacker_address": "208.100.26.1", "attacker_port": 59817}
-2024-07-22 15:45:10,988 - INFO - {"timestamp": "2024-07-22T08:45:10.988967", "event_type": "ssh_login_failed", "username": "SSH-2.0-MoTTY_Release_0.81", "attacker_address": "208.100.26.1", "attacker_port": 59817}
-2024-07-22 15:45:10,988 - INFO - {"timestamp": "2024-07-22T08:45:10.988967", "event_type": "ssh_disconnect", "attacker_address": "208.100.26.1"}
-2024-07-22 15:48:06,753 - INFO - {"timestamp": "2024-07-22T08:48:06.753354", "event_type": "ssh_connection", "attacker_address": "208.100.26.1", "attacker_port": 60062}
-2024-07-22 15:48:06,798 - INFO - {"timestamp": "2024-07-22T08:48:06.798372", "event_type": "ssh_login_attempt", "username": "SSH-2.0-MoTTY_Release_0.81", "password": "\u0000\u0000\u0006L\u0007\u0014%\u001e\u0014O\u001a5Wc#\u0000\u0000\u0001sntrup761x25519-sha512@openssh.com,curve448-sha512,curve25519-sha256,curve25519-sha256@libssh.org,ecdh-sha2-nistp256,ecdh-sha2-nistp384,ecdh-sha2-nistp521,diffie-hellman-group-exchange-sha256,diffie-hellman-group-exchange-sha1,diffie-hellman-group18-sha512,diffie-hellman-group17-sha512,diffie-hellman-group16-sha512,diffie-hellman-group15-sha512,diffie-hellman-group14-sha256,diffie-hellman-group14-sha1,rsa2048-sha256,rsa1024-sha1,diffie-hellman-group1-sha1,ext-info-c,kex-strict-c-v00@openssh.com\u0000\u0000\u0000{ssh-ed448,ssh-ed25519,ecdsa-sha2-nistp256,ecdsa-sha2-nistp384,ecdsa-sha2-nistp521,rsa-sha2-512,rsa-sha2-256,ssh-rsa,ssh-dss\u0000\u0000\u0000aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-ctr,aes192-cbc,aes128-ctr,aes128-cbc,chacha20-poly1305@openssh.com,aes128-gcm@openssh.com,aes256-gcm@openssh.com,3des-ctr,3des-cbc,blowfish-ctr,blowfish-cbc,arcfour256,arcfour128\u0000\u0000\u0000aes256-ctr,aes256-cbc,rijndael-cbc@lysator.liu.se,aes192-ctr,aes192-cbc,aes128-ctr,aes128-cbc,chacha20-poly1305@openssh.com,aes12", "attacker_address": "208.100.26.1", "attacker_port": 60062}
-2024-07-22 15:48:06,798 - INFO - {"timestamp": "2024-07-22T08:48:06.798372", "event_type": "ssh_login_failed", "username": "SSH-2.0-MoTTY_Release_0.81", "attacker_address": "208.100.26.1", "attacker_port": 60062}
-2024-07-22 15:48:06,798 - INFO - {"timestamp": "2024-07-22T08:48:06.798372", "event_type": "ssh_error", "error": "[WinError 10054] An existing connection was forcibly closed by the remote host", "attacker_address": "208.100.26.1", "attacker_port": 60062}
-2024-07-22 15:48:06,798 - INFO - {"timestamp": "2024-07-22T08:48:06.798902", "event_type": "ssh_disconnect", "attacker_address": "208.100.26.1"}
-2024-07-22 15:53:50,998 - INFO - <queue.Queue object at 0x0000023F42C5D7D0>
-2024-07-22 15:54:40,874 - INFO - <queue.Queue object at 0x000002AA98985B10>
-2024-07-22 15:55:34,396 - INFO - {"timestamp": "2024-07-22T08:55:34.394143", "event_type": "telnet_connection", "attacker_address": "208.100.26.1", "attacker_port": 60742}
-2024-07-22 15:57:30,733 - INFO - <queue.Queue object at 0x000001DE05A9DA10>
-2024-07-22 15:57:38,316 - INFO - {"timestamp": "2024-07-22T08:57:38.316308", "event_type": "telnet_connection", "attacker_address": "208.100.26.1", "attacker_port": 60965}
-2024-07-22 15:57:44,784 - INFO - {"timestamp": "2024-07-22T08:57:44.784461", "event_type": "telnet_login_attempt", "username": "\u0018'\u0001\u0003\u0003", "password": "", "attacker_address": "208.100.26.1", "attacker_port": 60965}
-2024-07-22 15:57:46,267 - INFO - {"timestamp": "2024-07-22T08:57:46.267280", "event_type": "telnet_error", "error": "[WinError 10053] An established connection was aborted by the software in your host machine", "attacker_address": "208.100.26.1", "attacker_port": 60965}
-2024-07-22 15:57:46,267 - INFO - {"timestamp": "2024-07-22T08:57:46.267280", "event_type": "telnet_disconnect", "attacker_address": "208.100.26.1"}
-2024-07-22 15:58:04,402 - INFO - <queue.Queue object at 0x000002A4ACA5DAD0>
-2024-07-22 16:01:01,896 - INFO - <queue.Queue object at 0x0000025A8C6CDF10>
-2024-07-22 16:20:53,042 - INFO - <queue.Queue object at 0x000001F7546626D0>
-2024-07-22 16:21:07,225 - INFO - <queue.Queue object at 0x0000019885FB7890>
-2024-07-22 16:21:30,516 - INFO - <queue.Queue object at 0x000002CE30E66A90>
-2024-07-22 16:21:55,362 - INFO - <queue.Queue object at 0x0000013563166810>
-2024-07-22 16:22:09,758 - INFO - <queue.Queue object at 0x000001F4D2869E50>
-2024-07-22 16:22:19,804 - INFO - {"timestamp": "2024-07-22T09:22:19.804363", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder", "details": {"type": "directory", "contents": {}}}
-2024-07-22 16:22:50,828 - INFO - {"timestamp": "2024-07-22T09:22:50.828215", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder\\New Text Document.txt", "details": {"filename": "New Text Document.txt", "extension": ".txt", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file"}}
-2024-07-22 16:23:12,858 - INFO - {"timestamp": "2024-07-22T09:23:12.858014", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder\\\u1ea1iucbhs.txt", "details": {"filename": "\u1ea1iucbhs.txt", "extension": ".txt", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file"}}
-2024-07-22 16:23:12,858 - INFO - {"timestamp": "2024-07-22T09:23:12.858511", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New folder\\New Text Document.txt", "details": {"filename": "New Text Document.txt", "extension": ".txt", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file"}}
+2024-07-22 18:29:14,184 - INFO - <queue.Queue object at 0x000002AA9080D850>
+2024-07-22 18:29:53,591 - INFO - <queue.Queue object at 0x000002D00C80DA10>
+2024-07-22 18:30:01,654 - INFO - {"timestamp": "2024-07-22T11:30:01.653919", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details": {"filename": "New Microsoft Word Document.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:27:24.111382"}}
+2024-07-22 18:30:01,661 - INFO - {"timestamp": "2024-07-22T11:30:01.661815", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details_filename": "New Microsoft Word Document.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:27:24.111382"}
+2024-07-22 18:30:52,100 - INFO - <queue.Queue object at 0x000001D5B13F9450>
+2024-07-22 18:31:07,092 - INFO - <queue.Queue object at 0x000001BA12709410>
+2024-07-22 18:31:23,510 - INFO - <queue.Queue object at 0x000001D78FDF9750>
+2024-07-22 18:31:34,473 - INFO - <queue.Queue object at 0x000002442A4F9490>
+2024-07-22 18:31:54,067 - INFO - <queue.Queue object at 0x000001BDC0AF94D0>
+2024-07-22 18:38:26,197 - INFO - <queue.Queue object at 0x000001EDFEA0DB50>
+2024-07-22 18:40:04,582 - INFO - <queue.Queue object at 0x000002012240D2D0>
+2024-07-22 18:40:23,048 - INFO - <queue.Queue object at 0x000002007440DA10>
+2024-07-22 18:40:34,120 - INFO - {"timestamp": "2024-07-22T11:40:34.119670", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder", "details": {"type": "directory", "contents": {}}}
+2024-07-22 18:40:34,126 - INFO - {"timestamp": "2024-07-22T11:40:34.126641", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder", "details_type": "directory"}
+2024-07-22 18:40:56,144 - INFO - {"timestamp": "2024-07-22T11:40:56.144965", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details": {"filename": "New Microsoft Word Document.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:40:55.287470"}}
+2024-07-22 18:40:56,151 - INFO - {"timestamp": "2024-07-22T11:40:56.151490", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details_filename": "New Microsoft Word Document.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:40:55.287470"}
+2024-07-22 18:40:58,156 - INFO - {"timestamp": "2024-07-22T11:40:58.156157", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\niabdw.docx", "details": {"filename": "niabdw.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:40:55.287470"}}
+2024-07-22 18:40:58,157 - INFO - {"timestamp": "2024-07-22T11:40:58.157149", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details": {"filename": "New Microsoft Word Document.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:40:55.287470"}}
+2024-07-22 18:40:58,179 - INFO - {"timestamp": "2024-07-22T11:40:58.178927", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\niabdw.docx", "details_filename": "niabdw.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:40:55.287470"}
+2024-07-22 18:40:58,187 - INFO - {"timestamp": "2024-07-22T11:40:58.187853", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details_filename": "New Microsoft Word Document.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:40:55.287470"}
+2024-07-22 18:41:23,227 - INFO - {"timestamp": "2024-07-22T11:41:23.227129", "event_type": "filesystem_change", "action": "modified", "path": "D:\\ZALO\\niabdw.docx", "details": {"filename": "niabdw.docx", "extension": ".docx", "size": 15, "hash": "8411d96c7711c8a1d4008a328a1af6af8ff024120283bb145abe2d88a2cc16f7", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:41:23.097880"}}
+2024-07-22 18:41:23,233 - INFO - {"timestamp": "2024-07-22T11:41:23.233430", "event_type": "filesystem_change", "action": "modified", "path": "D:\\ZALO\\niabdw.docx", "details_filename": "niabdw.docx", "details_extension": ".docx", "details_size": 15, "details_hash": "8411d96c7711c8a1d4008a328a1af6af8ff024120283bb145abe2d88a2cc16f7", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:41:23.097880"}
+2024-07-22 19:23:18,954 - INFO - <queue.Queue object at 0x00000235729F9450>
+2024-07-22 19:23:47,458 - INFO - <queue.Queue object at 0x000001D061DF9510>
+2024-07-22 19:24:28,033 - INFO - <queue.Queue object at 0x00000233E6BF9790>
+2024-07-22 19:24:58,922 - INFO - <queue.Queue object at 0x000001F263EF9810>
+2024-07-22 19:27:51,504 - INFO - <queue.Queue object at 0x00000172977F9710>
+2024-07-22 19:28:07,170 - INFO - <queue.Queue object at 0x000001F5614F9890>
+2024-07-22 19:30:07,779 - INFO - <queue.Queue object at 0x00000241A73F9890>
+2024-07-22 19:30:17,899 - INFO - {"timestamp": "2024-07-22T12:30:17.898819", "event_type": "telnet_connection", "attacker_address": "208.100.26.134", "attacker_port": 58862}
+2024-07-22 19:30:50,748 - INFO - {"timestamp": "2024-07-22T12:30:50.747964", "event_type": "telnet_login_attempt", "username": "&&\u0003\u0018\u001f !\"'\u0005#", "password": "root", "attacker_address": "208.100.26.134", "attacker_port": 58862}
+2024-07-22 19:30:50,748 - INFO - {"timestamp": "2024-07-22T12:30:50.748996", "event_type": "telnet_disconnect", "attacker_address": "208.100.26.134"}
+2024-07-22 19:36:58,181 - INFO - {"timestamp": "2024-07-22T12:36:58.181397", "event_type": "telnet_connection", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:37:03,527 - INFO - {"timestamp": "2024-07-22T12:37:03.527964", "event_type": "telnet_login_attempt", "username": "root", "password": "root", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:37:03,529 - INFO - {"timestamp": "2024-07-22T12:37:03.529007", "event_type": "telnet_login_success", "username": "root", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:38:49,761 - INFO - {"timestamp": "2024-07-22T12:38:49.761734", "event_type": "telnet_login_attempt", "username": "uhigfug", "password": "jihug", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:38:49,761 - INFO - {"timestamp": "2024-07-22T12:38:49.761734", "event_type": "telnet_disconnect", "attacker_address": "208.100.26.134"}
+2024-07-22 19:40:59,432 - INFO - <queue.Queue object at 0x000001E419AF9650>
+2024-07-22 19:49:29,089 - INFO - <queue.Queue object at 0x0000019135719910>
