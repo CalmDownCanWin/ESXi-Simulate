@@ -1,8 +1,10 @@
 import os
 import time
 import hashlib
+from datetime import datetime
+
 from configure import ESXI_ROOT, MONITOR_INTERVAL
-from LOG_TO_SPLUNK import log_attack  # Import hàm log_attack
+from LOG_TO_SPLUNK import log_attack
 
 def calculate_file_hash(filename, algorithm="sha256", chunk_size=1024 * 1024):
     """Tính toán hash của file."""
@@ -20,7 +22,8 @@ def get_file_info(filepath):
         "size": os.path.getsize(filepath),
         "hash": calculate_file_hash(filepath),
         "permissions": oct(os.stat(filepath).st_mode)[-3:],
-        "type": "file"
+        "type": "file",
+        "last_modified": datetime.utcfromtimestamp(os.path.getmtime(filepath)).isoformat()
     }
 
 def scan_filesystem(directory):
@@ -64,5 +67,7 @@ def monitor_filesystem():
         time.sleep(MONITOR_INTERVAL)
         current_state = scan_filesystem(ESXI_ROOT)
         changes = detect_changes(previous_state, current_state)
-        # Không cần print change ở đây nữa vì đã ghi log trong detect_changes
         previous_state = current_state
+
+        # Trả về danh sách changes để xử lý ở hàm main
+        yield from changes 

@@ -13,10 +13,10 @@ LOG_FILE = "attack_logs.json"
 MAX_QUEUE_SIZE = 10000
 
 # Cấu hình Splunk HEC
-SPLUNK_HEC_URL = os.environ.get("SPLUNK_HEC_URL", "") 
-SPLUNK_HEC_TOKEN = os.environ.get("SPLUNK_HEC_TOKEN", "")
-SPLUNK_HEC_INDEX = os.environ.get("SPLUNK_HEC_INDEX", "main")
-SPLUNK_HEC_SOURCE = os.environ.get("SPLUNK_HEC_SOURCE", "esxi_honeypot")
+SPLUNK_HEC_URL = os.environ.get("SPLUNK_HEC_URL", "https://208.100.26.1:8088/services/collector/event") 
+SPLUNK_HEC_TOKEN = os.environ.get("SPLUNK_HEC_TOKEN", "e7f17a1c-4930-4b71-b0ae-71f4c9c68696")
+SPLUNK_HEC_INDEX = os.environ.get("SPLUNK_HEC_INDEX", "honeypot_collect")
+SPLUNK_HEC_SOURCE = os.environ.get("SPLUNK_HEC_SOURCE", "esxi_log")
 
 
 
