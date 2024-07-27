@@ -106,6 +106,39 @@ vSphere Security documentation for more information.
     
 # Thư mục /etc/vmware
     vmware_path = os.path.join(etc_path, "vmware")
+    etc_vmware_file = {
+        ".#.backup.counter",
+        ".#dpd.conf",
+        ".#dvsdata.db",
+        ".#encryption.info",
+        ".#esx.conf",
+        ".#license.cfg",
+        ".#locker.conf",
+        ".backup.counter",
+        ".buildInfo",
+        ".vmiof",
+        "BootbankFunctions.sh",
+        "ah-trees.conf",
+        "config",
+        "configrules",
+        "defaultconfigrules",
+        "dvsdata.db",   
+        "esx.conf",
+        "hostparam.conf",
+        "logfilters",
+        "passthru.map",
+        "settings",
+        "snmp_boots.txt",
+        "support",
+        "svga_caps.cache",
+        "system_fips",
+        "usb.ids",
+        "usbarb.rules",
+        "vltd.conf",
+    }
+    for vmname in etc_vmware_file:
+        create_config_file(vmware_path,vmname,generate_random_string(12))
+
     my_symlinks = {
         "pci.ids": "/usr/share/hwdata/pci.ids",
         }
@@ -305,37 +338,6 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
-
-#     # Tạo file esx.conf
-#     esx_conf_content = f"""# ESXi Configuration File
-# hostname = "esxi-{random.randint(1, 10)}.example.com"
-# hostname = "prod-esxi-02.domain.com"
-# hostname = "esxi-{random.randint(1, 10)}.example.com"
-# # Cấu hình mạng giả mạo
-# /net/ipv4/interfaces/vmk0/ipAddress = "10.10.10.100"
-# /net/ipv4/interfaces/vmk0/subnetMask = "255.255.255.0"
-# /net/ipv4/gateway = "10.10.10.1"
-# net.dns.servers = "1.1.1.1, 8.8.8.8"
-# net.ipv4.tcp_syncookies = {random.randint(0, 1)}
-# net.ipv4.tcp_timestamps = {random.randint(0, 1)}
-# vmkernel.boot.diskUUID = "{generate_random_string(36)}"
-# vmkernel.boot.diskDevice = "{generate_random_string(10)}"
-# vmkernel.boot.diskType = "{random.choice(['disk', 'cdrom'])}"
-# vmkernel.boot.diskPath = "{generate_random_string(20)}"
-# # Phiên bản ESXi giả mạo (cũ hơn, có thể chứa lỗ hổng)
-# /product/version = "6.7.0" 
-# /product/build = "14320388"
-
-# # Vô hiệu hóa SSH (hoặc thay đổi cổng)
-# /system/services/ssh/enabled = "0" 
-# # /system/services/ssh/port = "2222"
-
-# # Cấu hình SNMP giả mạo
-# /snmp/enabled = "1"
-# /snmp/community = "public" 
-
-#     """
-#     create_config_file(vmware_path, "esx.conf", esx_conf_content)
 
     # Tạo file encryption.info
     encryption_content = f""".encoding = "UTF-8"

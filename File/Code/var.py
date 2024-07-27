@@ -4,7 +4,7 @@ import random
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
-from ESXi_config import generate_log_entry
+# from ESXi_config import generate_log_entry
 from ESXi_config import create_symlinks
 
 

@@ -94,16 +94,16 @@ def create_hosts_file(path):
 
     create_config_file(path, "hosts", content)
 
-def create_fake_datastore(base_path, datastore_name,size_gb):
-    """Mô phỏng datastore bằng cách tạo thư mục và file."""
-    datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
-    os.makedirs(datastore_path, exist_ok=True)
-    # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
-    if os.listdir(datastore_path):
-        return 
-    filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
-    with open(os.path.join(datastore_path, filename), 'w') as f:
-        f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
+# def create_fake_datastore(base_path, datastore_name,size_gb):
+#     """Mô phỏng datastore bằng cách tạo thư mục và file."""
+#     datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
+#     os.makedirs(datastore_path, exist_ok=True)
+#     # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
+#     if os.listdir(datastore_path):
+#         return 
+#     filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
+#     with open(os.path.join(datastore_path, filename), 'w') as f:
+#         f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
 
 def create_sshd_config(path, fake_port=None, allowed_ips=None):
     """Tạo file /etc/ssh/sshd_config giả mạo."""
@@ -319,14 +319,6 @@ def create_fake_file(file_path, file_size_in_bytes):
         
 
 def create_symlinks(base_path, symlinks):
-    """Tạo các liên kết tượng trưng trong một thư mục.
-
-    Args:
-        base_path: Đường dẫn đến thư mục gốc để tạo liên kết.
-        symlinks: Từ điển chứa các cặp `link_name`: `target`, 
-                  trong đó `link_name` là tên liên kết tượng trưng 
-                  và `target` là đường dẫn đến mục tiêu.
-    """
     for link_name, target in symlinks.items():
         link_path = os.path.join(base_path, link_name)
         target_path = os.path.join(base_path, target)
@@ -341,6 +333,7 @@ def create_symlinks(base_path, symlinks):
             print(f"Đã tạo liên kết '{link_name}' trỏ đến '{target}'.")
         except OSError as e:
             print(f"Lỗi khi tạo liên kết '{link_name}': {e}")
+
 
         
         

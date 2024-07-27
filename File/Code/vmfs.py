@@ -3,13 +3,14 @@ import random
 import uuid
 
 from ESXi_config import create_config_file
-from ESXi_config import create_vmx_file
 from ESXi_config import create_vmdk_file
 from ESXi_config import create_fake_datastore
 from ESXi_config import create_flat_vmdk
 from ESXi_config import create_log_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_fake_file
+from ESXi_config import create_symlinks
+
 
 
 def create_esx_vmfs(base_path="/ESXI 7"):
@@ -44,23 +45,10 @@ core       healthd    log        tmp        vdtc       vmware
     create_config_file(bootbank_path,f"OSDATA-{str(uuid.uuid4())}",content)
  
     #Thư mục vmfs/devices
-    device_path = os.path.join(base_path,"vmfs")
-    data_devices_content = """PMemDS                   dvfilter-generic-vmware  port                     usb0201
-PMemDisk                 dvfiltertbl              ptmx                     usb0301
-PMemNamespaces           dvsdev                   random                   usb0302
-PMemVolumes              ens_rep                  shm                      usbdevices
-TraceStreamVMFS          generic                  sunrpc-gss               usbpassthrough
-cbt                      genscsi                  svm                      vdfm
-cdp                      hyperclock               tty                      vflash
-cdrom                    iodm                     tty1                     vmwMgmtInfo
-char                     kbdmap                   tty2                     vmwMgmtNode0
-console                  klog                     tty3                     vmwMgmtNode1
-cswitch                  lacp                     tty4                     vmwMgmtNode2
-deltadisks               lvm                      ttyp0                    vprobe
-disks                    null                     urandom                  vsock
-dmesg                    nvdManagement            usb0101                  zero
-"""
-    create_config_file(device_path,"devices",data_devices_content)
+    vmfs_path = os.path.join(base_path,"vmfs")
+
+    # device_symlinks = {"devices": "/dev/"}
+    # create_symlinks(vmfs_path,device_symlinks)
 
     # Tạo cấu trúc máy ảo Windows, Kali-Linux và Ubuntu
     domain = "example.com"
@@ -182,6 +170,7 @@ usb_xhci:4.parent = "-1"
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 8)
         # Tạo file VMDK
         create_vmdk_file(vm_path, vm_name_Window)
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmdk"),1024 * 1024 * 1024 * 30)
         # Tạo file flat.VMDK
         create_flat_vmdk(vm_path, vm_name_Window, size_gb= 100)
         # Tạo file .vmx.bak (có thể được sử dụng trong quá trình restore)
@@ -203,6 +192,8 @@ usb_xhci:4.parent = "-1"
         create_config_file(vm_path,f"{vm_name_Window}.vmxf",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmxf"),1024 * 1024 * 1024 * 10)
 
+        print("Đã tạo foler " + vm_name_Window)
+
 #Kali or Ubuntu
     for _ in range(5):
         # Chọn ngẫu nhiên loại máy ảo
@@ -215,28 +206,38 @@ usb_xhci:4.parent = "-1"
             os.makedirs(vm_path, exist_ok=True)
             # Tạo file VMX
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
             # Tạo file log
             create_log_file(vm_path,name + ".log")
+            # create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
             # Tạo file VMDK
             create_vmdk_file(vm_path, vm_name)
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 9)
             # Tạo file flat.VMDK
             create_flat_vmdk(vm_path, vm_name, size_gb= 100)
             #Tạo file vmx.lck
             create_config_file(vm_path, f"{vm_name}.vmx.lck", vmx_content)
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx.lck"),1024 * 1024 * 1024 * 9)
             #Tạo file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
             #Tạo file vswp
             create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vswp",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
             #Tạo file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 9)
             #Tạo file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
 
-
+            print("Đã tạo folder " + vm_name)
 
 
         elif vm_type == "Ubuntu":
@@ -244,20 +245,29 @@ usb_xhci:4.parent = "-1"
             os.makedirs(vm_path, exist_ok=True)
             # Tạo file VMX
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
             # Tạo file log
             create_log_file(vm_path,name + ".log")
+            # create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
             # Tạo file VMDK
             create_vmdk_file(vm_path, vm_name)
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 27)
             # Tạo file flat.VMDK
             create_flat_vmdk(vm_path, vm_name, size_gb= 100)
             #Tạo file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
             #Tạo file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
             #Tạo file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 9)
             #Tạo file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
+            # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
 
+            print("Đã tạo folder " + vm_name)
