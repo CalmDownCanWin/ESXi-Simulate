@@ -1,7 +1,7 @@
 import os
 import random
-import uuid
 import stat
+import subprocess
 
 from ESXi_config import create_config_file
 from ESXi_config import create_vmdk_file
@@ -10,7 +10,6 @@ from ESXi_config import create_log_file
 from ESXi_config import generate_random_string
 # from ESXi_config import create_fake_file
 from ESXi_config import create_symlinks
-from ESXi_config import generate_uuid_with_fixed_parts
 from ESXi_config import create_directory
 
 # Định nghĩa cấu hình UUID và liên kết cho từng ESXi
@@ -51,7 +50,7 @@ ESXI_UUIDS = {
     },
 }
 
-def create_esx_vmfs(base_path, esxi_name, create_windows=False, create_kali_ubuntu=False, print_uuids=False):
+def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubuntu=True, print_uuids=True):
     """Tạo cấu trúc thư mục mô phỏng ESXi với UUID riêng biệt và tùy chọn cấu hình."""
 
     # Lấy cấu hình UUID và liên kết cho ESXi cụ thể
@@ -68,14 +67,14 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=False, create_kali_ubun
 
     # Nhập tên liên kết cho Data, Document nếu UUID tương ứng tồn tại
     if "UUID5" in esxi_config:
-        UUID5_link_name = input("Nhập tên liên kết cho Data: ")
+        UUID5_link_name = input(f"Nhập tên liên kết cho UUID5 ({esxi_config['UUID5']}): ")  # Hiển thị giá trị UUID5
         esxi_config["SYMLINKS"][UUID5_link_name] = "UUID5"
     if "UUID4" in esxi_config:
-        UUID4_link_name = input("Nhập tên liên kết cho Document: ")
+        UUID4_link_name = input(f"Nhập tên liên kết cho UUID4 ({esxi_config['UUID4']}): ")  # Hiển thị giá trị UUID4
         esxi_config["SYMLINKS"][UUID4_link_name] = "UUID4"
     if "UUID3" in esxi_config:
-        UUID3_link_name = input("Nhập tên liên kết cho Document: ")
-        esxi_config["SYMLINKS"][UUID3_link_name] = "UUID4"
+        UUID3_link_name = input(f"Nhập tên liên kết cho UUID3 ({esxi_config['UUID3']}): ")  # Hiển thị giá trị UUID3
+        esxi_config["SYMLINKS"][UUID3_link_name] = "UUID3"
 
     # Thư mục vmfs
     vmfs_path = os.path.join(base_path, "vmfs")
@@ -239,8 +238,29 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=False, create_kali_ubun
                     create_windows_vms(base_path, 5, uuid_str)
                 if create_kali_ubuntu:  
                     create_kali_ubuntu_vms(base_path, 3, uuid_str)
+                    
+    
     # Tạo liên kết tượng trưng
     create_symlinks(volumes_path, esxi_config["SYMLINKS"])
+    
+    # In ra kết quả ls -la
+    if print_uuids:
+        print(f"Kết quả ls -la cho ESXi '{esxi_name}':")
+        result = subprocess.run(['ls', '-la', volumes_path], capture_output=True, text=True)
+
+        # Xử lý kết quả ls -la
+        for line in result.stdout.splitlines():
+            if "->" in line:  # Chỉ xử lý liên kết tượng trưng
+                parts = line.split("->")
+                link_name = parts[0].strip().split()[-1]
+                target_uuid = esxi_config["SYMLINKS"][link_name]
+                line = line.replace(parts[1].strip(), target_uuid)
+
+                # Kiểm tra xem UUID đích có tồn tại trong esxi_config hay không
+                if target_uuid in esxi_config:  # Sửa lỗi ở đây
+                    line = line.replace(parts[1].strip(), esxi_config[target_uuid])
+
+            print(line)  # In dòng (đã sửa hoặc giữ nguyên)
 
     # In ra các UUID nếu được yêu cầu
     if print_uuids:
@@ -248,6 +268,7 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=False, create_kali_ubun
         for uuid_name, uuid_str in esxi_config.items():
             if uuid_name.startswith("UUID"):
                 print(f"{uuid_name}: {uuid_str}")
+                
 
 def create_windows_vms(base_path, num_vms, target_uuid):
     """Tạo máy ảo Windows."""
@@ -370,9 +391,12 @@ def create_kali_ubuntu_vms(base_path, num_vms, target_uuid):
             # create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
 
             print("Đã tạo folder " + vm_name)
+            
+
+            
+            
+
 
 if __name__ == "__main__":
     esxi_choice = input("Chọn ESXi (ESXi_1, ESXi_2,...): ")
-    create_windows = input("Tạo máy ảo Windows? (yes/no): ").lower() == "yes"
-    create_kali_ubuntu = input("Tạo máy ảo Kali/Ubuntu? (yes/no): ").lower() == "yes"
-    create_esx_vmfs("/ESXI 7/", esxi_choice, create_windows, create_kali_ubuntu, print_uuids=True)
+    create_esx_vmfs("/ESXI 7/", esxi_choice, create_windows=True, create_kali_ubuntu=True, print_uuids=True)
