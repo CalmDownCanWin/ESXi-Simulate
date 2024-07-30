@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log in - VMware ESXi</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body class="base-app-style">
+    <div class="">
+        <!----><div ui-view="" class="" style =""><div class="loginContainer">
+        <img id="topSplash" src="images/AppBgPattern.png" alt="Background image" class="">
+    
+        <div style="position: absolute; top: 65px; left: 65px;" class="">
+        <img src="images/vmware_logo_white_transparent.png" style="width: 60%;" class="">
+        </div>
+    
+        <form name="loginForm" ng-submit="login(credentials)">
+    
+        <div id="loginForm" class="">
+            <p class="loginRow">    
+                <label id="username-label" class="loginLabel">User name
+                    <input id="usernameInput" class="margeTextInput " type="usernameInput"  style="">
+                </label>
+            </p>
+            <p class="loginRow">
+                <label id="password-label" class="loginLabel">Password
+                    <input id="password"class="margeTextInput" type="password">
+                </label>
+            </p>
+            <p class=""> </p>
+            <p id="loginButtonRow" class="loginStatus wait">
+                <input id="loginStatus" class="button blue" type="submit" value="Log in" >
+            </p>
+        </div>
+        <div id="productName"">
+            <img src="images/vmware_logo_white_transparent.png" style="width: 120px; margin-right: 10px;" class="">
+            <img src="images/esxi.png" style="margin-bottom: 2px; width: 60px; bottom: 50px;" class="">
+        </div>
+        </form>
+         <div id="productName" >
+            <img src="images/vmware_logo_white_transparent.png" style="width: 120px; margin-right: 10px;" >
+            <img src="images/esxi.png" style="margin-bottom: 2px; width: 60px;" >
+
+            <div id="progressBar" style="display: none;">
+              <img src="images/Marge-anim-progressbar.gif" alt="progressBar">
+            </div>
+          
+            <div id="welcomeMessage" style="display: none;">
+              <!-- Content for welcome message -->
+            </div>
+          </div>
+          
+          <script>
+
+            
+const loginButton = document.getElementById("loginButtonRow");
+const loginStatus = document.getElementById("loginStatus");
+const progressBar = document.getElementById("progressBar");
+const welcomeMessage = document.getElementById("welcomeMessage");
+const usernameInput = document.getElementById("username"); // Get the username input element
+
+loginButton.addEventListener("click", function () {
+            // 1. Display the progress bar
+            progressBar.style.display = "block";
+
+            // 2. Update the login status message (optional)
+            loginStatus.textContent = "Logging in to ESXi host...";
+
+            // 3. Simulate login process (replace with your actual login logic)
+            setTimeout(() => {
+                // 4. Hide the progress bar
+                progressBar.style.display = "none";
+          
+                // Check if password is entered
+                if (passwordInput.value === "" || usernameInput.value.trim() === "") {
+                  // 5. Show the "incorrect username or password" message 
+                  loginStatus.textContent = "Cannot complete login due to an incorrect user name or password.";
+                } else {
+                  // 6. Show the welcome message (or redirect to the next page)
+                  welcomeMessage.style.display = "block";
+                  loginStatus.textContent = "Login successful!";
+                }
+              }, 5000); // Simulate a 5-second login process
+            });
+        </script>
+
+    
+        </form>
+        <div id="footer" class="footer">
+            <a href="https://www.vmware.com//support/pubs/" target="_blank" class="">
+              <!-- <img src="images/helpNewWindow16.png"> -->
+              <i class="esx-icon-help-new-window" style="margin-top: -3px; margin-right: px;"></i>
+              Open the VMware Host Client documentation</a>
+            <div style="float: right;" class=""></div>
+        </div>
+    
+    </div>
+</body>
+
+</html>

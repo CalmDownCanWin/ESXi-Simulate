@@ -1,0 +1,122 @@
+body {
+  background-color: #2173b9; /* Blue background color */
+  font-family: Arial, sans-serif; /* Default font */
+  margin: 0; /* Remove default body margins */
+  flex-direction: column;
+  align-items: center; /* Center content horizontally */
+  justify-content: center; /* Center content vertically */
+  min-height: 100vh; /* Ensure content fills entire viewport */
+}
+
+.loginRow {
+  display: block;
+  padding-top: 10px
+}
+
+.container {
+  width: 400px; /* Adjust width as needed */
+  background-color: #fff; /* White background */
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.loginContainer {
+  margin-bottom: 200px; /* Adjust spacing as needed */
+  bottom: 200;
+  text-align: center;
+}
+
+.logo1 img {
+  width: 250px; /* Adjust image width as needed */
+}
+
+.logo2 {
+  position: absolute; /* Position the ESXi logo */
+  bottom: 50px; /* Adjust bottom position */
+  right: 250px; /* Adjust right position */
+  height: 50%;
+}
+
+.logo2 img {
+  width: 250px; /* Adjust image width as needed */
+}
+
+.esxi {
+  position: absolute; /* Position the ESXi logo */
+  bottom: 50px; /* Adjust bottom position */
+  right: 50px; /* Adjust right position */
+  height: 50%;
+}
+
+.esxi img {
+  width: 200px; /* Adjust image width as needed */
+}
+
+.AppBgPattern {
+  position: absolute; top: 1px; left: 1px;
+}
+
+.AppBgPattern img {
+  width: 100%;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 10px;
+  margin-left: 100;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.footer {
+  background-color: #000;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-weight: 700;
+  padding: 10px;
+  color: #7B7E81;
+}
+
+.esx-icon-help-new-window {
+  background-size: 16px 16px;
+  line-height: 16px;
+  content: "\0000a0";
+  box-sizing: border-box;
+  color: #333;
+  text-align: left;
+  vertical-align: middle
+}
+
+
+
+button {
+  background-color: #007bff; /* Blue button color */
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; /* Darker blue on hover */
+}

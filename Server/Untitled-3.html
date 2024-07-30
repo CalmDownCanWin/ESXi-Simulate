@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Log in - VMware ESXi</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body class="base-app-style">
+    <div class="">
+        <!----><div ui-view="" class="" style =""><div class="loginContainer">
+        <img id="topSplash" src="images/AppBgPattern.png" alt="Background image" class="">
+    
+        <div style="position: absolute; top: 65px; left: 65px;" class="">
+        <img src="images/vmware_logo_white_transparent.png" style="width: 60%;" class="">
+        </div>
+    
+        <form name="loginForm" ng-submit="login(credentials)" novalidate="" class="ng-pristine ng-valid">
+    
+        <div id="loginForm" class="">
+            <p class="loginRow">
+                <label id="username-label" class="loginLabel">User name
+                    <input id="username" aria-labelledby="username-label" tabindex="2" focus-me="true" ng-disabled="loggingIn" ng-class="{loginFailed: loginFailed}" class="margeTextInput ng-pristine ng-valid ng-empty ng-touched" type="text" ng-model="credentials.username" style="">
+                </label>
+            </p>
+            <p class="loginRow">
+                <label id="password-label" class="loginLabel">Password
+                    <input id="password" autocomplete="off" aria-labelledby="password-label" tabindex="4" ng-disabled="loggingIn" ng-class="{loginFailed: loginFailed}" class="margeTextInput ng-pristine ng-untouched ng-valid ng-empty" type="password" ng-model="credentials.password">
+                </label>
+            </p>
+            <p class="">&nbsp;</p>
+            <p id="loginButtonRow" class="">
+                <input id="submit" class="button blue" type="submit" value="Log in" ng-disabled="credentials.username === '' ||
+                    loggingIn" disabled="disabled">
+            </p>
+            <button id="loginButton">Login</button> <span id="loginStatus" class="loginStatus wait" style=""></span>
+        </div>
+        <div id="productName" class="">
+            <img src="images/vmware_logo_white_transparent.png" style="width: 120px; margin-right: 10px;" class="">
+            <img src="images/esxi.png" style="margin-bottom: 2px; width: 60px; bottom: 50px;" class="">
+        </div>
+        </form>
+
+        <form name="loginForm" ng-submit="login(credentials)" novalidate="" class="ng-pristine ng-valid">
+        <!-- <div id="loginForm" class="">
+            <p class="loginRow">
+                <label id="username-label" class="loginLabel">User name
+                    <input id="username" aria-labelledby="username-label" tabindex="2" focus-me="true" ng-disabled="loggingIn" ng-class="{loginFailed: loginFailed}" class="margeTextInput ng-pristine ng-valid ng-empty ng-touched" type="text" ng-model="credentials.username" style="">
+                </label>
+            </p>
+            <p class="loginRow">
+                <label id="password-label" class="loginLabel">Password
+                    <input id="password" autocomplete="off" aria-labelledby="password-label" tabindex="4" ng-disabled="loggingIn" ng-class="{loginFailed: loginFailed}" class="margeTextInput ng-pristine ng-untouched ng-valid ng-empty" type="password" ng-model="credentials.password">
+                </label>
+            </p>
+            <p class="">&nbsp;</p>
+            <p id="loginButtonRow" class="">
+                <input id="submit" class="button blue" type="submit" value="Log in" ng-disabled="credentials.username === '' ||
+                    loggingIn" disabled="disabled">
+            </p>
+        </div>
+     -->
+        <!-- <div id="productName" class="">
+            <img src="images/vmware_logo_white_transparent.png" style="width: 120px; margin-right: 10px;" class="">
+               <img src="images/esxi.png" style="margin-bottom: 2px; width: 60px;" class="">
+   
+            
+   
+            <div ng-if="status !== null" ng-bind-html="status | escapeHtml | linebreak" class="loginStatus loginFailed" ng-class="{loginFailed: loginFailed || termsNotAccepted}" style="">Cannot complete login due to an incorrect user name or password.</div>
+   
+            <div ng-show="welcome !== null &amp;&amp; !loggingIn &amp;&amp; !initializing" ng-style="{'margin-top': status === null ? '29px' : '10px'}" class="loginWelcome ng-hide" style="margin-top: 10px;">
+               <div ng-bind-html="welcome | escapeHtml | linebreak" class=""></div>
+               <div ng-show="accept !== null" style="margin: 10px; text-align: right;" class="ng-hide">
+               </div>
+            </div>
+         </div> -->
+
+         <!-- <div id="productName" class="wait">
+            <img src="images/vmware_logo_white_transparent.png" style="width: 120px; margin-right: 10px;" class="wait">
+               <img src="images/esxi.png" style="margin-bottom: 2px; width: 60px;" class="wait">
+   
+            <div ng-if="loggingIn" class="" style="">
+               <img src="images/Marge-anim-progressbar.gif" alt="Progress bar">
+            </div>
+   
+            <div ng-if="status !== null" ng-bind-html="status | escapeHtml | linebreak" class="loginStatus wait" ng-class="{loginFailed: loginFailed || termsNotAccepted}" style="">Logging in to ESXi host...</div>
+   
+            <div ng-show="welcome !== null &amp;&amp; !loggingIn &amp;&amp; !initializing" ng-style="{'margin-top': status === null ? '29px' : '10px'}" class="loginWelcome ng-hide wait" style="margin-top: 10px;">
+               <div ng-bind-html="welcome | escapeHtml | linebreak" class="wait"></div>
+               <div ng-show="accept !== null" style="margin: 10px; text-align: right;" class="ng-hide wait">
+               </div>
+            </div>
+         </div> -->
+
+
+         <div id="productName" >
+            <img src="images/vmware_logo_white_transparent.png" style="width: 120px; margin-right: 10px;" >
+            <img src="images/esxi.png" style="margin-bottom: 2px; width: 60px;" >
+          
+            <button id="loginButton">Login</button> <span id="loginStatus" class="loginStatus wait" style=""></span>
+          
+            <div id="progressBar" style="display: none;">
+              <img src="images/Marge-anim-progressbar.gif" alt="Progress bar">
+            </div>
+          
+            <div id="welcomeMessage" style="display: none;">
+              <!-- Content for welcome message -->
+            </div>
+          </div>
+          
+          <script>
+            const loginButton = document.getElementById("loginButton");
+            const loginStatus = document.getElementById("loginStatus");
+            const progressBar = document.getElementById("progressBar");
+            const welcomeMessage = document.getElementById("welcomeMessage");
+          
+            loginButton.addEventListener("click", function () {
+              // 1. Display the progress bar
+              progressBar.style.display = "Logging in to ESXi host...";
+          
+              // 2. Update the login status message (optional)
+              loginStatus.textContent = "Logging in to ESXi host...";
+          
+              // 3. Simulate login process (replace with your actual login logic)
+              setTimeout(() => {
+                // 4. Hide the progress bar
+                progressBar.style.display = "none";
+          
+                // 5. Show the welcome message 
+                welcomeMessage.style.display = "block";
+          
+                // 6. Update the login status message (optional)
+                loginStatus.textContent = "Login successful!";
+              }, 500000); // Simulate a 2-second login process
+            });
+          </script>
+
+    
+        </form>
+        <div id="footer" class="footer">
+            <a href="https://www.vmware.com//support/pubs/" target="_blank" class="">
+              <i class="esx-icon-help-new-window" style="margin-top: -3px; margin-right: px;"></i>
+              Open the VMware Host Client documentation</a>
+            <div style="float: right;" class=""></div>
+        </div>
+    
+    </div>
+</body>
+</html>
