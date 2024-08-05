@@ -4,8 +4,8 @@ import uuid
 
 from ESXi_config import create_config_file
 from ESXi_config import create_directory
-from ESXi_config import create_ssh_keys
-from ESXi_config import create_sshd_config
+# from ESXi_config import create_ssh_keys
+# from ESXi_config import create_sshd_config
 from ESXi_config import create_hosts_file
 from ESXi_config import create_vmware_lic
 from ESXi_config import create_passwd_file
@@ -697,11 +697,11 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
     # Tạo file /etc/ssh/sshd_config và các key
     ssh_path = os.path.join(etc_path,"ssh")
     key_path = os.path.join(ssh_path,"keys-root")
-    create_ssh_keys(ssh_path)  # Tạo key trước khi tạo sshd_config
-    fake_ssh_port = 2222 
-    allowed_ips = ["10.0.0.1", "192.168.1.100"]  
-    create_sshd_config(ssh_path, fake_ssh_port, allowed_ips)
-    create_sshd_config(ssh_path)
+    # create_ssh_keys(ssh_path)  # Tạo key trước khi tạo sshd_config
+    # fake_ssh_port = 2222 
+    # allowed_ips = ["10.0.0.1", "192.168.1.100"]  
+    # create_sshd_config(ssh_path, fake_ssh_port, allowed_ips)
+    # create_sshd_config(ssh_path)
     create_config_file(ssh_path,"moduli",generate_random_string(12))
     create_config_file(key_path,"authorized_keys",generate_random_string(10))
     create_config_file(ssh_path,".#ssh_host_ecdsa_key",generate_random_string(12))

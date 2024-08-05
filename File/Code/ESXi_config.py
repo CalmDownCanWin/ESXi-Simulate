@@ -94,16 +94,16 @@ def create_hosts_file(path):
 
     create_config_file(path, "hosts", content)
 
-# def create_fake_datastore(base_path, datastore_name,size_gb):
-#     """Mô phỏng datastore bằng cách tạo thư mục và file."""
-#     datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
-#     os.makedirs(datastore_path, exist_ok=True)
-#     # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
-#     if os.listdir(datastore_path):
-#         return 
-#     filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
-#     with open(os.path.join(datastore_path, filename), 'w') as f:
-#         f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
+def create_fake_datastore(base_path, datastore_name,size_gb):
+    """Mô phỏng datastore bằng cách tạo thư mục và file."""
+    datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
+    os.makedirs(datastore_path, exist_ok=True)
+    # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
+    if os.listdir(datastore_path):
+        return 
+    filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
+    with open(os.path.join(datastore_path, filename), 'w') as f:
+        f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
 
 def create_sshd_config(path, fake_port=None, allowed_ips=None):
     """Tạo file /etc/ssh/sshd_config giả mạo."""

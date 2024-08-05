@@ -1,5 +1,5 @@
-from Create_File_and_Folder import start_Luaga
-from Create_File_and_Folder import monitor_Luaga_log
+# from Create_File_and_Folder import start_Luaga
+# from Create_File_and_Folder import monitor_Luaga_log
 
 
 from ESXi_config import generate_random_string
@@ -18,6 +18,7 @@ from tmp import create_esx_tmp
 from usr import create_esx_usr
 from var import create_esx_var
 from vmfs import create_esx_vmfs
+from vmfs_1 import create_esx_vmfs
 
 
     
@@ -88,7 +89,7 @@ if __name__ == "__main__":
     create_esx_tmp()
     create_esx_usr()
     create_esx_var()
-    create_esx_vmfs()
+    create_esx_vmfs("/ESXI 7/", "ESXi_1", create_windows=True, create_kali_ubuntu=True, print_uuids=True)
     create_esx_vmimages()
 
     # start_Luaga()
