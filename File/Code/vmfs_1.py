@@ -87,37 +87,39 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DataStore1": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_1
-            "DataStore2": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_1
-            "DataStore3": esxi_config["UUID5"],  # Thay đổi tên DataStore cho ESXi_1
+            "DevOpsDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_1
+            "SREDataStore": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_1
+            "TeamDataStore": esxi_config["UUID5"],  # Thay đổi tên DataStore cho ESXi_1
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_2":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DataStore2": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_2
+            "ProjectDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_2
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_3":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DataStore3": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_3
+            "DataCenter": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_3
+            "DataHub": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_3
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_4":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DataStore4": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_4
+            "ProjectAlphaDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_4
+            "BetaCluster": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_4
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_5":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DataStore5": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_5
+            "ProductionDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_5
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     else:
