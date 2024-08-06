@@ -1,6 +1,7 @@
-# from Create_File_and_Folder import start_Luaga
-# from Create_File_and_Folder import monitor_Luaga_log
+import os
 
+from Create_File_and_Folder import start_Luaga
+from Create_File_and_Folder import monitor_Luaga_log
 
 from ESXi_config import generate_random_string
 from ESXi_config import create_config_file
@@ -17,22 +18,22 @@ from tardisks import create_esx_tardisks
 from tmp import create_esx_tmp
 from usr import create_esx_usr
 from var import create_esx_var
-from vmfs import create_esx_vmfs
+#from vmfs import create_esx_vmfs
 from vmfs_1 import create_esx_vmfs
 
 
     
-def create_esx_proc(proc="/ESXI 7/proc/"):
+def create_esx_proc(proc= os.path.join(os.path.expanduser("~"), "ESXI 7","proc")):
     create_directory(proc)
 
-def create_esx_tardisks_noauto(noauto="/ESXI 7/tardisks_noauto/"):
+def create_esx_tardisks_noauto(noauto= os.path.join(os.path.expanduser("~"), "ESXI 7","tardisks_noauto")):
     create_directory(noauto)
          
-def create_esx_vmimages(vmimages ="/ESXI 7/vmimages"):
+def create_esx_vmimages(vmimages = os.path.join(os.path.expanduser("~"), "ESXI 7","vmimages")):
     create_config_file(vmimages,"floppies",generate_random_string(15))
     create_config_file(vmimages,"tools-isoimages",generate_random_string(15))
 
-def create_esx_config_files(base_path="/ESXI 7"):
+def create_esx_config_files(base_path= os.path.join(os.path.expanduser("~"), "ESXI 7")):
     """Tạo các file cấu hình ESXi 7."""
     boot_cfg_content_1 = """
     atlantic.v00  elx_esx_.v00  iavmd.v00     loadesx.v00   lsuv2_nv.v00  nhpsa.v00     nvmxnet3.v00  qfle3i.v00    tpmesxup.v00  vmkusb.v00
@@ -89,7 +90,8 @@ if __name__ == "__main__":
     create_esx_tmp()
     create_esx_usr()
     create_esx_var()
-    create_esx_vmfs("/ESXI 7/", "ESXi_1", create_windows=True, create_kali_ubuntu=True, print_uuids=True)
+    esxi_choice = input("Chọn ESXi (ESXi_1, ESXi_2,...): ")
+    create_esx_vmfs(os.path.join(os.path.expanduser("~"), "ESXI 7"), esxi_choice, create_windows=True, create_kali_ubuntu=True, print_uuids=True)
     create_esx_vmimages()
 
     # start_Luaga()

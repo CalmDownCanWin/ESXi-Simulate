@@ -1,10 +1,12 @@
+import os
+
 from ESXi_config import create_config_file
 from ESXi_config import create_directory
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_lib(lib_path="/ESXI 7/lib/"):
-    security_path='/ESXI 7/lib/security'
+def create_esx_lib(lib_path= os.path.join(os.path.expanduser("~"), "ESXI 7","lib")):
+    security_path= os.path.join(os.path.expanduser("~"), "ESXI 7","lib","security")
     create_directory(security_path)
 
     lib_file = {

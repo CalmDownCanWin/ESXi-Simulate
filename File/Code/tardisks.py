@@ -4,7 +4,7 @@ import datetime
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 
-def create_esx_tardisks(tardisks_path='/ESXI 7/tardisks/'):
+def create_esx_tardisks(tardisks_path= os.path.join(os.path.expanduser("~"), "ESXI 7","tardisks")):
     """Tạo thư mục và file giả mạo trong /tardisks."""
     os.makedirs(tardisks_path, exist_ok=True)
 
@@ -31,7 +31,7 @@ def create_esx_tardisks(tardisks_path='/ESXI 7/tardisks/'):
     create_config_file(tardisks_path, "fake-patch-1.vib", generate_random_string(1024))
 
     # Các file giả mạo ESXi
-    tardisks_files = {
+    esxi_files = {
         "atlantic.v00": 1414,
         "basemisc.tgz": 11430,
         "bnxtnet.v00": 919,
@@ -79,5 +79,5 @@ def create_esx_tardisks(tardisks_path='/ESXI 7/tardisks/'):
         "weaselin.v00": 2701,
         "xorg.v00": 3438,
     }
-    for filename, size in tardisks_files.items():
+    for filename, size in esxi_files.items():
         create_config_file(tardisks_path, filename, generate_random_string(size))

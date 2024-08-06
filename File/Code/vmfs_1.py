@@ -2,6 +2,7 @@ import os
 import random
 import stat
 import subprocess
+import datetime
 
 from ESXi_config import create_config_file
 from ESXi_config import create_vmdk_file
@@ -228,10 +229,10 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
                 for uuidn in UUID2_Folder:
                     create_directory(os.path.join(uuid_path,uuidn))
 
-                content = """# Nội dung cho OSDATA"""
-                create_config_file(uuid_path, f"OSDATA-{uuid_str}", content)
-                OSDATA_symlinks = {f"OSDATA-{uuid_str}": "UUID6"}
-                create_symlinks(volumes_path,OSDATA_symlinks)
+                # content = """# Nội dung cho OSDATA"""
+                # create_config_file(uuid_path, f"OSDATA-{uuid_str}", content)
+                # OSDATA_symlinks = {f"OSDATA-{uuid_str}": "UUID6"}
+                # create_symlinks(volumes_path,OSDATA_symlinks)
             elif uuid_name == "UUID6":
                 create_config_file(uuid_path, "boot.cfg", generate_random_string(12))
             elif uuid_name == "UUID3" and (create_windows or create_kali_ubuntu):
@@ -362,12 +363,55 @@ def create_windows_vms(base_path, num_vms, target_uuid):
 
         print("Đã tạo foler " + vm_name_Window)
 
+def create_windows_vms(base_path, num_vms, target_uuid):
+    """Tạo máy ảo Windows."""
+    vmx_content = """# Nội dung file .vmx cho Windows"""
+    for _ in range(num_vms):
+        version_window = random.choice(["2006","2016","2019","2012"])
+        number = f"{version_window}"
+        vm_name_Window = f"Window_Server_{number}"
+        name = "vmware"
+        vm_path = os.path.join(base_path, 'vmfs', 'volumes', target_uuid, vm_name_Window)
+        os.makedirs(vm_path, exist_ok=True)
+        # Tạo file VMX
+        create_config_file(vm_path, f"{vm_name_Window}.vmx", vmx_content)
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmx"),1024 * 1024 * 1024 * 10)
+        # Tạo file log
+        create_log_file(vm_path,name + ".log")
+        create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 8)
+        # Tạo file VMDK
+        create_vmdk_file(vm_path, vm_name_Window)
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmdk"),1024 * 1024 * 1024 * 30)
+        # Tạo file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name_Window, size_gb= 100)
+        # Tạo file .vmx.bak (có thể được sử dụng trong quá trình restore)
+        create_config_file(vm_path, f"{vm_name_Window}.vmx.bak", vmx_content)
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmx.bak"),1024 * 1024 * 1024 * 10)
+        #Tạo file .nvram 
+        create_config_file(vm_path,f"{vm_name_Window}.nvram",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.nvram"),1024 * 1024 * 1024 * 10)
+        #Tạo file vmsd
+        create_config_file(vm_path,f"{vm_name_Window}.vmsd",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmsd"),1024 * 1024 * 1024 * 10)
+        #Tạo file vmsn
+        create_config_file(vm_path,f"{vm_name_Window}.vmsn",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmsn"),1024 * 1024 * 1024 * 10)
+        #Tạo file vmtx
+        create_config_file(vm_path,f"{vm_name_Window}.vmtx",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmtx"),1024 * 1024 * 1024 * 10)
+        #Tạo file vmxf
+        create_config_file(vm_path,f"{vm_name_Window}.vmxf",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmxf"),1024 * 1024 * 1024 * 10)
+
+        print("Đã tạo foler " + vm_name_Window)
+
+
 def create_kali_ubuntu_vms(base_path, num_vms, target_uuid):
     vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
     #Kali or Ubuntu
     for _ in range(num_vms):
         # Chọn ngẫu nhiên loại máy ảo
-        vm_type = random.choice(["Kali-Linux","Ubuntu","Kali",""])
+        vm_type = random.choice(["Kali-Linux","Ubuntu","Kali","Centos"])
         vm_name = f"{vm_type}"
         name = "vmware"
         # Tạo thư mục VM
@@ -382,7 +426,7 @@ def create_kali_ubuntu_vms(base_path, num_vms, target_uuid):
             create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
             # Tạo file VMDK
             create_vmdk_file(vm_path, vm_name)
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 30)
             # Tạo file flat.VMDK
             create_flat_vmdk(vm_path, vm_name, size_gb= 100)
             #Tạo file vmx.lck
@@ -390,22 +434,24 @@ def create_kali_ubuntu_vms(base_path, num_vms, target_uuid):
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx.lck"),1024 * 1024 * 1024 * 9)
             #Tạo file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
             #Tạo file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
             #Tạo file vswp
             create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vswp",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 9)
+            create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
             #Tạo file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 2)
             #Tạo file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
             #Tạo file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
             print("Đã tạo folder " + vm_name)
 
@@ -426,27 +472,193 @@ def create_kali_ubuntu_vms(base_path, num_vms, target_uuid):
             create_flat_vmdk(vm_path, vm_name, size_gb= 100)
             #Tạo file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
             #Tạo file vmsd
-            create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
+            create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vmsd",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
+            create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
             #Tạo file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 2)
             #Tạo file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
             #Tạo file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
-            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 9)
+            create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
             print("Đã tạo folder " + vm_name)
             
 
-            
-            
+def create_Kali_Centos_vms(base_path, num_vms, target_uuid):
+    vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
+    #Kali or Ubuntu
+    for _ in range(num_vms):
+        # Chọn ngẫu nhiên loại máy ảo
+        vm_type = random.choice(["Kali","Centos"])
+        vm_name = f"{vm_type}"
+        name = "vmware"
+        # Tạo thư mục VM
+        vm_path = os.path.join(base_path, 'vmfs', 'volumes', target_uuid, vm_name)
+        os.makedirs(vm_path, exist_ok=True)
+        # Tạo file VMX
+        create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
+        # Tạo file log
+        create_log_file(vm_path,name + ".log")
+        create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
+        # Tạo file VMDK
+        create_vmdk_file(vm_path, vm_name)
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 30)
+        # Tạo file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name, size_gb= 100)
+        #Tạo file vmx.lck
+        create_config_file(vm_path, f"{vm_name}.vmx.lck", vmx_content)
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx.lck"),1024 * 1024 * 1024 * 9)
+        #Tạo file .nvram 
+        create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
+        #Tạo file vmsd
+        create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
+        #Tạo file vswp
+        create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vswp",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 9)
+        create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
+        #Tạo file vmsn
+        create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 2)
+        #Tạo file vmtx
+        create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
+        #Tạo file vmxf
+        create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
+
+        print("Đã tạo folder " + vm_name)
+
+def create_MacOS_vms(base_path, num_vms, target_uuid):
+    vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
+    #Kali or Ubuntu
+    for _ in range(num_vms):
+        vm_path = os.path.join(base_path, 'vmfs', 'volumes',target_uuid, vm_name)
+        version_window = random.choice(["7","8","10","11"])
+        number = f"{version_window}"
+        vm_name = f"MacOS_{number}"
+        name = "vmware"
+        os.makedirs(vm_path, exist_ok=True)
+        # Tạo file VMX
+        create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
+        # Tạo file log
+        create_log_file(vm_path,name + ".log")
+        create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
+        # Tạo file VMDK
+        create_vmdk_file(vm_path, vm_name)
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 27)
+        # Tạo file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name, size_gb= 100)
+        #Tạo file .nvram 
+        create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
+        #Tạo file vmsd
+        create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vmsd",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
+        create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
+        #Tạo file vmsn
+        create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 2)
+        #Tạo file vmtx
+        create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
+        #Tạo file vmxf
+        create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
+        create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
+
+        print("Đã tạo folder " + vm_name)
 
 
-# if __name__ == "__main__":
-#     esxi_choice = input("Chọn ESXi (ESXi_1, ESXi_2,...): ")
-#     create_esx_vmfs("/ESXI 7/", esxi_choice, create_windows=True, create_kali_ubuntu=True, print_uuids=True)
+
+# Định nghĩa cấu trúc thư mục backup
+BACKUP_PATH = os.path.join(os.path.expanduser("~"), "ESXI 7","backup")
+def create_vm_backup(backup_path, vm_name, uuid):
+    """Tạo file nén backup cho VM (dung lượng giả mạo)."""
+    today = datetime.date.today().strftime("%Y%m%d")
+    backup_filename = f"{today}_{vm_name}_backup.tar.gz"
+    backup_file = os.path.join(backup_path, backup_filename)
+    
+    # Tạo file backup giả mạo 
+    fake_backup_size = 1024 * 1024 * 1024 * 10  # 10GB (chỉnh sửa kích thước theo ý muốn)
+    create_fake_file(backup_file, fake_backup_size)  # Tạo file với kích thước giả mạo
+    
+    print(f"Đã backup VM: {vm_name} trên vào {backup_file} (dung lượng giả mạo)")
+        
+def find_and_backup_vm(backup_path, vm_name, uuid):
+    """Tìm VM và tạo file nén backup."""
+    vm_path = os.path.join(os.path.expanduser("~"), "ESXI 7","vmfs","volumes", uuid, vm_name)
+    if os.path.isdir(vm_path):
+        create_vm_backup(backup_path,  vm_name, uuid)
+    else:
+        print(f"VM '{vm_name}' không tồn tại trên ")
+
+def backup_esxi(backup_path):
+    """Thực hiện backup cho toàn bộ hệ thống ESXi."""
+    vm_backup_path = os.path.join(backup_path, "vm Backup")
+
+    # Tạo các thư mục backup
+    os.makedirs(vm_backup_path, exist_ok=True)
+
+    # Backup VM
+    for esxi_host in ESXI_UUIDS:
+        # Tạo thư mục cho ESXi host
+        esxi_backup_path = os.path.join(vm_backup_path, esxi_host)
+        os.makedirs(esxi_backup_path, exist_ok=True)
+
+        # Lấy danh sách máy ảo trên ESXi host
+        # Tạo các đường dẫn đến thư mục chứa VM
+        vm_paths = []
+        for uuid_key in ESXI_UUIDS[esxi_host]:
+            if uuid_key.startswith("UUID"):
+                uuid = ESXI_UUIDS[esxi_host][uuid_key]
+                if uuid in ESXI_UUIDS[esxi_host].values():
+                    vm_paths.append(os.path.join(os.path.expanduser("~"), "ESXI 7","vmfs","volumes", uuid))
+
+        # Duyệt qua các VM
+        for vm_name in ["Window_10", "Window_7", "Kali-Linux", "Window_11", "Window_8", "Ubuntu"]:
+            # # Tìm và backup từng VM
+            # for vm_path in vm_paths:
+            #     find_and_backup_vm(esxi_backup_path, vm_name, ESXI_UUIDS[esxi_host]["UUID3"])  
+            # for vm_path in vm_paths:
+            #     find_and_backup_vm(esxi_backup_path, vm_name, ESXI_UUIDS[esxi_host]["UUID4"])  
+            # for vm_path in vm_paths:
+            #     find_and_backup_vm(esxi_backup_path, vm_name, ESXI_UUIDS[esxi_host]["UUID5"]) 
+            # Kiểm tra xem UUID4 có tồn tại
+            if "UUID4" in ESXI_UUIDS[esxi_host]:
+                find_and_backup_vm(esxi_backup_path,vm_name, ESXI_UUIDS[esxi_host]["UUID4"])
+            # Kiểm tra xem UUID3 có tồn tại
+            if "UUID3" in ESXI_UUIDS[esxi_host]:
+                find_and_backup_vm(esxi_backup_path,vm_name, ESXI_UUIDS[esxi_host]["UUID3"])
+            # Kiểm tra xem UUID5 có tồn tại
+            if "UUID5" in ESXI_UUIDS[esxi_host]:
+                find_and_backup_vm(esxi_backup_path,vm_name, ESXI_UUIDS[esxi_host]["UUID5"])
+
+
+def get_vms_from_esxi_by_path(path):
+    """Lấy danh sách các VM từ một đường dẫn."""
+    vms = []
+    for root, _, files in os.walk(path):
+        if any(file.endswith(".vmx") for file in files):
+            vm_name = os.path.basename(root)
+            vms.append(vm_name)
+    return vms
+
+
+if __name__ == "__main__":
+
+    create_esx_vmfs(os.path.join(os.path.expanduser("~"), "ESXI 7"), "ESXi_1", create_windows=True, create_kali_ubuntu=True, print_uuids=True)
+
+    # Thực hiện backup
+    backup_esxi(BACKUP_PATH)

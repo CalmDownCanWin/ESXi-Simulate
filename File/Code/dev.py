@@ -4,7 +4,7 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_directory
 
-def create_esx_dev(base_path="/ESXI 7/dev"):
+def create_esx_dev(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","dev")):
     dev_file = {
         "cdp": 13,
         "console": 13,
@@ -53,37 +53,37 @@ def create_esx_dev(base_path="/ESXI 7/dev"):
     cbt_path = os.path.join(base_path,"cbt")
     create_config_file(cbt_path,"control",generate_random_string(15))
 
-    cdrom_path = '/ESXI 7/dev/cdrom/'
+    cdrom_path = os.path.join(base_path,"cdrom")
     create_directory(cdrom_path)
 
-    char_devmgr_path = '/ESXI 7/dev/char/devmgr/'
+    char_devmgr_path = os.path.join(base_path,"char","devmgr")
     create_directory(char_devmgr_path)
 
-    char_mem_path = '/ESXI 7/dev/char/mem/'
+    char_mem_path = os.path.join(base_path,"char","mem")
     create_directory(char_mem_path)
 
-    char_pty_path = '/ESXI 7/dev/char/pty/'
+    char_pty_path = os.path.join(base_path,"char","pty")
     create_directory(char_pty_path)
 
-    char_scsi_trace_path = '/ESXI 7/dev/char/scsi-trace/'
+    char_scsi_trace_path = os.path.join(base_path,"char","scsi-trace")
     create_directory(char_scsi_trace_path)
 
-    char_serial_path = '/ESXI 7/dev/char/serial/'
+    char_serial_path = os.path.join(base_path,"char","serial")
     create_directory(char_serial_path)
 
-    char_tty_path = '/ESXI 7/dev/char/tty/'
+    char_tty_path = os.path.join(base_path,"char","tty")
     create_directory(char_tty_path)
 
-    char_vmkdriver_path = '/ESXI 7/dev/char/vmkdriver/'
+    char_vmkdriver_path = os.path.join(base_path,"char","vmkdriver")
     create_directory(char_vmkdriver_path)
 
-    char_vob_path = '/ESXI 7/dev/char/vob/'
+    char_vob_path = os.path.join(base_path,"char","vob")
     create_directory(char_vob_path)
 
-    char_vscsi_filters_path = '/ESXI 7/dev/char/vscsi-filters/'
+    char_vscsi_filters_path = os.path.join(base_path,"char","vscsi-filters")
     create_directory(char_vscsi_filters_path)
 
-    char_vsoc_path = '/ESXI 7/dev/char/vsoc/'
+    char_vsoc_path = os.path.join(base_path,"char","vsoc")
     create_directory(char_vsoc_path)
 
     deltadisks_path = os.path.join(base_path,"deltadisks")
@@ -95,17 +95,17 @@ def create_esx_dev(base_path="/ESXI 7/dev"):
         disks_content = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(disks_path,"disks",disks_content)
 
-    PMemDisk_path = '/ESXI 7/dev/PMemDisk'
+    PMemDisk_path = os.path.join(base_path,"PMemDisk")
     create_directory(PMemDisk_path)
 
-    PMemDS_path = '/ESXI 7/dev/PMemDS'
+    PMemDS_path = os.path.join(base_path,"PMemDS")
     create_directory(PMemDS_path)
 
-    PMemNamespaces_path = '/ESXI 7/dev/PMemNamespaces'
+    PMemNamespaces_path = os.path.join(base_path,"PMemNamespaces")
     create_directory(PMemNamespaces_path)
 
-    PMemVolumes_path = '/ESXI 7/dev/PMemVolumes'
+    PMemVolumes_path = os.path.join(base_path,"PMemVolumes")
     create_directory(PMemVolumes_path)
 
-    vflash_path = '/ESXI 7/dev/vflash'
+    vflash_path = os.path.join(base_path,"vflash")
     create_directory(vflash_path)

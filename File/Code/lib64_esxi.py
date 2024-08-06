@@ -9,17 +9,17 @@ from ESXi_config import create_symlinks
 
 
 def create_esx_lib64():
-    pcsc_path = '/ESXI 7/lib64/pcsc/drivers/ifd-ccid.bundle/Contents/'
-    pcsc_linux_path = '/ESXI 7/lib64/pcsc/drivers/ifd-ccid.bundle/Contents/Linux/'
+    pcsc_path = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","pcsc","drivers","ifd-ccid.bundle","Contents")
+    pcsc_linux_path = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","pcsc","drivers","ifd-ccid.bundle","Contents","Linux")
     create_config_file(pcsc_path,"Info.plist",generate_random_string(1024))
     create_config_file(pcsc_linux_path,"libccid.so",generate_random_string(1024))
 
-    python3_5_path = '/ESXI 7/lib64/python3.5/site-packages/loadesxLive/borautils/'
+    python3_5_path = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","python3.5","site-packages","loadesxLive","borautils")
     create_config_file(python3_5_path,"elfbin.pyc",generate_random_string(14))
     create_config_file(python3_5_path,"exception.pyc",generate_random_string(1))
     create_config_file(python3_5_path,"libelf.so",generate_random_string(130))
 
-    python_load_path = '/ESXI 7/lib64/python3.5/site-packages/loadesxLive/'
+    python_load_path = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","python3.5","site-packages","loadesxLive")
     create_config_file(python_load_path,"__init__.pyc",generate_random_string(1024))
     create_config_file(python_load_path,"bootInfo.pyc",generate_random_string(1024))
     create_config_file(python_load_path,"common.pyc",generate_random_string(1024))
@@ -32,10 +32,10 @@ def create_esx_lib64():
     create_config_file(python_load_path,"utils.pyc",generate_random_string(1024))
     create_config_file(python_load_path,"vimutils.pyc",generate_random_string(1024))
 
-    python_vmware_path = '/ESXI 7/lib64/python3.5/site-packages/vmware/'
+    python_vmware_path = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","python3.5","site-packages","vmware")
     create_config_file(python_vmware_path,"esximage",generate_random_string(1024))
 
-    python3_8 = '/ESXI 7/lib64/python3.8/'
+    python3_8 = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","python3.8")
     py3_8_folder = {
         "asyncio",
         "collections",
@@ -74,10 +74,10 @@ def create_esx_lib64():
     for foldern in py3_8_folder:
         create_directory(os.path.join(python3_8,foldern))
 
-    sec = '/ESXI 7/lib64/security/'
+    sec = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64","security")
     create_directory(sec)
 
-    lib64 = '/ESXI 7/lib64/'
+    lib64 = os.path.join(os.path.expanduser("~"), "ESXI 7","lib64")
     li_file = {
         "diskLibWrapper.so": 546,
         "ld-2.17.so": 546,
