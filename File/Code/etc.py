@@ -8,42 +8,15 @@ from ESXi_config import create_directory
 # from ESXi_config import create_sshd_config
 from ESXi_config import create_hosts_file
 from ESXi_config import create_vmware_lic
-from ESXi_config import create_passwd_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_etc(etc_path= os.path.join(os.path.expanduser("~"), "ESXI 7", "etc"),config_type="basic"):
+def create_esx_etc(etc_path= os.path.join(os.path.expanduser("~"), "ESXI 7", "etc"),config_type="ESXi_1"):
 #các file trong thư mục etc
-    content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
-daemon:*:15800:0:99999:7:::
-bin:*:15800:0:99999:7:::
-sys:*:15800:0:99999:7:::
-sync:*:15800:0:99999:7:::
-games:*:15800:0:99999:7:::
-man:*:15800:0:99999:7:::
-lp:*:15800:0:99999:7:::
-mail:*:15800:0:99999:7:::
-news:*:15800:0:99999:7:::
-uucp:*:15800:0:99999:7:::
-proxy:*:15800:0:99999:7:::
-www-data:*:15800:0:99999:7:::
-backup:*:15800:0:99999:7:::
-list:*:15800:0:99999:7:::
-irc:*:15800:0:99999:7:::
-gnats:*:15800:0:99999:7:::
-nobody:*:15800:0:99999:7:::
-libuuid:!:15800:0:99999:7:::
-sshd:*:15800:0:99999:7:::
-dcui:*:13358:0:99999:7:::
-vpxuser:*:14875:0:99999:7:::"""
-    create_config_file(etc_path,"shadow",content_shadow)
     create_config_file(etc_path,"rc.local",generate_random_string(50))
 
     # Tạo file /etc/hosts
     create_hosts_file(etc_path)
-
-    # Tạo file passwd
-    create_passwd_file(etc_path)
 
     etc_file = {
         ".#chkconfig.db": 54,
@@ -165,7 +138,7 @@ vSphere Security documentation for more information.
     create_config_file(service_path,"vltd-service.xml",generate_random_string(12))
 
     #Tạo file esx.conf
-    if config_type == "ESXI 1":
+    if config_type == "ESXi_1":
         # Tạo file cấu hình cơ bản
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -200,7 +173,16 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
-    elif config_type == "ESXI 2":
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+    
+    elif config_type == "ESXi_2":
         # Tạo file cấu hình nâng cao
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -235,7 +217,16 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(2048, 16384)}
         """)
 
-    elif config_type == "ESXI 3":
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+
+    elif config_type == "ESXi_3":
         # Tạo file cấu hình tùy chỉnh
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -269,7 +260,17 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastore = {random.randint(512, 2048)}
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
-    elif config_type == "ESXI 4":
+
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """   
+    
+    elif config_type == "ESXi_4":
         # Tạo file cấu hình tùy chỉnh
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -303,7 +304,17 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastore = {random.randint(512, 2048)}
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
-    elif config_type == "ESXI 5":
+    
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+    
+    elif config_type == "ESXi_5":
         # Tạo file cấu hình tùy chỉnh
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -338,6 +349,18 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+
+
+    create_config_file(etc_path,"shadow",content_shadow)
+    create_config_file(etc_path, "passwd", content)
 
     # Tạo file encryption.info
     encryption_content = f""".encoding = "UTF-8"

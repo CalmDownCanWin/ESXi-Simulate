@@ -77,10 +77,11 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
 
 
 if __name__ == "__main__":
+    esxi_choice = input("Chọn ESXi (ESXi_1, ESXi_2,...): ")
     create_esx_config_files()
     create_esx_bin()
     create_esx_dev()
-    create_esx_etc()
+    create_esx_etc(config_type= f"{esxi_choice}" )
     create_esx_include()
     create_esx_lib()
     create_esx_lib64()
@@ -91,7 +92,6 @@ if __name__ == "__main__":
     create_esx_tmp()
     create_esx_usr()
     create_esx_var()
-    esxi_choice = input("Chọn ESXi (ESXi_1, ESXi_2,...): ")
     create_esx_vmfs(os.path.join(os.path.expanduser("~"), "ESXI 7"), esxi_choice, create_windows=True, create_kali_ubuntu=True, print_uuids=True)
     create_esx_vmimages()
 
