@@ -12,7 +12,7 @@ from ESXi_config import create_passwd_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_etc(etc_path=os.path.join(os.path.expanduser("~"), "ESXI 7", "etc"),config_type="basic"):
+def create_esx_etc(etc_path= os.path.join(os.path.expanduser("~"), "ESXI 7", "etc"),config_type="basic"):
 #các file trong thư mục etc
     content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
 daemon:*:15800:0:99999:7:::

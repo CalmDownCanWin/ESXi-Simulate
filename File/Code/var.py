@@ -18,7 +18,8 @@ def create_esx_var(base_path= os.path.join(os.path.expanduser("~"), "ESXI 7","va
     create_directory(payload)
 
     vm = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lib","vmware")
-    create_directory(vm)
+    create_config_file(os.path.join(vm,"osdata"),"locker",generate_random_string(2))
+    create_config_file(os.path.join(vm,"osdata"),"store",generate_random_string(2))
 
     sfcb = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lib","sfcb","registration")
     create_directory(sfcb)

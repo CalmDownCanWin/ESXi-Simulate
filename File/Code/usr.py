@@ -3,11 +3,18 @@ import os
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
+from ESXi_config import create_symlinks
 
 def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
 #File trong folder usr
-    create_config_file(usr,"bin",generate_random_string(561))
-    create_config_file(usr,"sbin",generate_random_string(561))
+    create_config_file(usr,"bin",generate_random_string(1))
+    create_config_file(usr,"sbin",generate_random_string(1))
+
+    my_symlinks = {
+        "bin": "/bin",
+        "sbin": "/bin",
+        }
+    create_symlinks(usr,my_symlinks)
 
 #Folder /usr/lib
     lib = os.path.join(usr,"lib")
@@ -28,6 +35,10 @@ def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
     #Folder locale
     lib_locale = os.path.join(lib,"locale")
     create_config_file(lib_locale,"locale-archive",generate_random_string(954))
+
+    #Folder hostprofiles
+    create_config_file(os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib","hostprofiles"),"locale",generate_random_string(10))
+    create_config_file(os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib","hostprofiles"),"plugins",generate_random_string(10))
 
 
 #Folder /usr/lib64/

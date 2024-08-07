@@ -133,35 +133,6 @@ def find_and_backup_vm(backup_path, vm_name, uuid, backup_date):
     if os.path.isdir(vm_path):
         create_vm_backup(backup_path,  vm_name, uuid, backup_date)
 
-# def delete_old_backups(backup_path, days=7):
-#     """Xóa các file backup cũ hơn `days` ngày."""
-#     try:
-#         for root, dirs, files in os.walk(backup_path):
-#             for file in files:
-#                 file_path = os.path.join(root, file)
-#                 file_created_time = datetime.datetime.fromtimestamp(os.path.getctime(file_path))
-#                 if (datetime.datetime.now() - file_created_time).days > days:
-#                     os.remove(file_path)
-#                     print(f"Đã xóa file backup cũ: {file_path}")
-#     except Exception as e:
-#         print(f"Lỗi xóa backup: {e}")
-
-# def delete_old_backups(backup_path):
-#     """Xóa các thư mục backup cũ hơn 30 ngày."""
-#     for filename in os.listdir(backup_path):
-#         file_path = os.path.join(backup_path, filename)
-#         if os.path.isdir(file_path):
-#             try:
-#                 # Lấy thời gian tạo thư mục
-#                 creation_time = datetime.datetime.fromtimestamp(os.path.getctime(file_path))
-#                 # Kiểm tra thời gian tạo có lớn hơn 30 ngày không
-#                 if (datetime.datetime.now() - creation_time).days > 30:
-#                     # Xóa thư mục
-#                     os.rmdir(file_path)
-#                     print(f"Đã xóa thư mục backup cũ: {file_path}")
-#             except Exception as e:
-#                 print(f"Lỗi xóa thư mục backup: {e}")
-
 def delete_old_backups(backup_path):
     """Xóa các file backup cũ hơn 30 ngày."""
     for filename in os.listdir(backup_path):
