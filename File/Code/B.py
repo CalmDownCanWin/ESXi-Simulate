@@ -96,39 +96,29 @@ def create_data_backup_structure(data_backup_path):
 
 def create_app_backup( backup_folder, app_name):
     """Tạo file nén backup cho ứng dụng."""
-    today = datetime.date.today().strftime("%Y%m%d")
-    backup_filename = f"{today}_{app_name}_backup.tar.gz"
-    backup_file = os.path.join(backup_folder, backup_filename)
-    # # Tạo file giả mạo
-    try:
-        subprocess.run(["tar", "-czvf", backup_file])
-        print(f"Đã backup ứng dụng: {app_name} vào {backup_file}")
-         # Tạo file giả mạo
-        fake_backup_file = os.path.join(backup_folder, f"{today}_{app_name}_backup.tar.gz")
-        create_fake_file(fake_backup_file, random.randint(10 * 1024 * 1024 * 1024, 50 * 1024 * 1024 * 1024))  # 10GB to 100GB
-
-    except Exception as e:
-        print(f"Lỗi backup ứng dụng: {e}")
+    for i in range(4):
+        backup_date = (datetime.date.today() - datetime.timedelta(days=2)- datetime.timedelta(days=i*7)).strftime("%Y%m%d")
+        backup_filename = f"{backup_date}_{app_name}_backup.tar.gz"
+        backup_file = os.path.join(backup_folder, backup_filename)
+        # # Tạo file giả mạo
+        create_fake_file(backup_file, random.randint(10 * 1024 * 1024 * 1024, 50 * 1024 * 1024 * 1024))  # 10GB to 100GB
+    print(f"Đã backup cơ sở dữ liệu: {app_name} vào {backup_file}")
 
 def create_db_backup(backup_folder, db_name):
     """Tạo file nén backup cho cơ sở dữ liệu."""
-    today = datetime.date.today().strftime("%Y%m%d")
-    backup_filename = f"{today}_{db_name}_backup.tar.gz"
-    backup_file = os.path.join(backup_folder, backup_filename)
-    try:
-        subprocess.run(["tar", "-czvf", backup_file])
-        print(f"Đã backup cơ sở dữ liệu: {db_name} vào {backup_file}")
+    for i in range(4):
+        backup_date = (datetime.date.today() - datetime.timedelta(days=2)- datetime.timedelta(days=i*7)).strftime("%Y%m%d")
+        backup_filename = f"{backup_date}_{db_name}_backup.tar.gz"
+        backup_file = os.path.join(backup_folder, backup_filename)
          # Tạo file giả mạo
-        fake_backup_file = os.path.join(backup_folder, f"{today}_{db_name}_backup_fake.tar.gz")
-        create_fake_file(fake_backup_file, random.randint(20 * 1024 * 1024 * 1024, 100 * 1024 * 1024 * 1024))  # 10GB to 100GB
+        create_fake_file(backup_file, random.randint(20 * 1024 * 1024 * 1024, 70 * 1024 * 1024 * 1024))  # 10GB to 100GB
 
-    except Exception as e:
-        print(f"Lỗi backup cơ sở dữ liệu: {e}")
+    print(f"Đã backup cơ sở dữ liệu: {db_name} vào {backup_file}")
 
 def create_vm_backup(backup_path, vm_name, uuid, backup_date):
     """Tạo file nén backup cho VM (dung lượng giả mạo)."""
     for i in range(4):
-        backup_date = (datetime.date.today() - datetime.timedelta(days=i*7)).strftime("%Y%m%d")
+        backup_date = (datetime.date.today() - datetime.timedelta(days=2)- datetime.timedelta(days=i*7)).strftime("%Y%m%d")
         backup_filename = f"{backup_date}_{vm_name}_backup.tar.gz"
         backup_file = os.path.join(backup_path, backup_filename)
     	# Tạo file backup giả mạo 
@@ -145,18 +135,52 @@ def find_and_backup_vm(backup_path, vm_name, uuid, backup_date):
     else:
         print(f"VM '{vm_name}' không tồn tại trên ")
 
-def delete_old_backups(backup_path, days=7):
-    """Xóa các file backup cũ hơn `days` ngày."""
-    try:
-        for root, dirs, files in os.walk(backup_path):
-            for file in files:
-                file_path = os.path.join(root, file)
-                file_created_time = datetime.datetime.fromtimestamp(os.path.getctime(file_path))
-                if (datetime.datetime.now() - file_created_time).days > days:
+# def delete_old_backups(backup_path, days=7):
+#     """Xóa các file backup cũ hơn `days` ngày."""
+#     try:
+#         for root, dirs, files in os.walk(backup_path):
+#             for file in files:
+#                 file_path = os.path.join(root, file)
+#                 file_created_time = datetime.datetime.fromtimestamp(os.path.getctime(file_path))
+#                 if (datetime.datetime.now() - file_created_time).days > days:
+#                     os.remove(file_path)
+#                     print(f"Đã xóa file backup cũ: {file_path}")
+#     except Exception as e:
+#         print(f"Lỗi xóa backup: {e}")
+
+# def delete_old_backups(backup_path):
+#     """Xóa các thư mục backup cũ hơn 30 ngày."""
+#     for filename in os.listdir(backup_path):
+#         file_path = os.path.join(backup_path, filename)
+#         if os.path.isdir(file_path):
+#             try:
+#                 # Lấy thời gian tạo thư mục
+#                 creation_time = datetime.datetime.fromtimestamp(os.path.getctime(file_path))
+#                 # Kiểm tra thời gian tạo có lớn hơn 30 ngày không
+#                 if (datetime.datetime.now() - creation_time).days > 30:
+#                     # Xóa thư mục
+#                     os.rmdir(file_path)
+#                     print(f"Đã xóa thư mục backup cũ: {file_path}")
+#             except Exception as e:
+#                 print(f"Lỗi xóa thư mục backup: {e}")
+
+def delete_old_backups(backup_path):
+    """Xóa các file backup cũ hơn 30 ngày."""
+    for filename in os.listdir(backup_path):
+        file_path = os.path.join(backup_path, filename)
+        # Kiểm tra xem file_path có phải là file và có đuôi là file nén hay không
+        if os.path.isfile(file_path) and filename.endswith((".tar.gz", ".zip", ".7z")):  
+            try:
+                # Lấy thời gian tạo file
+                creation_time = datetime.datetime.fromtimestamp(os.path.getctime(file_path))
+                # Kiểm tra thời gian tạo có lớn hơn 30 ngày không
+                if (datetime.datetime.now() - creation_time).days > 30:
+                    # Xóa file
                     os.remove(file_path)
                     print(f"Đã xóa file backup cũ: {file_path}")
-    except Exception as e:
-        print(f"Lỗi xóa backup: {e}")
+            except Exception as e:
+                print(f"Lỗi xóa file backup: {e}")
+
 
 def create_backup_schedule(backup_path, days=7):
     """Tạo lịch trình backup."""
@@ -253,7 +277,7 @@ def main(base_path, days=7):
                     if uuid_key.startswith("UUID"):
                         uuid = ESXI_UUIDS[esxi_host][uuid_key]
                         for i in range(4):
-                            backup_date = (datetime.date.today() - datetime.timedelta(days=7)).strftime("%Y%m%d")
+                            backup_date = (datetime.date.today() - datetime.timedelta(days)).strftime("%Y%m%d")
                             if "UUID4" in ESXI_UUIDS[esxi_host]:
                                 find_and_backup_vm(esxi_backup_path, vm_name, ESXI_UUIDS[esxi_host]["UUID4"], backup_date)
                             if "UUID3" in ESXI_UUIDS[esxi_host]:
@@ -261,9 +285,9 @@ def main(base_path, days=7):
                             if "UUID5" in ESXI_UUIDS[esxi_host]:
                                 find_and_backup_vm(esxi_backup_path, vm_name, ESXI_UUIDS[esxi_host]["UUID5"], backup_date)
 
-    delete_old_backups(app_backup_path, 30)
-    delete_old_backups(data_backup_path, 30)
-    delete_old_backups(vm_backup_path, 30)
+    delete_old_backups(app_backup_path)
+    delete_old_backups(data_backup_path)
+    delete_old_backups(vm_backup_path)
 
 if __name__ == "__main__":
     base_path = os.path.join(os.path.expanduser("~"), "ESXI 7")  # Thay thế bằng đường dẫn thực tế
