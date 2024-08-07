@@ -5,7 +5,8 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
+def create_esx_usr(folder):
+    usr = os.path.join(os.path.expanduser("~"), folder,"usr")
 #File trong folder usr
     create_config_file(usr,"bin",generate_random_string(1))
     create_config_file(usr,"sbin",generate_random_string(1))
@@ -29,7 +30,7 @@ def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
     lib_vmware = os.path.join(lib,"vmware")
     create_config_file(lib_vmware,"esxcli-software",generate_random_string(545))
     #Tạo file /usr/lib/vmware/hostd/docroot/ui/index.html
-    ui = os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib","vmware","hostd","docroot","ui")
+    ui = os.path.join(usr,"lib","vmware","hostd","docroot","ui")
     create_config_file(ui,"index.html",generate_random_string(1024))
 
     #Folder locale
@@ -37,21 +38,21 @@ def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
     create_config_file(lib_locale,"locale-archive",generate_random_string(954))
 
     #Folder hostprofiles
-    create_config_file(os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib","hostprofiles"),"locale",generate_random_string(10))
-    create_config_file(os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib","hostprofiles"),"plugins",generate_random_string(10))
+    create_config_file(os.path.join(usr,"lib","hostprofiles"),"locale",generate_random_string(10))
+    create_config_file(os.path.join(usr,"lib","hostprofiles"),"plugins",generate_random_string(10))
 
 
 #Folder /usr/lib64/
-    lib64 = os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib64")
+    lib64 = os.path.join(usr,"lib64")
     create_directory(os.path.join(lib64,"cim"))
 
     create_config_file(os.path.join(lib64,"locale"),"locale-archive",generate_random_string(55))
 
-    open = os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib64","openwsman")
+    open = os.path.join(usr,"lib64","openwsman")
     create_directory(os.path.join(open,"authenticators"))
     create_directory(os.path.join(open,"plugins"))
 
-    vmw = os.path.join(os.path.expanduser("~"), "ESXI 7","usr","lib64","vmware")
+    vmw = os.path.join(usr,"lib64","vmware")
     create_directory(vmw)
 
     li_file = {
@@ -73,7 +74,7 @@ def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
         create_config_file(lib64,lin,generate_random_string(lis))
     
 #Folder /usr/libexec
-    libexec = os.path.join(os.path.expanduser("~"), "ESXI 7","usr","libexec")
+    libexec = os.path.join(usr,"libexec")
     create_config_file(libexec,"pci-info",generate_random_string(1))
 
     create_directory(os.path.join(libexec,"jumpstart","plugins"))
@@ -82,7 +83,7 @@ def create_esx_usr(usr = os.path.join(os.path.expanduser("~"), "ESXI 7","usr")):
     create_directory(os.path.join(libexec,"vmwauth","lib64"))
 
 #Folder //usr/share
-    share = os.path.join(os.path.expanduser("~"), "ESXI 7","usr","share")
+    share = os.path.join(usr,"share")
     sha_folder = {
         "certs",
         "doc",

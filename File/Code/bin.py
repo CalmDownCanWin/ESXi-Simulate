@@ -5,7 +5,8 @@ from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
 
-def create_esx_bin(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","bin")):
+def create_esx_bin(folder):
+    base_path=os.path.join(os.path.expanduser("~"), folder,"bin")
     bin_file = {
         # "[": 45,
         # "[[": 4,

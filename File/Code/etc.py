@@ -4,14 +4,14 @@ import uuid
 
 from ESXi_config import create_config_file
 from ESXi_config import create_directory
-# from ESXi_config import create_ssh_keys
-# from ESXi_config import create_sshd_config
 from ESXi_config import create_hosts_file
 from ESXi_config import create_vmware_lic
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_etc(etc_path= os.path.join(os.path.expanduser("~"), "ESXI 7", "etc"),config_type="ESXi_1"):
+def create_esx_etc(folder,config_type="ESXi_1"):
+
+    etc_path= os.path.join(os.path.expanduser("~"),folder, "etc")
 #các file trong thư mục etc
     create_config_file(etc_path,"rc.local",generate_random_string(50))
 
@@ -217,7 +217,7 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(2048, 16384)}
         """)
 
-        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+        content_shadow = """root:$6$4aOmWdpJ$ZXaOSOTKO5E3/yAlxUtN/QjpLLn6ge8ROMdpUFNeB9IcilbOUMlNsvLPFEEgUxjsPNQ5fCOpjqWJ2WzthIXuA.:15800:0:99999:7:::
     dcui:*:13358:0:99999:7:::
     vpxuser:*:14875:0:99999:7:::"""
         content = """
@@ -261,7 +261,7 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
-        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+        content_shadow = """root:$6$4aOmWdpJ$P07npumHWHLe3FN6OiWJAMkVO5Pmay9nWzSw6CcF6s4A2GJvkH95fwrYquU3VTL1EbvySbuMS5I5fffmoxc5A.:15800:0:99999:7:::
     dcui:*:13358:0:99999:7:::
     vpxuser:*:14875:0:99999:7:::"""
         content = """
@@ -305,7 +305,7 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
     
-        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+        content_shadow = """root:$6$4aOmWdpJ$zt3D2I1NUuKxxbez/FmVazmv9quSmhdt7fv7TkeZa82mt8Fb6phqekuFNcztnRfDEUlWFCmGzeRDYciyGEcaQ.:15800:0:99999:7:::
     dcui:*:13358:0:99999:7:::
     vpxuser:*:14875:0:99999:7:::"""
         content = """
@@ -349,7 +349,7 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
-        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+        content_shadow = """root:$6$4aOmWdpJ$hve8ESy4SpxUP5dC8ukv0aox3rBSfX6Ir7Oo/B6tLrYFcZ4OlnFiUtEjEl8tNvlp3ZJLNWYytMxDWpdrPxi9Q.:15800:0:99999:7:::
     dcui:*:13358:0:99999:7:::
     vpxuser:*:14875:0:99999:7:::"""
         content = """

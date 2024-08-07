@@ -18,22 +18,25 @@ from tardisks import create_esx_tardisks
 from tmp import create_esx_tmp
 from usr import create_esx_usr
 from var import create_esx_var
-#from vmfs import create_esx_vmfs
 from vmfs_1 import create_esx_vmfs
+from Backup import main,create_backup_schedule
 
 
     
-def create_esx_proc(proc= os.path.join(os.path.expanduser("~"), "ESXI 7","proc")):
+def create_esx_proc(folder):
+    proc= os.path.join(os.path.expanduser("~"), folder,"proc")
     create_directory(proc)
 
-def create_esx_tardisks_noauto(noauto= os.path.join(os.path.expanduser("~"), "ESXI 7","tardisks_noauto")):
+def create_esx_tardisks_noauto(folder):
+    noauto= os.path.join(os.path.expanduser("~"), folder,"tardisks_noauto")
     create_directory(noauto)
          
-def create_esx_vmimages(vmimages = os.path.join(os.path.expanduser("~"), "ESXI 7","vmimages")):
+def create_esx_vmimages(folder):
+    vmimages = os.path.join(os.path.expanduser("~"), folder,"vmimages")
     create_config_file(vmimages,"floppies",generate_random_string(15))
     create_config_file(vmimages,"tools-isoimages",generate_random_string(15))
 
-def create_esx_config_files(base_path= os.path.join(os.path.expanduser("~"), "ESXI 7")):
+def create_esx_config_files(base_path):
     """Tạo các file cấu hình ESXi 7."""
     boot_cfg_content_1 = """
     atlantic.v00  elx_esx_.v00  iavmd.v00     loadesx.v00   lsuv2_nv.v00  nhpsa.v00     nvmxnet3.v00  qfle3i.v00    tpmesxup.v00  vmkusb.v00
@@ -78,22 +81,29 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
 
 if __name__ == "__main__":
     esxi_choice = input("Chọn ESXi (ESXi_1, ESXi_2,...): ")
-    create_esx_config_files()
-    create_esx_bin()
-    create_esx_dev()
-    create_esx_etc(config_type= f"{esxi_choice}" )
-    create_esx_include()
-    create_esx_lib()
-    create_esx_lib64()
-    create_esx_opt()
-    create_esx_proc()
-    create_esx_tardisks()
-    create_esx_tardisks_noauto()
-    create_esx_tmp()
-    create_esx_usr()
-    create_esx_var()
-    create_esx_vmfs(os.path.join(os.path.expanduser("~"), "ESXI 7"), esxi_choice, create_windows=True, create_kali_ubuntu=True, print_uuids=True)
-    create_esx_vmimages()
+    base_path = os.path.join(os.path.expanduser("~"), esxi_choice)  # Thay thế bằng đường dẫn thực tế
+
+
+    create_esx_config_files(base_path)
+    create_esx_bin(esxi_choice)
+    create_esx_dev(esxi_choice)
+    create_esx_etc( esxi_choice,config_type= esxi_choice)
+    create_esx_include(esxi_choice)
+    create_esx_lib(esxi_choice)
+    create_esx_lib64(esxi_choice)
+    create_esx_opt(esxi_choice)
+    create_esx_proc(esxi_choice)
+    create_esx_tardisks(esxi_choice)
+    create_esx_tardisks_noauto(esxi_choice)
+    create_esx_tmp(esxi_choice)
+    create_esx_usr(esxi_choice)
+    create_esx_var(esxi_choice)
+    create_esx_vmfs(base_path, esxi_choice, create_windows=True, create_kali_ubuntu=True,create_FreeBSD=True,create_window_server=True,create_MacOS=True,create_Kali_Centos=True, print_uuids=True)
+    create_esx_vmimages(esxi_choice)
+
+    main(base_path, 7)
+    # Tạo lịch trình backup
+    create_backup_schedule(base_path, 7)
 
     # start_Luaga()
     # monitor_Luaga_log()

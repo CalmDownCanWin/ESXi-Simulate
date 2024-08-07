@@ -10,36 +10,37 @@ from ESXi_config import create_symlinks
 
 
 
-def create_esx_var(base_path= os.path.join(os.path.expanduser("~"), "ESXI 7","var")):
-    esximg = os.path.join(os.path.expanduser("~"), "ESXI 7","var","db","esximg")
+def create_esx_var(folder):
+    base_path= os.path.join(os.path.expanduser("~"), folder,"var")
+    esximg = os.path.join(base_path,"db","esximg")
     create_directory(esximg)
 
-    payload = os.path.join(os.path.expanduser("~"), "ESXI 7","var","db","payloads")
+    payload = os.path.join(base_path,"db","payloads")
     create_directory(payload)
 
-    vm = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lib","vmware")
+    vm = os.path.join(base_path,"lib","vmware")
     create_config_file(os.path.join(vm,"osdata"),"locker",generate_random_string(2))
     create_config_file(os.path.join(vm,"osdata"),"store",generate_random_string(2))
 
-    sfcb = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lib","sfcb","registration")
+    sfcb = os.path.join(base_path,"lib","sfcb","registration")
     create_directory(sfcb)
 
-    installer = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lib","initenvs","installer")
+    installer = os.path.join(base_path,"lib","initenvs","installer")
     create_directory(installer)
 
-    dhcp = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lib","dhcp")
+    dhcp = os.path.join(base_path,"lib","dhcp")
     create_directory(dhcp)
 
-    token = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lock","eToken")
+    token = os.path.join(base_path,"lock","eToken")
     create_directory(token)
 
-    lock = os.path.join(os.path.expanduser("~"), "ESXI 7","var","lock","iscsi")
+    lock = os.path.join(base_path,"lock","iscsi")
     create_config_file(lock,"lock",generate_random_string(55))
 
-    opt = os.path.join(os.path.expanduser("~"), "ESXI 7","var","opt")
+    opt = os.path.join(base_path,"opt")
     create_directory(opt)
 
-    run = os.path.join(os.path.expanduser("~"), "ESXI 7","var","run")
+    run = os.path.join(base_path,"run")
     r_folder = {
         "crx",
         "iofilters",
@@ -70,15 +71,15 @@ def create_esx_var(base_path= os.path.join(os.path.expanduser("~"), "ESXI 7","va
     run_symlinks = {"log": "/scratch/log",}
     create_symlinks(run,run_symlinks)
 
-    cron = os.path.join(os.path.expanduser("~"), "ESXI 7","var","spool","cron","crontabs")
+    cron = os.path.join(base_path,"spool","cron","crontabs")
     create_config_file(cron,".#root",generate_random_string(65))
     create_config_file(cron,"root",generate_random_string(65))
 
     # Thư mục /var/log/vmware
-    log_vmware = os.path.join(os.path.expanduser("~"), "ESXI 7","var","log","vmware","journal")
+    log_vmware = os.path.join(base_path,"log","vmware","journal")
     create_directory(log_vmware)
 
-    log_path = os.path.join(os.path.expanduser("~"), "ESXI 7","var","log")
+    log_path = os.path.join(base_path,"log")
     log_file = {
         ".vmsyslogd.err": 1,
         "apiForwarder.log": 50,

@@ -4,7 +4,8 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_directory
 
-def create_esx_dev(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","dev")):
+def create_esx_dev(folder):
+    base_path=os.path.join(os.path.expanduser("~"), folder,"dev")
     dev_file = {
         "cdp": 13,
         "console": 13,
