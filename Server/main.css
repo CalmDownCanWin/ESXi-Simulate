@@ -50,7 +50,7 @@
 }
 
 .loginLabel {
-    font-weight: 700;
+    font-weight: bold;
     color: #FFF;
     text-align: left;
     display: block
@@ -75,12 +75,12 @@
     clear: both;
     float: right;
     margin-right: 40px;
-    margin-top: 0
+    margin-top: 5
 }
 
 .button {
     zoom:1;vertical-align: baseline;
-    margin: 0 2px;
+    margin: 0 4px;
     text-align: center;
     text-decoration: none;
     padding: 0 30px;

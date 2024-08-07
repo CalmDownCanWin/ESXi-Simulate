@@ -24,43 +24,6 @@ def create_directory(path):
   except OSError as e:
     print(f"Lỗi khi tạo thư mục: {e}")
 
-def create_passwd_file(path):
-    """Tạo file /etc/vmware/passwd giả mạo."""
-    content = """
-    # Thông tin tài khoản người dùng (Deception)
-    root:x:0:0:Administrator:/:/bin/sh
-    dcui:x:100:100:DCUI User:/:/bin/sh
-    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
-    daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
-    sys:x:3:3:sys:/dev:/usr/sbin/nologin
-    adm:x:4:4:adm:/var/adm:/usr/sbin/nologin
-    lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
-    mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
-    uucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin
-    operator:x:11:0:operator:/root:/sbin/nologin
-    games:x:12:100:games:/usr/games:/usr/sbin/nologin
-    gopher:x:13:30:gopher:/usr/lib/gopher-data:/usr/sbin/nologin
-    ftp:x:14:50:FTP User:/var/ftp:/usr/sbin/nologin
-    vcsa:x:69:69:virtual console:/dev:/sbin/nologin
-    ntp:x:38:38::/etc/ntp:/sbin/nologin
-    nscd:x:28:28:NSCD Daemon:/:/usr/sbin/nologin
-    dbus:x:81:81:System message bus:/:/usr/sbin/nologin
-    avahi:x:70:70:Avahi daemon:/:/usr/sbin/nologin
-    rpcuser:x:29:29:RPC Service User:/var/lib/nfs:/usr/sbin/nologin
-    nfsnobody:x:65534:65534:Anonymous NFS User:/var/lib/nfs:/usr/sbin/nologin
-    postfix:x:89:89::/var/spool/postfix:/usr/sbin/nologin
-    sshd:x:74:74:Privilege-separated SSH:/var/empty/sshd:/usr/sbin/nologin
-    messagebus:x:18:18::/var/run/dbus:/usr/sbin/nologin
-    polkitd:x:999:998:User for polkitd:/:/usr/sbin/nologin
-    usbmuxd:x:113:113:usbmuxd user:/:/usr/sbin/nologin
-
-    # Fake users (Deception)
-    fakeuser1:x:1000:1000::/home/fakeuser1:/bin/bash
-    fakeuser2:x:1001:1001::/home/fakeuser2:/bin/false 
-    backupuser:x:1002:1002::/backup:/bin/bash
-    """
-
-    create_config_file(path, "passwd", content)
 
 def create_hosts_file(path):
     """Tạo file /etc/hosts giả mạo."""
@@ -94,16 +57,16 @@ def create_hosts_file(path):
 
     create_config_file(path, "hosts", content)
 
-# def create_fake_datastore(base_path, datastore_name,size_gb):
-#     """Mô phỏng datastore bằng cách tạo thư mục và file."""
-#     datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
-#     os.makedirs(datastore_path, exist_ok=True)
-#     # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
-#     if os.listdir(datastore_path):
-#         return 
-#     filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
-#     with open(os.path.join(datastore_path, filename), 'w') as f:
-#         f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
+def create_fake_datastore(base_path, datastore_name,size_gb):
+    """Mô phỏng datastore bằng cách tạo thư mục và file."""
+    datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
+    os.makedirs(datastore_path, exist_ok=True)
+    # Kiểm tra xem đã có file trong thư mục datastore_path hay chưa
+    if os.listdir(datastore_path):
+        return 
+    filename = str(uuid.uuid4())  # Tạo UUID ngẫu nhiên
+    with open(os.path.join(datastore_path, filename), 'w') as f:
+        f.write(f"Fake Size: {size_gb} GB\n")  # Thêm thông tin kích thước giả
 
 def create_sshd_config(path, fake_port=None, allowed_ips=None):
     """Tạo file /etc/ssh/sshd_config giả mạo."""

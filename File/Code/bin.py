@@ -1,10 +1,15 @@
+import os
+
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
 
-def create_esx_bin(base_path="/ESXI 7/bin"):
+def create_esx_bin(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","bin")):
     bin_file = {
+        # "[": 45,
+        # "[[": 4,
+        #"ash": 86,
         "amldump": 86,
         "apiForwarder": 454786,
         "apply-host-profiles": 4763,
@@ -220,3 +225,4 @@ def create_esx_bin(base_path="/ESXI 7/bin"):
     }
 
     create_symlinks(base_path,my_symlinks)
+

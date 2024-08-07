@@ -4,46 +4,19 @@ import uuid
 
 from ESXi_config import create_config_file
 from ESXi_config import create_directory
-from ESXi_config import create_ssh_keys
-from ESXi_config import create_sshd_config
+# from ESXi_config import create_ssh_keys
+# from ESXi_config import create_sshd_config
 from ESXi_config import create_hosts_file
 from ESXi_config import create_vmware_lic
-from ESXi_config import create_passwd_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_etc(etc_path="/ESXI 7/etc/",config_type="basic"):
+def create_esx_etc(etc_path= os.path.join(os.path.expanduser("~"), "ESXI 7", "etc"),config_type="ESXi_1"):
 #các file trong thư mục etc
-    content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
-daemon:*:15800:0:99999:7:::
-bin:*:15800:0:99999:7:::
-sys:*:15800:0:99999:7:::
-sync:*:15800:0:99999:7:::
-games:*:15800:0:99999:7:::
-man:*:15800:0:99999:7:::
-lp:*:15800:0:99999:7:::
-mail:*:15800:0:99999:7:::
-news:*:15800:0:99999:7:::
-uucp:*:15800:0:99999:7:::
-proxy:*:15800:0:99999:7:::
-www-data:*:15800:0:99999:7:::
-backup:*:15800:0:99999:7:::
-list:*:15800:0:99999:7:::
-irc:*:15800:0:99999:7:::
-gnats:*:15800:0:99999:7:::
-nobody:*:15800:0:99999:7:::
-libuuid:!:15800:0:99999:7:::
-sshd:*:15800:0:99999:7:::
-dcui:*:13358:0:99999:7:::
-vpxuser:*:14875:0:99999:7:::"""
-    create_config_file(etc_path,"shadow",content_shadow)
     create_config_file(etc_path,"rc.local",generate_random_string(50))
 
     # Tạo file /etc/hosts
     create_hosts_file(etc_path)
-
-    # Tạo file passwd
-    create_passwd_file(etc_path)
 
     etc_file = {
         ".#chkconfig.db": 54,
@@ -145,7 +118,7 @@ vSphere Security documentation for more information.
     create_symlinks(vmware_path,my_symlinks)
 
     #Folder vmwauth
-    vmwauth_path = '/ESXI 7/etc/vmware/vmwauth/'
+    vmwauth_path = os.path.join(vmware_path, "vmwauth")
     create_config_file(vmwauth_path,"authentication.conf",generate_random_string(10))
     create_config_file(vmwauth_path,"camprovider.conf",generate_random_string(10))
     create_config_file(vmwauth_path,"provider.conf",generate_random_string(10))
@@ -158,14 +131,14 @@ vSphere Security documentation for more information.
     create_config_file(os.path.join(vmware_path,"stats.d"),"esxtokend.conf",generate_random_string(10))
 
     #Folder service
-    service_path = '/ESXI 7/etc/vmware/service/'
+    service_path = os.path.join(vmware_path,"service")
     create_config_file(service_path,"dpd-service.xml",generate_random_string(12))
     create_config_file(service_path,"likewise.xml",generate_random_string(12))
     create_config_file(service_path,"service.xml",generate_random_string(12))
     create_config_file(service_path,"vltd-service.xml",generate_random_string(12))
 
     #Tạo file esx.conf
-    if config_type == "ESXI 1":
+    if config_type == "ESXi_1":
         # Tạo file cấu hình cơ bản
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -200,7 +173,16 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
-    elif config_type == "ESXI 2":
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+    
+    elif config_type == "ESXi_2":
         # Tạo file cấu hình nâng cao
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -235,7 +217,16 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(2048, 16384)}
         """)
 
-    elif config_type == "ESXI 3":
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+
+    elif config_type == "ESXi_3":
         # Tạo file cấu hình tùy chỉnh
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -269,7 +260,17 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastore = {random.randint(512, 2048)}
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
-    elif config_type == "ESXI 4":
+
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """   
+    
+    elif config_type == "ESXi_4":
         # Tạo file cấu hình tùy chỉnh
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -303,7 +304,17 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastore = {random.randint(512, 2048)}
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
-    elif config_type == "ESXI 5":
+    
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+    
+    elif config_type == "ESXi_5":
         # Tạo file cấu hình tùy chỉnh
         create_config_file(vmware_path, "esx.conf", f"""
         # ESXi Configuration File
@@ -338,6 +349,18 @@ vSphere Security documentation for more information.
         Storage.Datastore.MaxDatastoreSize = {random.randint(1024, 8192)}
         """)
 
+        content_shadow = """root:$6$4aOmWdpJ$/kyPOik9rR0kSLyABIYNXgg/UqlWX3c1eIaovOLWphShTGXmuUAMq6iu9DrcQqlVUw3Pirizns4u27w3Ugvb6.:15800:0:99999:7:::
+    dcui:*:13358:0:99999:7:::
+    vpxuser:*:14875:0:99999:7:::"""
+        content = """
+    root:x:0:0:Administrator:/:/bin/sh
+    dcui:x:100:100:DCUI User:/:/bin/sh
+    vpxuser:x:500:100:VMware VirtualCenter administration account:/:/bin/sh
+    """
+
+
+    create_config_file(etc_path,"shadow",content_shadow)
+    create_config_file(etc_path, "passwd", content)
 
     # Tạo file encryption.info
     encryption_content = f""".encoding = "UTF-8"
@@ -697,11 +720,11 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
     # Tạo file /etc/ssh/sshd_config và các key
     ssh_path = os.path.join(etc_path,"ssh")
     key_path = os.path.join(ssh_path,"keys-root")
-    create_ssh_keys(ssh_path)  # Tạo key trước khi tạo sshd_config
-    fake_ssh_port = 2222 
-    allowed_ips = ["10.0.0.1", "192.168.1.100"]  
-    create_sshd_config(ssh_path, fake_ssh_port, allowed_ips)
-    create_sshd_config(ssh_path)
+    # create_ssh_keys(ssh_path)  # Tạo key trước khi tạo sshd_config
+    # fake_ssh_port = 2222 
+    # allowed_ips = ["10.0.0.1", "192.168.1.100"]  
+    # create_sshd_config(ssh_path, fake_ssh_port, allowed_ips)
+    # create_sshd_config(ssh_path)
     create_config_file(ssh_path,"moduli",generate_random_string(12))
     create_config_file(key_path,"authorized_keys",generate_random_string(10))
     create_config_file(ssh_path,".#ssh_host_ecdsa_key",generate_random_string(12))
@@ -766,13 +789,13 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
     create_config_file(system_path, "custom_config.xml", custom_config_xml_content)
 
 #Folder config
-    config = '/ESXI 7/etc/config/EMU/mili/'
+    config = os.path.join(etc_path,"config","EMU","mili")
     create_config_file(config,"intr_logopts.txt",generate_random_string(5284))
     create_config_file(config,"savestp.txt",generate_random_string(5284))
     create_config_file(config,"savetgt.txt",generate_random_string(5284))
 
 #Folder init.d
-    init = '/ESXI 7/etc/init.d/'
+    init = os.path.join(etc_path,"init.d")
     init_file = {
         "DCUI": 654,
         "ESXShell": 654,
@@ -863,30 +886,30 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
         "wsman": 15,
         "xorg": 85,
     }
-    vmsyslog = '/ESXI 7/etc/vmsyslog.conf.d/'
+    vmsyslog = os.path.join(etc_path,"vmsyslog.conf.d")
     for vmsname, vmssize in vmsyslog_file.items():
         create_config_file(vmsyslog,vmsname,generate_random_string(vmssize))
 
 #Folder likewise
-    like = '/ESXI 7/etc/likewise/'
+    like = os.path.join(etc_path,"likewise")
     create_directory(like)
 
 #Folder openwsman
-    openw = '/ESXI 7/etc/openwsman/'
+    openw = os.path.join(etc_path,"openwsman")
     create_config_file(openw,"identify.xml",generate_random_string(54))
     create_config_file(openw,"openwsman.conf.tmpl",generate_random_string(54))
     create_config_file(openw,"owsmangencert.sh",generate_random_string(54))
     create_config_file(openw,"subscriptions",generate_random_string(54))
 
 #Folder opt
-    opt = '/ESXI 7/etc/opt/'
+    opt = os.path.join(etc_path,"opt")
     create_directory(opt)
 
 #Folder pam.d
-    pam_tem = '/ESXI 7/etc/pam.d/template/'
+    pam_tem = os.path.join(etc_path,"pam.d","template")
     create_directory(pam_tem)
 
-    pam = '/ESXI 7/etc/pam.d/'
+    pam = os.path.join(etc_path,"pam.d")
     pam_file = {
         "daemondk": 12,
         "dcui": 12,
@@ -905,7 +928,7 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
         create_config_file(pam,pamname,generate_random_string(pamsize))
 
 #Folder rc.local.d
-    rc = '/ESXI 7/etc/rc.local.d/'
+    rc = os.path.join(etc_path,"rc.local.d")
     rc_file = {
         "009.vsanwitness.sh": 15,
         "cleanupStatefulHost.py": 15,
@@ -917,7 +940,7 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
         create_config_file(rc,rcname,generate_random_string(rcsize))
     
 #Folder security
-    se = '/ESXI 7/etc/security/'
+    se = os.path.join(etc_path,"security")
     se_file = {
         ".#access.conf": 13,
         "access.conf": 13,
@@ -930,18 +953,18 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
         create_config_file(se,sename,generate_random_string(sesze))
 
 #Folder sfcb
-    sfcb = '/ESXI 7/etc/sfcb/'
+    sfcb = os.path.join(etc_path,"sfcb")
     create_config_file(sfcb,"repository",generate_random_string(12))
     create_config_file(sfcb,"sfcb.cfg",generate_random_string(12))
     create_config_file(os.path.join(sfcb,"omc"),"sensor_health",generate_random_string(12))
 
 #Folder shutdown.d
-    shut = '/ESXI 7/etc/shutdown.d/'
+    shut = os.path.join(etc_path,"shutdown.d")
     create_config_file(shut,"iofilterd-spm",generate_random_string(13))
     create_config_file(shut,"iofilterd-vmwarevmcrypt",generate_random_string(13))
 
 #Folder vmware_tool
-    vmt = '/ESXI 7/etc/vmware-tools/'
+    vmt = os.path.join(etc_path,"vmware-tools")
     vmt_file = {
         "poweroff-vm-default": 354,
         "poweron-vm-default": 354,
@@ -953,19 +976,19 @@ ConfigEncData = "keyId={generate_random_string(24)}%3d%3d:data1={generate_random
     for vmtn,vmts in vmt_file.items():
         create_config_file(vmt,vmtn,generate_random_string(vmts))
 
-    com = '/ESXI 7/etc/vmware-tools/plugins/common/'
+    com = os.path.join(etc_path,"vmware-tools","plugins","common")
     create_directory(com)
 
-    vmsvc = '/ESXI 7/etc/vmware-tools/plugins/vmsvc/'
+    vmsvc = os.path.join(etc_path,"vmware-tools","plugins","vmsvc")
     create_directory(vmsvc)
 
-    script = '/ESXI 7/etc/vmware-tools/script-data/'
+    script = os.path.join(etc_path,"vmware-tools","script-data")
     create_directory(script)
 
-    vmware = '/ESXI 7/etc/vmware-tools/scripts/vmware/'
+    vmware = os.path.join(etc_path,"vmware-tools","scripts","vmware")
     create_config_file(vmware,"network",generate_random_string(25))
 
 #Folder X11
-    X11 = '/ESXI 7/etc/X11/'
+    X11 = os.path.join(etc_path,"X11")
     create_config_file(X11,"server.xkm",generate_random_string(1035))
     create_config_file(X11,"xorg.conf",generate_random_string(10))
