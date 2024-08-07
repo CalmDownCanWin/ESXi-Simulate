@@ -4,9 +4,9 @@ import datetime
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 
-def create_esx_tardisks(folder):
+def create_esx_tardisks(base_path):
     """Tạo thư mục và file giả mạo trong /tardisks."""
-    tardisks_path= os.path.join(os.path.expanduser("~"), folder,"tardisks")
+    tardisks_path= os.path.join(base_path,"tardisks")
     os.makedirs(tardisks_path, exist_ok=True)
 
     # File metadata giả mạo

@@ -9,9 +9,9 @@ from ESXi_config import create_vmware_lic
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_etc(folder,config_type="ESXi_1"):
+def create_esx_etc(base_path,config_type="ESXi_1"):
 
-    etc_path= os.path.join(os.path.expanduser("~"),folder, "etc")
+    etc_path= os.path.join(base_path, "etc")
 #các file trong thư mục etc
     create_config_file(etc_path,"rc.local",generate_random_string(50))
 

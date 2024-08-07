@@ -7,7 +7,7 @@ import random
 
 #  Import from ESXI_config.py
 from ESXi_config import create_fake_file 
-from vmfs_1 import ESXI_UUIDS
+from vmfs import ESXI_UUIDS
 
 def create_backup_structure(base_path):
     """Tạo cấu trúc thư mục backup."""

@@ -5,8 +5,8 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_usr(folder):
-    usr = os.path.join(os.path.expanduser("~"), folder,"usr")
+def create_esx_usr(base_path):
+    usr = os.path.join(base_path,"usr")
 #File trong folder usr
     create_config_file(usr,"bin",generate_random_string(1))
     create_config_file(usr,"sbin",generate_random_string(1))
