@@ -13,7 +13,7 @@ from tardisks import create_esx_tardisks
 from tmp import create_esx_tmp
 from usr import create_esx_usr
 from var import create_esx_var
-from vmfs_1 import create_esx_vmfs
+from vmfs import create_esx_vmfs
 from Other_folder import create_esx_config_files,create_esx_proc,create_esx_tardisks_noauto,create_esx_vmimages
 
 
