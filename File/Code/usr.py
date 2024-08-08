@@ -7,7 +7,7 @@ from ESXi_config import create_symlinks
 
 def create_esx_usr(base_path):
     usr = os.path.join(base_path,"usr")
-#File trong folder usr
+#File in folder usr
     create_config_file(usr,"bin",generate_random_string(1))
     create_config_file(usr,"sbin",generate_random_string(1))
 
@@ -29,7 +29,7 @@ def create_esx_usr(base_path):
     #Folder vmware
     lib_vmware = os.path.join(lib,"vmware")
     create_config_file(lib_vmware,"esxcli-software",generate_random_string(545))
-    #Tạo file /usr/lib/vmware/hostd/docroot/ui/index.html
+    #Create file /usr/lib/vmware/hostd/docroot/ui/index.html
     ui = os.path.join(usr,"lib","vmware","hostd","docroot","ui")
     create_config_file(ui,"index.html",generate_random_string(1024))
 

@@ -4,7 +4,6 @@ import random
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
-# from ESXi_config import generate_log_entry
 from ESXi_config import create_symlinks
 
 
@@ -74,7 +73,7 @@ def create_esx_var(base_path):
     create_config_file(cron,".#root",generate_random_string(65))
     create_config_file(cron,"root",generate_random_string(65))
 
-    # Thư mục /var/log/vmware
+    # Folder /var/log/vmware
     log_vmware = os.path.join(base_path,"var","log","vmware","journal")
     create_directory(log_vmware)
 
@@ -83,7 +82,12 @@ def create_esx_var(base_path):
         ".vmsyslogd.err": 1,
         "apiForwarder.log": 50,
         "attestd.log": 30,
-        "boot.gz": 65,
+        "auth.log": 10,
+        "boot.gz": 2,
+        "clomd.log": 2,
+        "crx-cli.log": 2,
+        "cryptoloader.log": 2,
+        "envoy.log": 2,
         "clusterAgent.log": 1,
         "cmmdsd.log": 1,
         "cmmdsTimeMachine.log": 1,
@@ -144,7 +148,7 @@ def create_esx_var(base_path):
 
 
 
-    # Thư mục /var/db/vmware
+    # Folder /var/db/vmware
     var_db_vmware_path = os.path.join(base_path,"var", "db", "vmware")
     create_config_file(var_db_vmware_path, "vmInventory.db", "")
     create_config_file(var_db_vmware_path, "vpxd.db", "")

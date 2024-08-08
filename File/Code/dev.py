@@ -92,7 +92,27 @@ def create_esx_dev(base_path):
     disks_path = os.path.join(base_path,"dev","disks")
     Disks = "dev_disks.txt"
     with open(Disks, 'r', encoding='utf-8') as f:
-        disks_content = f.read()  # Đọc nội dung file vào biến chuỗi
+        disks_content = """t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001
+t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:1
+t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:5
+t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:6
+t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:7
+t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000002
+t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000002:1
+vml.0100000000564d57617265204e564d455f3030303020202020564d77617265
+vml.0100000000564d57617265204e564d455f3030303020202020564d77617265:1
+vml.0100000000564d57617265204e564d455f3030303020202020564d77617265:5
+vml.0100000000564d57617265204e564d455f3030303020202020564d77617265:6
+vml.0100000000564d57617265204e564d455f3030303020202020564d77617265:7
+vml.0100010000564d57617265204e564d455f3030303020202020564d77617265
+vml.0100010000564d57617265204e564d455f3030303020202020564d77617265:1
+vml.054e8c490ab3972791eb04c40b0ddf7bdc9eee19d2dd723d9fc1899f2635ce12b9
+vml.054e8c490ab3972791eb04c40b0ddf7bdc9eee19d2dd723d9fc1899f2635ce12b9:1
+vml.054e8c490ab3972791eb04c40b0ddf7bdc9eee19d2dd723d9fc1899f2635ce12b9:5
+vml.054e8c490ab3972791eb04c40b0ddf7bdc9eee19d2dd723d9fc1899f2635ce12b9:6
+vml.054e8c490ab3972791eb04c40b0ddf7bdc9eee19d2dd723d9fc1899f2635ce12b9:7
+vml.05b201b1046b6c89868bbf6b9bbfd8f6222039d774429467ef0ca1d2a1e43e52eb
+vml.05b201b1046b6c89868bbf6b9bbfd8f6222039d774429467ef0ca1d2a1e43e52eb:1"""
     create_config_file(disks_path,"disks",disks_content)
 
     PMemDisk_path = os.path.join(base_path,"dev","PMemDisk")

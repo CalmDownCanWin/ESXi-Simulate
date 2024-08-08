@@ -21,7 +21,7 @@ def create_esx_vmimages(base_path):
     create_config_file(vmimages,"tools-isoimages",generate_random_string(15))
 
 def create_esx_config_files(base_path):
-    """Tạo các file cấu hình ESXi 7."""
+    """Create ESXI configuration files."""
     boot_cfg_content_1 = """
     atlantic.v00  elx_esx_.v00  iavmd.v00     loadesx.v00   lsuv2_nv.v00  nhpsa.v00     nvmxnet3.v00  qfle3i.v00    tpmesxup.v00  vmkusb.v00
 b.b00         elxiscsi.v00  icen.v00      lpfc.v00      lsuv2_oe.v00  nmlx4_co.v00  nvmxnet3.v01  qflge.v00     trx.v00       vmw_ahci.v00
