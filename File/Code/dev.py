@@ -4,7 +4,7 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_directory
 
-def create_esx_dev(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","dev")):
+def create_esx_dev(base_path):
     dev_file = {
         "cdp": 13,
         "console": 13,
@@ -48,64 +48,64 @@ def create_esx_dev(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","dev
         "zero": 13,
     }
     for devn,devs in dev_file.items():
-        create_config_file(base_path,devn,generate_random_string(devs))
+        create_config_file(os.path.join(base_path,"dev"),devn,generate_random_string(devs))
 
-    cbt_path = os.path.join(base_path,"cbt")
+    cbt_path = os.path.join(base_path,"dev","cbt")
     create_config_file(cbt_path,"control",generate_random_string(15))
 
-    cdrom_path = os.path.join(base_path,"cdrom")
+    cdrom_path = os.path.join(base_path,"dev","cdrom")
     create_directory(cdrom_path)
 
-    char_devmgr_path = os.path.join(base_path,"char","devmgr")
+    char_devmgr_path = os.path.join(base_path,"dev","char","devmgr")
     create_directory(char_devmgr_path)
 
-    char_mem_path = os.path.join(base_path,"char","mem")
+    char_mem_path = os.path.join(base_path,"dev","char","mem")
     create_directory(char_mem_path)
 
-    char_pty_path = os.path.join(base_path,"char","pty")
+    char_pty_path = os.path.join(base_path,"dev","char","pty")
     create_directory(char_pty_path)
 
-    char_scsi_trace_path = os.path.join(base_path,"char","scsi-trace")
+    char_scsi_trace_path = os.path.join(base_path,"dev","char","scsi-trace")
     create_directory(char_scsi_trace_path)
 
-    char_serial_path = os.path.join(base_path,"char","serial")
+    char_serial_path = os.path.join(base_path,"dev","char","serial")
     create_directory(char_serial_path)
 
-    char_tty_path = os.path.join(base_path,"char","tty")
+    char_tty_path = os.path.join(base_path,"dev","char","tty")
     create_directory(char_tty_path)
 
-    char_vmkdriver_path = os.path.join(base_path,"char","vmkdriver")
+    char_vmkdriver_path = os.path.join(base_path,"dev","char","vmkdriver")
     create_directory(char_vmkdriver_path)
 
-    char_vob_path = os.path.join(base_path,"char","vob")
+    char_vob_path = os.path.join(base_path,"dev","char","vob")
     create_directory(char_vob_path)
 
-    char_vscsi_filters_path = os.path.join(base_path,"char","vscsi-filters")
+    char_vscsi_filters_path = os.path.join(base_path,"dev","char","vscsi-filters")
     create_directory(char_vscsi_filters_path)
 
-    char_vsoc_path = os.path.join(base_path,"char","vsoc")
+    char_vsoc_path = os.path.join(base_path,"dev","char","vsoc")
     create_directory(char_vsoc_path)
 
-    deltadisks_path = os.path.join(base_path,"deltadisks")
+    deltadisks_path = os.path.join(base_path,"dev","deltadisks")
     create_config_file(deltadisks_path,"control",generate_random_string(15))
 
-    disks_path = os.path.join(base_path,"disks")
+    disks_path = os.path.join(base_path,"dev","disks")
     Disks = "dev_disks.txt"
     with open(Disks, 'r', encoding='utf-8') as f:
         disks_content = f.read()  # Đọc nội dung file vào biến chuỗi
     create_config_file(disks_path,"disks",disks_content)
 
-    PMemDisk_path = os.path.join(base_path,"PMemDisk")
+    PMemDisk_path = os.path.join(base_path,"dev","PMemDisk")
     create_directory(PMemDisk_path)
 
-    PMemDS_path = os.path.join(base_path,"PMemDS")
+    PMemDS_path = os.path.join(base_path,"dev","PMemDS")
     create_directory(PMemDS_path)
 
-    PMemNamespaces_path = os.path.join(base_path,"PMemNamespaces")
+    PMemNamespaces_path = os.path.join(base_path,"dev","PMemNamespaces")
     create_directory(PMemNamespaces_path)
 
-    PMemVolumes_path = os.path.join(base_path,"PMemVolumes")
+    PMemVolumes_path = os.path.join(base_path,"dev","PMemVolumes")
     create_directory(PMemVolumes_path)
 
-    vflash_path = os.path.join(base_path,"vflash")
+    vflash_path = os.path.join(base_path,"dev","vflash")
     create_directory(vflash_path)

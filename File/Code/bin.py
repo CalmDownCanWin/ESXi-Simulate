@@ -5,7 +5,7 @@ from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
 
-def create_esx_bin(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","bin")):
+def create_esx_bin(base_path):
     bin_file = {
         # "[": 45,
         # "[[": 4,
@@ -89,7 +89,7 @@ def create_esx_bin(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","bin
         "watchdog.sh": 964,
     }
     for name, size in bin_file.items():
-        create_config_file(base_path,name,generate_random_string(size))
+        create_config_file(os.path.join(base_path,"bin"),name,generate_random_string(size))
 
     my_symlinks = {
         "[": "/usr/lib/vmware/busybox/bin/busybox",
@@ -224,5 +224,5 @@ def create_esx_bin(base_path=os.path.join(os.path.expanduser("~"), "ESXI 7","bin
         "zcat": "/usr/lib/vmware/busybox/bin/busybox",
     }
 
-    create_symlinks(base_path,my_symlinks)
+    create_symlinks(os.path.join(base_path,"bin"),my_symlinks)
 

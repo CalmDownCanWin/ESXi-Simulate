@@ -1,6 +1,9 @@
 import os
 import shlex
 import ESXi_fs as fs
+import time
+import re
+import random
 
 class SimpleCommand:
     def __init__(self, cmd, args, cwd, fs, environ=None, stdin=None):
@@ -17,6 +20,11 @@ class SimpleCommand:
         self.append_output = False
 
     def run(self):
+        self.log_command()
+
+        if self.check_malicious():
+            self.Notify_malicious_behavior()
+
         raise NotImplementedError
     
     def handle_redirection(self):
@@ -37,15 +45,13 @@ class SimpleCommand:
         self.outfile = self.args[redirect_index + 1]
         self.args = self.args[:redirect_index]
 
-    def open_outfile(self):
-        if self.outfile:
-            try:
-                mode = "a" if self.append_output else "w"
-                return self.fs.open(self.outfile, mode)
-            except (fs.FileNotFoundError, PermissionError) as e:
-                self.stderr = f"{self.cmd}: {self.outfile}: {e}"
-                self.returncode = 1
-                self.outfile = None
+        try:
+            mode = "a" if self.append_output else "w"
+            self.outfile = self.fs.open(self.outfile, mode)
+        except (fs.FileNotFoundError, PermissionError) as e:
+            self.stderr = f"{self.cmd}: {self.outfile}: {e}"
+            self.returncode = 1
+            self.outfile = None
 
     def close_outfile(self):
         if self.outfile:
@@ -65,11 +71,17 @@ class SimpleCommand:
             return False
         return True
     
-    def write_output(self, output):
+    def write_output(self, output, end="\n", flush=False):
         if self.outfile:
-            self.outfile.write(output)
+            try:
+                self.outfile.write(output)
+            except Exception as e:
+                self.stderr = f"{self.cmd}: {self.outfile}: {e}"
+                self.returncode = 1
         else:
-            self.stdout = output
+            self.stdout += output
+            if flush:  # Flush stdout
+                self.chan.send(output.encode())
 
     def handle_CTRL_C(self):
         self.stderr = "^C"
