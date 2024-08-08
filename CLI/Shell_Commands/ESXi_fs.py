@@ -4,16 +4,29 @@ import shutil
 class FileNotFoundError(Exception):
     pass
 
+class FileExistsError(Exception):
+    pass
+
 class SimpleFS:
     def __init__(self, root="/"):
         self.root = root
         self.cwd = root
+        self.files = {} 
+        self.files["/"] = {"type": "dir", "contents": []}
 
     def chdir(self, path):
         new_path = self.resolve_path(path)
-        if path == ".." and self.cwd != self.root:  # Xử lý "cd .."
-            self.cwd = os.path.dirname(self.cwd)
-        elif os.path.isdir(new_path) and new_path.startswith(self.root):  # Giới hạn truy cập
+
+        # root path
+        new_path = os.path.abspath(new_path)
+
+        # sub-dir
+        real_root = os.path.realpath(self.root)
+        real_new_path = os.path.realpath(new_path)
+        if not real_new_path.startswith(real_root):
+            self.cwd = self.root
+            return
+        if os.path.isdir(real_new_path):
             self.cwd = new_path
         else:
             raise FileNotFoundError
@@ -33,11 +46,14 @@ class SimpleFS:
         return open(path, mode)
 
     def resolve_path(self, path):
-        if path.startswith("/"):
-            return path
+        """resolve path on root."""
+        if path.startswith("/") and not os.path.exists(path):
+            # check /path
+            path = os.path.join(self.root, path[1:]) 
         else:
-            return os.path.join(self.cwd, path)
-
+            path = os.path.join(self.cwd, path)
+        return os.path.normpath(path)
+        
     def exists(self, path):
         return os.path.exists(self.resolve_path(path))
 
@@ -73,16 +89,22 @@ class SimpleFS:
     def rename(self, old_path, new_path):
         os.rename(self.resolve_path(old_path), self.resolve_path(new_path))
 
+    def mkfile(self, path, uid=0, gid=0, size=0, mode=33188): 
+        """new file"""
+        path = self.resolve_path(path)
+        if not self.exists(path):
+            self.files[path] = {"type": "file", "uid": uid, "gid": gid, "size": size, "mode": mode}
+            parent_dir = os.path.dirname(path)
+            if parent_dir != path:
+                self.files[parent_dir]["contents"].append(os.path.basename(path))
+        else:
+            raise FileExistsError
+
     def write_file(self, filename, content):
-        """
-        Ghi nội dung vào file.
-        """
         with open(self.resolve_path(filename), "wb") as f:
             f.write(content)
     
     def update_realfile(self, filename, real_file):
-        """
-        Cập nhật real file cho file trong honeypot.
-        """
-        # Không thực hiện gì trong simple_fs
         pass
+        
+
