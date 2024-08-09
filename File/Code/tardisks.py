@@ -5,11 +5,11 @@ from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
 
 def create_esx_tardisks(base_path):
-    """Tạo thư mục và file giả mạo trong /tardisks."""
+    """Create fake folders and files in /Tardisks. """
     tardisks_path= os.path.join(base_path,"tardisks")
     os.makedirs(tardisks_path, exist_ok=True)
 
-    # File metadata giả mạo
+    # Fake Metadata file
     metadata_content = f"""
     {{
         "created": "{datetime.datetime.now().isoformat()}",
@@ -28,10 +28,10 @@ def create_esx_tardisks(base_path):
     }}
     """
     create_config_file(tardisks_path, "metadata.json", metadata_content)
-    # File patch giả mạo
+    # Fake patch file
     create_config_file(tardisks_path, "fake-patch-1.vib", generate_random_string(1024))
 
-    # Các file giả mạo ESXi
+    #The fake ESXI files
     esxi_files = {
         "atlantic.v00": 1414,
         "basemisc.tgz": 11430,

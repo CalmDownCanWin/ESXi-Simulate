@@ -18,29 +18,29 @@ from Other_folder import create_esx_config_files,create_esx_proc,create_esx_tard
 
 
 def start_Luaga():
-    """Bắt đầu honeypot Luaga."""
+    """Start Honeypot Luaga."""
     try:
         subprocess.Popen(["Luaga"])
-        print("Luaga honeypot đang chạy...")
+        print("Luaga Honeypot is running...")
     except FileNotFoundError:
-        print("Luaga không được cài đặt. Vui lòng cài đặt Luaga trước khi chạy.")
+        print("Luaga is not installed.Please install Luaga before running.")
 
 def monitor_Luaga_log():
-    """Giám sát log của Luaga để phát hiện kết nối SSH."""
-    log_file = "S:/ESXI 7/var/log/shell.log" #file log chứa dữ liệu để nhận bt ssh
+    """Luaga's log monitor to detect SSH connection."""
+    log_file = "S:/ESXI 7/var/log/shell.log" #file log contains data to receive bt ssh
     last_line = None
     while True:
-        time.sleep(1)  # Kiểm tra log mỗi giây
+        time.sleep(1)  # Check log every second
         with open(log_file, "r") as f:
             for line in f:
                 if line != last_line:
                     last_line = line
                     if "SSH" in line or "Client" in line:
-                        # Phát hiện kết nối SSH từ Client
+                        # Detect SSH connection from client
                         attacker_ip = line.split(" ")[4].strip()
-                        print(f"Phát hiện kết nối SSH từ: {attacker_ip}")
-                        # Xử lý khi attacker SSH từ ESXi 1 sang ESXi khác
-                        if attacker_ip == "192.168.1.1":  # Địa chỉ ESXi 1
+                        print(f"Detect SSH connection from: {attacker_ip}")
+                        # Processing when Attacker SSH from ESXI 1 to ESXI
+                        if attacker_ip == "192.168.1.1":  #Address ESXI 1
                             create_esx_config_files()
                             create_esx_bin()
                             create_esx_dev()
@@ -57,9 +57,9 @@ def monitor_Luaga_log():
                             create_esx_var()
                             create_esx_vmfs()
                             create_esx_vmimages()
-                            print("Tạo lại file cấu hình ESXi 7 với cấu hình khác.")
-                        elif attacker_ip == "192.168.1.2":  # Địa chỉ ESXi 2
-                            # create_esx_config_files(config_type="advanced")  # Tạo lại file cấu hình với cấu hình khác
+                            print("Create ESXI 7 configuration file with another configuration.")
+                        elif attacker_ip == "192.168.1.2":  # Esxi 2 address
+                            # Create_esx_config_files (Config_type = "Advanced") # Retend the configuration file with another configuration
                             create_esx_config_files()
                             create_esx_bin()
                             create_esx_dev()
@@ -76,8 +76,8 @@ def monitor_Luaga_log():
                             create_esx_var()
                             create_esx_vmfs()
                             create_esx_vmimages()
-                            print("Tạo lại file cấu hình ESXi 7 với cấu hình khác.")
-                        elif attacker_ip == "192.168.1.162":  # Địa chỉ ESXi 3
+                            print("Create ESXI 7 configuration file with another configuration.")
+                        elif attacker_ip == "192.168.1.162":  # Address ESXI 3
                             create_esx_config_files()
                             create_esx_bin()
                             create_esx_dev()
@@ -94,8 +94,8 @@ def monitor_Luaga_log():
                             create_esx_var()
                             create_esx_vmfs()
                             create_esx_vmimages()
-                            print("Tạo lại file cấu hình ESXi 7 với cấu hình khác.")
-                        elif attacker_ip == "192.168.1.16":  # Địa chỉ ESXi 4
+                            print("Create ESXI 7 configuration file with another configuration.")
+                        elif attacker_ip == "192.168.1.16":  # Address ESXI 4
                             create_esx_config_files()
                             create_esx_bin()
                             create_esx_dev()
@@ -112,4 +112,4 @@ def monitor_Luaga_log():
                             create_esx_var()
                             create_esx_vmfs()
                             create_esx_vmimages()
-                            print("Tạo lại file cấu hình ESXi 7 với cấu hình khác.")
+                            print("Create ESXI 7 configuration file with another configuration.")
