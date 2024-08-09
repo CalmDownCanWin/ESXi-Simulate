@@ -90,9 +90,7 @@ def create_esx_dev(base_path):
     create_config_file(deltadisks_path,"control",generate_random_string(15))
 
     disks_path = os.path.join(base_path,"dev","disks")
-    Disks = "dev_disks.txt"
-    with open(Disks, 'r', encoding='utf-8') as f:
-        disks_content = """t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001
+    disks_content = """t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001
 t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:1
 t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:5
 t10.NVMe____VMware_Virtual_NVMe_Disk________________VMWare_NVME_0000____00000001:6
