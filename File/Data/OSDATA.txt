@@ -1,2 +1,0 @@
-cache      downloads  locker     store      var        vmkdump
-core       healthd    log        tmp        vdtc       vmware
