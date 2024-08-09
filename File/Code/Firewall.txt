@@ -1,0 +1,1135 @@
+<!--
+/**********************************************************
+ * Copyright (C) 2007-2021 VMware, Inc. All rights reserved.
+ **********************************************************/
+-->
+
+<!-- Firewall configuration information -->
+<ConfigRoot>
+
+  <!-- Known and blessed services -->
+
+  <service id='0000'>
+    <id>sshServer</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>22</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>true</required>
+  </service>
+
+  <service id='0001'>
+    <id>sshClient</id>
+    <rule>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>22</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0002'>
+    <id>nfsClient</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0003'>
+    <id>nfs41Client</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0004'>
+    <id>dhcp</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>68</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>src</porttype>
+      <port>68</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0005'>
+    <id>dns</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>53</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>53</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0006'>
+    <id>snmp</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>161</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0007'>
+    <id>ntpClient</id>
+    <rule>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>123</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- First-party optional services -->
+
+  <service id='0008'>
+    <id>CIMHttpServer</id>
+    <rule>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>5988</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0009'>
+    <id>CIMHttpsServer</id>
+    <rule>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>5989</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0010'>
+    <id>CIMSLP</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>427</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>427</port>
+    </rule>
+    <rule id='0002'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>427</port>
+    </rule>
+    <rule id='0003'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>427</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0011'>
+    <id>iSCSI</id>
+    <rule>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>3260</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0012'>
+    <id>vpxHeartbeats</id>
+    <rule>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>902</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0013'>
+    <id>updateManager</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>80</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>9000</begin>
+        <end>9100</end>
+      </port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0014'>
+    <id>faultTolerance</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>80</port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>8300</port>
+    </rule>
+    <rule id='0002'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>8300</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0015'>
+    <id>webAccess</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>80</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0016'>
+    <id>vMotion</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>8000</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>8000</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0017'>
+    <id>vSphereClient</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>902</port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>443</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>true</required>
+  </service>
+
+  <service id='0018'>
+     <id>activeDirectoryAll</id>
+
+     <!--
+         the required ports are listed here:
+         https://kb.vmware.com/s/article/1026538
+     -->
+
+     <!-- Kerberos 5 -->
+     <rule id='0000'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>88</port>
+     </rule>
+     <rule id='0001'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>88</port>
+     </rule>
+
+     <!-- NTP -->
+     <rule id='0002'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>123</port>
+     </rule>
+
+     <!-- NetBIOS Name Service -->
+     <rule id='0003'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>137</port>
+     </rule>
+
+     <!-- NetBIOS Session (SMB) -->
+     <rule id='0004'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>139</port>
+     </rule>
+
+     <!-- LDAP -->
+     <rule id='0005'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>389</port>
+     </rule>
+     <rule id='0006'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>389</port>
+     </rule>
+
+     <!-- SMB over TCP -->
+     <rule id='0007'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>445</port>
+     </rule>
+
+     <!-- Machine password changes -->
+     <rule id='0008'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>464</port>
+     </rule>
+     <rule id='0009'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>464</port>
+     </rule>
+
+     <!-- Global Catalog search -->
+     <rule id='0010'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>3268</port>
+     </rule>
+
+     <!-- CAM service -->
+     <rule id='0011'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>7476</port>
+     </rule>
+
+     <!-- VMAFD service -->
+     <rule id='0012'>
+        <direction>inbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>2020</port>
+     </rule>
+
+     <enabled>false</enabled>
+     <required>false</required>
+
+  </service>
+
+  <service id='0019'>
+    <id>NFC</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>902</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>902</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0020'>
+    <id>HBR</id>
+    <!-- vSphere Replication traffic initiated from VMkernel on
+    port 31031 (initial sync), and port 44046 (on-going replication).
+    See PR 610578. -->
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>31031</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>44046</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Just for active mode ftp access -->
+  <service id='0021'>
+    <id>ftpClient</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>21</port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>src</porttype>
+      <port>20</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id="0022">
+    <id>httpClient</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>80</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>443</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0023'>
+    <id>gdbserver</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>1000</begin>
+        <end>9999</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>50000</begin>
+        <end>50999</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id="0024">
+    <id>DVFilter</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2222</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id="0025">
+    <id>DHCPv6</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>547</port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>546</port>
+    </rule>
+    <rule id='0002'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>547</port>
+    </rule>
+    <rule id='0003'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>546</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id="0026">
+    <id>DVSSync</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>8302</port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>8301</port>
+    </rule>
+    <rule id='0002'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>8301</port>
+    </rule>
+    <rule id='0003'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>8302</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <service id="0027">
+    <id>syslog</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>514</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>514</port>
+    </rule>
+    <rule id='0002'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>1514</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- IKED="0028" has been removed -->
+
+  <service id="0029">
+    <id>WOL</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>9</port>
+    </rule>
+    <enabled>true</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Remote serial port with vSPC: all remote serial port traffic is initiated by us -->
+  <service id="0030">
+    <id>vSPC</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Remote serial port without vSPC: we may be listening -->
+  <service id="0031">
+    <id>remoteSerialPort</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>23</port>
+    </rule>
+    <rule id='0002'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>1024</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- vprobeServer service id='0032' removed. -->
+
+  <!-- VSAN services -->
+  <service id='0033'>
+     <id>rdt</id>
+     <rule id='0000'>
+        <direction>inbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>2233</port>
+     </rule>
+     <rule id='0001'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>2233</port>
+     </rule>
+     <rule id='0002'>
+        <direction>inbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>12443</port>
+     </rule>
+     <rule id='0003'>
+        <direction>outbound</direction>
+        <protocol>tcp</protocol>
+        <porttype>dst</porttype>
+        <port>12443</port>
+     </rule>
+     <enabled>false</enabled>
+     <required>false</required>
+  </service>
+
+  <service id='0034'>
+     <id>cmmds</id>
+     <rule id='0000'>
+        <direction>inbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>12345</port>
+     </rule>
+     <rule id='0001'>
+        <direction>inbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>23451</port>
+     </rule>
+     <rule id='0002'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>12345</port>
+     </rule>
+     <rule id='0003'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>23451</port>
+     </rule>
+     <rule id='0004'>
+        <direction>inbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>12321</port>
+     </rule>
+     <rule id='0005'>
+        <direction>outbound</direction>
+        <protocol>udp</protocol>
+        <porttype>dst</porttype>
+        <port>12321</port>
+     </rule>
+     <enabled>false</enabled>
+     <required>false</required>
+  </service>
+
+  <!-- DI service for IP Forwarding Module -->
+  <service id='0037'>
+    <id>ipfam</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>6999</port>
+    </rule>
+    <rule id='0001' >
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>6999</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0038'>
+    <id>vvold</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+ </service>
+
+  <service id='0039'>
+    <id>iofiltervp</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <port type='dst'>9080</port>
+      <flags>-m state --state NEW</flags>
+    </rule>
+   <enabled>false</enabled>
+   <required>false</required>
+  </service>
+
+  <!-- Ports get opened during esxupdate process to download VIBs -->
+  <service id='0040'>
+    <id>esxupdate</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <port type='dst'>443</port>
+    </rule>
+   <enabled>false</enabled>
+   <required>false</required>
+  </service>
+
+  <service id='0041'>
+    <id>vit</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>3260</begin>
+        <end>3260</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <service id='0042'>
+    <id>vsanEncryption</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Ports opened for PVRDMA devices to connect to each other. -->
+  <service id="0043">
+    <id>pvrdma</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>28250</begin>
+        <end>28761</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>28250</begin>
+        <end>28761</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- vSphere Integrated Containers Engine to allow outbound 2377/cp -->
+  <service id='0044'>
+    <id>vic-engine</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>2377</begin>
+        <end>2377</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Official etcd port 2379 for client communication -->
+  <service id='0045'>
+    <id>etcdClientComm</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2379</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2379</port>
+    </rule>
+
+    <enabled>false</enabled>
+    <required>false</required>
+ </service>
+
+  <!-- Official etcd port 2380 for peer communication -->
+  <service id='0046'>
+    <id>etcdPeerComm</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2380</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2380</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+ </service>
+
+  <service id='0048'>
+    <id>settingsd</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>8083</begin>
+        <end>8083</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>8083</begin>
+        <end>8083</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+  <service id='0049'>
+    <id>vdfs</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>1564</begin>
+        <end>1564</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>1564</begin>
+        <end>1564</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+  <service id='0050'>
+    <id>gstored</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>443</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Key Provider Service needs to talk to key servers -->
+  <service id='0051'>
+    <id>trusted-infrastructure-kmxd</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>0</begin>
+        <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- iwarp port mapper service -->
+  <service id='0052'>
+    <id>iwarp-pm</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>3935</begin>
+        <end>3935</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>3935</begin>
+        <end>3935</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Precision Time Protocol Daemon (ptpd) 319 for event and 320 for general messages -->
+  <service id='0053'>
+    <id>ptpd</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>319</begin>
+        <end>320</end>
+      </port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>udp</protocol>
+      <porttype>dst</porttype>
+      <port>
+        <begin>319</begin>
+        <end>320</end>
+      </port>
+    </rule>
+  </service>
+
+  <!-- Key Provider Service agent needs to make API calls to Trust Authority Host -->
+  <service id='0054'>
+    <id>trusted-infrastructure-kmxa</id>
+    <rule id='0000'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>
+         <begin>0</begin>
+         <end>65535</end>
+      </port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+   <!-- NVMe over Fabrics ports -->
+   <service id='0055'>
+     <id>nvmetcp</id>
+     <rule id='0000'>
+       <direction>outbound</direction>
+       <protocol>tcp</protocol>
+       <porttype>dst</porttype>
+       <port>8009</port>
+     </rule>
+     <rule id='0001'>
+       <direction>outbound</direction>
+       <protocol>tcp</protocol>
+       <porttype>dst</porttype>
+       <port>4420</port>
+     </rule>
+     <enabled>false</enabled>
+     <required>false</required>
+   </service>
+
+  <service id='0056'>
+    <id>vSphereCCP</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>81</port>
+    </rule>
+    <rule id='0001'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>81</port>
+    </rule>
+    <rule id='0002'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>444</port>
+    </rule>
+    <rule id='0003'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>444</port>
+    </rule>
+    <rule id='0004'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2014</port>
+    </rule>
+    <rule id='0005'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>2014</port>
+    </rule>
+    <rule id='0006'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>5480</port>
+    </rule>
+    <rule id='0007'>
+      <direction>outbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>5480</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+  <!-- Port get opened to host ESXio image for SmartNic during installation -->
+  <service id='0057'>
+    <id>esxio-orchestrator</id>
+    <rule id='0000'>
+      <direction>inbound</direction>
+      <protocol>tcp</protocol>
+      <porttype>dst</porttype>
+      <port>8084</port>
+    </rule>
+    <enabled>false</enabled>
+    <required>false</required>
+  </service>
+
+</ConfigRoot>
+

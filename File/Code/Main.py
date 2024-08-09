@@ -24,12 +24,20 @@ from Other_folder import create_esx_config_files,create_esx_proc,create_esx_tard
 
 if __name__ == "__main__":
     esxi_choice = input("Select ESXI (ESXI_1, ESXI_2, ...): ")
-    base_path = os.path.join(os.path.expanduser("~"), esxi_choice)  # Replace by actual path
+    Ip = input("Select IP_Adress : ")
+    # base_path = os.path.join(os.path.expanduser("~"), esxi_choice)  # Replace by actual path
+    while True:
+        path = input("Nhập đường dẫn (path) bạn muốn tạo file hệ thống (ví dụ: /home/user/ESXI_7): ")
+        if os.path.exists(path):
+            break
+        else:
+            print("Đường dẫn không hợp lệ. Vui lòng nhập lại.")
+    base_path = os.path.join(path, esxi_choice)
 
     create_esx_config_files(base_path)
     create_esx_bin(base_path)
     create_esx_dev(base_path)
-    create_esx_etc( base_path,config_type= esxi_choice)
+    create_esx_etc( base_path,Ip,esxi_choice)
     create_esx_include(base_path)
     create_esx_lib(base_path)
     create_esx_lib64(base_path)

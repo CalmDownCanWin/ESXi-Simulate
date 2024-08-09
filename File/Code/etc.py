@@ -9,7 +9,7 @@ from ESXi_config import create_vmware_lic
 from ESXi_config import generate_random_string
 from ESXi_config import create_symlinks
 
-def create_esx_etc(base_path,config_type="ESXi_1"):
+def create_esx_etc(base_path,IP,config_type):
 
     etc_path= os.path.join(base_path, "etc")
 #Files in ETC folder
@@ -146,7 +146,7 @@ vSphere Security documentation for more information.
 
         # General Settings
         Host.Name = "esx-host-{generate_random_string(10)}"
-        Host.IpAddress = "192.168.1.1"
+        Host.IpAddress = {IP}
         Host.Netmask = "255.255.255.0"
         Host.Gateway = "192.168.1.{random.randint(1, 254)}"
 
@@ -190,7 +190,7 @@ vSphere Security documentation for more information.
 
         # General Settings
         Host.Name = "esx-host-{generate_random_string(10)}"
-        Host.IpAddress = "192.168.1.2"
+        Host.IpAddress = {IP}
         Host.Netmask = "255.255.255.0"
         Host.Gateway = "192.168.1.{random.randint(1, 254)}"
 
@@ -234,7 +234,7 @@ vSphere Security documentation for more information.
 
         # General Settings
         Host.Name = "esx-host-{generate_random_string(10)}"
-        Host.IpAddress = "192.168.1.162"
+        Host.IpAddress = {IP}
         Host.Netmask = "255.255.255.0"
         Host.Gateway = "192.168.1.{random.randint(1, 254)}"
 
@@ -278,7 +278,7 @@ vSphere Security documentation for more information.
 
         # General Settings
         Host.Name = "esx-host-{generate_random_string(10)}"
-        Host.IpAddress = "192.168.1.16"
+        Host.IpAddress = {IP}
         Host.Netmask = "255.255.255.0"
         Host.Gateway = "192.168.1.{random.randint(1, 254)}"
 
@@ -322,7 +322,7 @@ vSphere Security documentation for more information.
 
         # General Settings
         Host.Name = "esx-host-{generate_random_string(10)}"
-        Host.IpAddress = "192.168.1.24"
+        Host.IpAddress = {IP}
         Host.Netmask = "255.255.255.0"
         Host.Gateway = "192.168.1.{random.randint(1, 254)}"
 
