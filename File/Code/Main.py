@@ -23,7 +23,7 @@ from Other_folder import create_esx_config_files,create_esx_proc,create_esx_tard
 
 
 if __name__ == "__main__":
-    esxi_choice = input("Select ESXI (ESXI_1, ESXI_2, ...): ")
+    esxi_choice = input("Select ESXI (ESXi_1, ESXi_2, ...): ")
     Ip = input("Select IP_Adress : ")
     # base_path = os.path.join(os.path.expanduser("~"), esxi_choice)  # Replace by actual path
     while True:
