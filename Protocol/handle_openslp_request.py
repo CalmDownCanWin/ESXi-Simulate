@@ -197,7 +197,7 @@ def handle_openslp_request(client_socket, address):
                 log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
                 # Ghi payload vào file honeypot.log
                 with open("honeypot.log", "a") as f:
-                    f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")s
+                    f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
 
                 # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
                 handle_openslp_exploit(client_socket, address)
