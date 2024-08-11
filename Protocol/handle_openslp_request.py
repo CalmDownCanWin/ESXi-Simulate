@@ -191,7 +191,19 @@ def handle_openslp_request(client_socket, address):
             # Yêu cầu lấy thuộc tính của service
             fake_response = b"AttrRply (attr1=fake),(attr2=value)\r\n"
         else:
-            fake_response = b"OpenSLP-Error: Unsupported request type\r\n"
+            if len(data) > 10:
+                client_socket.send(MARKER)
+                log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
+                log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
+                # Ghi payload vào file honeypot.log
+                with open("honeypot.log", "a") as f:
+                    f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")s
+
+                # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
+                handle_openslp_exploit(client_socket, address)
+                return    
+            else:
+            	fake_response = b"OpenSLP-Error: Unsupported request type\r\n"
 
         client_socket.send(fake_response)
 
@@ -208,17 +220,17 @@ def handle_openslp_request(client_socket, address):
                     log_event(f"[OpenSLP] Error decoding request: Unable to decode data.", level=logging.ERROR)
                     return
 
-        if len(data) > 10:
-            client_socket.send(MARKER)
-            log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
-            log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
-            # Ghi payload vào file honeypot.log
-            with open("honeypot.log", "a") as f:
-                f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
+        # if len(data) > 10:
+        #     client_socket.send(MARKER)
+        #     log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
+        #     log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
+        #     # Ghi payload vào file honeypot.log
+        #     with open("honeypot.log", "a") as f:
+        #         f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
 
-            # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
-            handle_openslp_exploit(client_socket, address)
-            return      
+        #     # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
+        #     handle_openslp_exploit(client_socket, address)
+        #     return      
 
         log_event(f"[OpenSLP] Request from {address}: {request_str}")  # Ghi log request
         send_message_to_soc(f"[OpenSLP] Request from {address}: {request_str}")
