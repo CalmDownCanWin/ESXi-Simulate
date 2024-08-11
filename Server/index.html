@@ -5,6 +5,20 @@
     <title>Log in - VMware ESXi</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="main.css">
+    <!-- <meta http-equiv="refresh" content="0;url=/login/ui" /> -->
+    <script>
+        // Thay đổi URL mà không tải lại trang
+        if (window.location.pathname === '/index.html') {
+            window.history.replaceState({}, '', '/login#ui');
+        }
+
+        // Xử lý sự kiện khi người dùng điều hướng qua các trạng thái
+        window.addEventListener('popstate', function(event) {
+            console.log('Location: ' + document.location + ', state: ' + JSON.stringify(event.state));
+            // Có thể gọi hàm để tải nội dung phù hợp với URL nếu cần
+        });
+    </script>
+   
 </head>
 
 <body class="base-app-style">
