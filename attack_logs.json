@@ -1,0 +1,39 @@
+2024-07-22 18:29:14,184 - INFO - <queue.Queue object at 0x000002AA9080D850>
+2024-07-22 18:29:53,591 - INFO - <queue.Queue object at 0x000002D00C80DA10>
+2024-07-22 18:30:01,654 - INFO - {"timestamp": "2024-07-22T11:30:01.653919", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details": {"filename": "New Microsoft Word Document.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:27:24.111382"}}
+2024-07-22 18:30:01,661 - INFO - {"timestamp": "2024-07-22T11:30:01.661815", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details_filename": "New Microsoft Word Document.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:27:24.111382"}
+2024-07-22 18:30:52,100 - INFO - <queue.Queue object at 0x000001D5B13F9450>
+2024-07-22 18:31:07,092 - INFO - <queue.Queue object at 0x000001BA12709410>
+2024-07-22 18:31:23,510 - INFO - <queue.Queue object at 0x000001D78FDF9750>
+2024-07-22 18:31:34,473 - INFO - <queue.Queue object at 0x000002442A4F9490>
+2024-07-22 18:31:54,067 - INFO - <queue.Queue object at 0x000001BDC0AF94D0>
+2024-07-22 18:38:26,197 - INFO - <queue.Queue object at 0x000001EDFEA0DB50>
+2024-07-22 18:40:04,582 - INFO - <queue.Queue object at 0x000002012240D2D0>
+2024-07-22 18:40:23,048 - INFO - <queue.Queue object at 0x000002007440DA10>
+2024-07-22 18:40:34,120 - INFO - {"timestamp": "2024-07-22T11:40:34.119670", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder", "details": {"type": "directory", "contents": {}}}
+2024-07-22 18:40:34,126 - INFO - {"timestamp": "2024-07-22T11:40:34.126641", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New folder", "details_type": "directory"}
+2024-07-22 18:40:56,144 - INFO - {"timestamp": "2024-07-22T11:40:56.144965", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details": {"filename": "New Microsoft Word Document.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:40:55.287470"}}
+2024-07-22 18:40:56,151 - INFO - {"timestamp": "2024-07-22T11:40:56.151490", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details_filename": "New Microsoft Word Document.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:40:55.287470"}
+2024-07-22 18:40:58,156 - INFO - {"timestamp": "2024-07-22T11:40:58.156157", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\niabdw.docx", "details": {"filename": "niabdw.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:40:55.287470"}}
+2024-07-22 18:40:58,157 - INFO - {"timestamp": "2024-07-22T11:40:58.157149", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details": {"filename": "New Microsoft Word Document.docx", "extension": ".docx", "size": 0, "hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:40:55.287470"}}
+2024-07-22 18:40:58,179 - INFO - {"timestamp": "2024-07-22T11:40:58.178927", "event_type": "filesystem_change", "action": "created", "path": "D:\\ZALO\\niabdw.docx", "details_filename": "niabdw.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:40:55.287470"}
+2024-07-22 18:40:58,187 - INFO - {"timestamp": "2024-07-22T11:40:58.187853", "event_type": "filesystem_change", "action": "deleted", "path": "D:\\ZALO\\New Microsoft Word Document.docx", "details_filename": "New Microsoft Word Document.docx", "details_extension": ".docx", "details_size": 0, "details_hash": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:40:55.287470"}
+2024-07-22 18:41:23,227 - INFO - {"timestamp": "2024-07-22T11:41:23.227129", "event_type": "filesystem_change", "action": "modified", "path": "D:\\ZALO\\niabdw.docx", "details": {"filename": "niabdw.docx", "extension": ".docx", "size": 15, "hash": "8411d96c7711c8a1d4008a328a1af6af8ff024120283bb145abe2d88a2cc16f7", "permissions": "666", "type": "file", "last_modified": "2024-07-22T11:41:23.097880"}}
+2024-07-22 18:41:23,233 - INFO - {"timestamp": "2024-07-22T11:41:23.233430", "event_type": "filesystem_change", "action": "modified", "path": "D:\\ZALO\\niabdw.docx", "details_filename": "niabdw.docx", "details_extension": ".docx", "details_size": 15, "details_hash": "8411d96c7711c8a1d4008a328a1af6af8ff024120283bb145abe2d88a2cc16f7", "details_permissions": "666", "details_type": "file", "details_last_modified": "2024-07-22T11:41:23.097880"}
+2024-07-22 19:23:18,954 - INFO - <queue.Queue object at 0x00000235729F9450>
+2024-07-22 19:23:47,458 - INFO - <queue.Queue object at 0x000001D061DF9510>
+2024-07-22 19:24:28,033 - INFO - <queue.Queue object at 0x00000233E6BF9790>
+2024-07-22 19:24:58,922 - INFO - <queue.Queue object at 0x000001F263EF9810>
+2024-07-22 19:27:51,504 - INFO - <queue.Queue object at 0x00000172977F9710>
+2024-07-22 19:28:07,170 - INFO - <queue.Queue object at 0x000001F5614F9890>
+2024-07-22 19:30:07,779 - INFO - <queue.Queue object at 0x00000241A73F9890>
+2024-07-22 19:30:17,899 - INFO - {"timestamp": "2024-07-22T12:30:17.898819", "event_type": "telnet_connection", "attacker_address": "208.100.26.134", "attacker_port": 58862}
+2024-07-22 19:30:50,748 - INFO - {"timestamp": "2024-07-22T12:30:50.747964", "event_type": "telnet_login_attempt", "username": "&&\u0003\u0018\u001f !\"'\u0005#", "password": "root", "attacker_address": "208.100.26.134", "attacker_port": 58862}
+2024-07-22 19:30:50,748 - INFO - {"timestamp": "2024-07-22T12:30:50.748996", "event_type": "telnet_disconnect", "attacker_address": "208.100.26.134"}
+2024-07-22 19:36:58,181 - INFO - {"timestamp": "2024-07-22T12:36:58.181397", "event_type": "telnet_connection", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:37:03,527 - INFO - {"timestamp": "2024-07-22T12:37:03.527964", "event_type": "telnet_login_attempt", "username": "root", "password": "root", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:37:03,529 - INFO - {"timestamp": "2024-07-22T12:37:03.529007", "event_type": "telnet_login_success", "username": "root", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:38:49,761 - INFO - {"timestamp": "2024-07-22T12:38:49.761734", "event_type": "telnet_login_attempt", "username": "uhigfug", "password": "jihug", "attacker_address": "208.100.26.134", "attacker_port": 37842}
+2024-07-22 19:38:49,761 - INFO - {"timestamp": "2024-07-22T12:38:49.761734", "event_type": "telnet_disconnect", "attacker_address": "208.100.26.134"}
+2024-07-22 19:40:59,432 - INFO - <queue.Queue object at 0x000001E419AF9650>
+2024-07-22 19:49:29,089 - INFO - <queue.Queue object at 0x0000019135719910>

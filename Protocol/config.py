@@ -1,14 +1,9 @@
 # Cấu hình cho mô phỏng SSH
-OPENSLP_PORT = 427
-SERVER_IP = "192.168.79.172"
 # Cổng SSH
-
 SSH_PORT = 22
 TELNET_PORT = 23
 SYSLOG_PORT = 514
-HTTPS_PORT = 443
-
-#INTERFACE = "eth0"
+DCUI_PORT = 5901
 # Người dùng hợp lệ và mật khẩu tương ứng
 VALID_USERS = {
     "root": "root",
@@ -34,5 +29,3 @@ SSH_FINGERPRINT = get_ssh_fingerprint_from_file(RSA_KEY_PATH)
 # Telnet banner giả mạo
 TELNET_BANNER =  b"SSH-2.0-OpenSSH_8.8\r\n"
 
-TEMPLATE_FOLDER = "templates"
-STATIC_FOLDER = "static"
