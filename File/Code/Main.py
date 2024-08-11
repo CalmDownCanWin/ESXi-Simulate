@@ -51,9 +51,9 @@ if __name__ == "__main__":
     create_esx_vmfs(base_path, esxi_choice, create_windows=True, create_kali_ubuntu=True,create_FreeBSD=True,create_window_server=True,create_MacOS=True,create_Kali_Centos=True, print_uuids=True)
     create_esx_vmimages(base_path)
 
-    Backup(base_path, 7)
+    #Backup(base_path, 7)
     # Create a backup schedule
-    create_backup_schedule(base_path, 7)
+    #create_backup_schedule(base_path, 7)
 
     # start_Luaga()
     # monitor_Luaga_log()
