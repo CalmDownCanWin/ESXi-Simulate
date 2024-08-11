@@ -5,12 +5,14 @@ import logging
 import os
 import shlex
 import time
+import random
 
+from datetime import datetime
 
 
 from Settings.config import SSH_PORT, VALID_USERS, SERVER_BANNER, RSA_KEY_PATH, RSA_PUB_KEY_PATH, LOG_ROOT
 from Settings.utils import send_message_to_soc, log_event, DisconnectException
-from Log.Log_to_Splunk import log_attack
+from Log.Log_to_Splunk import log_command, log_recon, log_login
 
 from Shell_Commands import ESXi_fs as fs
 from Shell_Commands.test_cat import ESXiCatCommand
@@ -72,7 +74,7 @@ logging.basicConfig(
 IP_ADDRESSES = [""]
 
 # RSA_key for IP
-IP_TRACKER_FILE = 'ip_tracker.txt'
+IP_TRACKER_FILE = os.path.join(LOG_ROOT, 'ip_tracker.txt')
 
 # Check and store IP
 def check_and_store_ip(client_ip):
@@ -106,10 +108,23 @@ class Server(paramiko.ServerInterface):
         log_event(f"[SSH] Authentication attempt for user: {username}")
         if username in VALID_USERS and VALID_USERS[username] == password:
             log_event(f"[SSH] Authentication successful for user: {username}")
+            log_login(
+                client_ip = self.client_ip,
+                username = username,
+                password = password,
+                status = "Successfully!"
+            )
             return paramiko.AUTH_SUCCESSFUL
         log_event(f"[SSH] Authentication failed for user: {username}")
+        log_login(
+            client_ip = self.client_ip,
+            username = username,
+            password = password,
+            status = "Failed!"
+        )
         return paramiko.AUTH_FAILED
 
+    
     def check_channel_pty_request(self, channel, term, width, height, pixelwidth, pixelheight, modes):
         log_event(f"[SSH] PTY request on channel {channel}")
         return True # PTY
@@ -125,10 +140,10 @@ class Server(paramiko.ServerInterface):
         return True
 
 
-
 def handle_esxi_honeypot(channel, client_ip, fs_honeypot):
     """shell ESXi honeypot."""
     waiting_for_input = False
+    python_input = False
     while True:
         try:
             # Start Shell
@@ -194,8 +209,7 @@ def handle_esxi_honeypot(channel, client_ip, fs_honeypot):
                 args = parts[1:]
                 
             # log to .json
-            log_attack(
-                event_type="command_executed",
+            log_command(
                 commands=command,
                 arguments=args,
                 cwd=fs_honeypot.getcwd(),
@@ -246,6 +260,13 @@ def handle_esxi_honeypot(channel, client_ip, fs_honeypot):
                             channel.send(data)
                 elif command == "echo" and outfile:
                     outfile.write(command_obj.get_output())
+                
+                elif command == "python"and len(args) == 0: # Chế độ interactive
+                        channel.send("Python 3.5.2 (default, Nov 17 2016, 17:05:23)\r\n".encode())
+                        channel.send("[GCC 5.4.0 20160609] on linux\r\n".encode())
+                        channel.send("Type \"help\", \"copyright\", \"credits\" or \"license\" for more information.\r\n".encode())
+                        channel.send(">>> ".encode())
+                        python_input = True
                     
                 else:
             # send output and error
@@ -258,6 +279,29 @@ def handle_esxi_honeypot(channel, client_ip, fs_honeypot):
                 
                 if outfile: 
                     outfile.close()
+
+                if python_input:
+                    while True:
+                        try:
+                            user_input = channel.recv(1024).decode().strip()
+                            if not user_input:
+                                continue
+
+                            channel.send(user_input.encode() + b'\r\n')
+                            
+                            if user_input.strip().lower() == "exit()" or user_input == "\x04":
+                                python_input = False
+                                break
+
+                            # Mô phỏng xử lý
+                            time.sleep(random.uniform(2,5))
+                            channel.send(">>> ".encode())
+
+
+                        except (KeyboardInterrupt):
+                            channel.send("KeyboardInterrupt\r\n ")
+                            python_input = False
+                            break
 
                 
             elif command == 'exit':
@@ -279,6 +323,7 @@ def handle_client(client_socket, client_address):
     send_message_to_soc(f"[SSH] New connection from {client_address}")
 
     client_ip = client_address[0]
+    connection_time = datetime.utcnow()
 
     try:
         with paramiko.Transport(client_socket) as transport:
@@ -313,6 +358,7 @@ def handle_client(client_socket, client_address):
                 # Public key
                 chan.send(f"Public RSA Key: {rsa_pub_key}\r\n".encode('utf-8'))
 
+
             server = Server(client_ip=client_ip)
             try:
                 #transport.local_version = 'OpenSSH 8.3 (protocol 2.0)'
@@ -340,6 +386,14 @@ def handle_client(client_socket, client_address):
     except Exception as e:
         logging.exception(f"[SSH] Error handling connection from {client_address}:")
     finally:
+        disconnection_time = datetime.utcnow() 
+        duration = (disconnection_time - connection_time).total_seconds() 
+        
+        log_recon(
+            client_ip=client_ip,
+            client_port=client_address[1],
+            duration=duration,
+        )
         client_socket.close()
 
 

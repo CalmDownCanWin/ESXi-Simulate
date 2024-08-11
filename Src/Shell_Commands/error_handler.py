@@ -26,6 +26,15 @@ def Wget_error(url):
     ]
     return random.choice(errors) + "\n"
 
+def Python_Interactive_Error():
+        """Yeah your script is problem!!!"""
+        fake_messages = [
+            f"Traceback (most recent call last):\r\n  File \"<stdin>\", line {random.randint(1,10)}, in <module>\r\n",
+            f"  File \"<stdin>\", line {random.randint(1,10)} \r\n    ^\r\nSyntaxError: invalid syntax",
+            f"TypeError: unsupported operand type(s)\r\n"
+        ]
+        return random.choice(fake_messages)
+
 def Delay(self):
     """It's Delay time"""
     message = "Required to reset host for applying changes. Reload in 10 seconds...\r\n"
