@@ -53,7 +53,7 @@ def run_dcui_server():
         try:
             sock.bind(('', DCUI_PORT)) 
             sock.listen()
-            print(f"[DCUI] Honeypot dcui is listening to the port {DCUI_PORT}")
+            print(f"[DCUI]  DCUI is listening to the port {DCUI_PORT}")
             
             while True:
                 client_socket, address = sock.accept()
