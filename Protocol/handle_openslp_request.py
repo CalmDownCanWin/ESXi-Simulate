@@ -35,7 +35,7 @@ FAKE_SERVICES = [
 # --- ESXi Shell Mocking ---
 def handle_esxi_shell(client_socket, address):
     """Mô phỏng shell của ESXi."""
-    log_event(f"[ESXi Shell] Kết nối từ {address}")
+    log_event(f"[ESXi Shell] Connection {address}")
 
    # Create Pseudo-Terminal and execute Honeypot's Shell
     master, slave = pty.openpty()
