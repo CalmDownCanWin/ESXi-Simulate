@@ -52,7 +52,7 @@ def handle_iscsi_connection(client_socket, address):
     print(f"[iSCSI] Connection {address} closed")
 
 def run_iscsi_server():
-    """Khởi động iSCSI server giả mạo."""
+    """Start ISCSI server fake."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind(('', ISCSI_PORT)) 
         sock.listen()
@@ -61,7 +61,7 @@ def run_iscsi_server():
             client_socket, address = sock.accept()
             threading.Thread(target=handle_iscsi_connection, args=(client_socket, address)).start()
 
-# --- Khởi chạy các server ---
+# --- Run the servers ---
 
 def run_vmkernel_server():
     """Start fake network services."""
