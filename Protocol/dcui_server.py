@@ -40,27 +40,27 @@ def handle_dcui_client(client_socket, address):
                 client_socket.send(response.encode())
                 client_socket.send(b"dcui> ")
             except Exception as e:
-                print(f"[DCUI] Lỗi trong khi xử lý lệnh: {e}")
+                print(f"[DCUI] Error during command processing: {e}")
                 break
     except Exception as e:
-        print(f"[DCUI] Lỗi: {e}")
+        print(f"[DCUI] Error: {e}")
     finally:
         client_socket.close()
 
 def run_dcui_server():
-    """Khởi động DCUI server giả lập."""
+    """Start the DCUI server simulating."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         try:
             sock.bind(('', DCUI_PORT)) 
             sock.listen()
-            print(f"[DCUI] Honeypot DCUI đang lắng nghe trên cổng {DCUI_PORT}")
+            print(f"[DCUI] Honeypot dcui is listening to the port {DCUI_PORT}")
             
             while True:
                 client_socket, address = sock.accept()
-                print(f"[DCUI] Chấp nhận kết nối từ {address}")
+                print(f"[DCUI] Accept connection from {address}")
                 threading.Thread(target=handle_dcui_client, args=(client_socket, address)).start()
         except Exception as e:
-            print(f"[DCUI] Lỗi khi bind hoặc listen trên cổng {DCUI_PORT}: {e}")
+            print(f"[DCUI] Error when bind or listen on the port {DCUI_PORT}: {e}")
 
 if __name__ == "__main__":
     run_dcui_server()
