@@ -7,7 +7,7 @@ import subprocess
 from config import SERVER_IP, HTTPS_PORT
 
 def generate_self_signed_certificate(certfile, keyfile):
-    """Tạo self-signed certificate."""
+    """tạoSelfSignedCertificate"""
     if not os.path.exists(certfile) or not os.path.exists(keyfile):
         os.system(f"openssl req -x509 -newkey rsa:4096 -nodes -out {certfile} -keyout {keyfile} -days 365 -subj '/CN={socket.gethostname()}'")
         print(f"Generated self-signed certificate: {certfile}")
@@ -15,14 +15,14 @@ def generate_self_signed_certificate(certfile, keyfile):
         print(f"Using existing certificate: {certfile}")
 
 def run_https_server(ip_address, port, html_dir, keyfile, certfile):
-    """Khởi động HTTPS server.
+    """Start https server.
 
     Args:
-        SERVER_IP: Địa chỉ IP để bind server.
-        port: Cổng để lắng nghe.
-        html_dir: Thư mục chứa file HTML và JS.
-        keyfile: Đường dẫn đến file private key (ví dụ: key.pem).
-        certfile: Đường dẫn đến file certificate (ví dụ: cert.pem).
+        SERVER_IP: IP address to bind server.
+        port: port to listen.
+        html_dir: The folder contains HTML and JS files.
+        keyfile: The path to the private key file (for example: key.pem).
+        certfile: The path to the Certificate file (for example: cert.pem).
     """
     class MyHandler(SimpleHTTPRequestHandler):
         def __init__(self, *args, **kwargs):
@@ -37,13 +37,13 @@ def run_https_server(ip_address, port, html_dir, keyfile, certfile):
     httpd.serve_forever()
     
 def create_virtual_ip(ip_address):
-    """Tạo địa chỉ IP ảo nếu chưa tồn tại trên bất kỳ interface nào."""
+    """Create virtual IP address if not exist on any interface."""
     try:
-        # Lấy danh sách tất cả các interface mạng
+        # Get a list of all network interfaces
         output = subprocess.check_output(["ip", "link"], stderr=subprocess.STDOUT).decode()
         interfaces = [line.split(":")[1].strip() for line in output.splitlines() if ":" in line]
 
-        # Kiểm tra xem địa chỉ IP đã tồn tại trên interface nào chưa
+        # Check if the IP address exists on any interface yet
         ip_exists = False
         for interface in interfaces:
             try:
@@ -55,9 +55,9 @@ def create_virtual_ip(ip_address):
                 pass
 
         if not ip_exists:
-            # Địa chỉ IP chưa tồn tại, tạo mới trên interface đầu tiên
+            # IP address does not exist, created new on the first interface
             print(f"Creating virtual IP address: {ip_address} on interface eth0")
-            os.system(f"sudo ip addr add {ip_address}/24 dev eth0")  # Thay subnet mask nếu cần
+            os.system(f"sudo ip addr add {ip_address}/24 dev eth0") 
         else:
             print(f"IP address {ip_address} already exists.")
 
@@ -68,12 +68,12 @@ if __name__ == "__main__":
     keyfile = "key.pem"
     certfile = "cert.pem"
 
-    # Tạo certificate nếu chưa tồn tại
+    # Create a Certificate if not existed
     generate_self_signed_certificate(certfile, keyfile)
 
-    # Tạo địa chỉ IP ảo nếu chưa tồn tại
+    # Create virtual IP address if not existed
     create_virtual_ip(SERVER_IP)
 
-    # Khởi động server trong một thread riêng
+    # Start the server in a separate thread
     server_thread = threading.Thread(target=run_https_server, args=(SERVER_IP, HTTPS_PORT, html_dir, keyfile, certfile))
     server_thread.start()
