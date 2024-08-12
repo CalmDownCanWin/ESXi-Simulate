@@ -5,17 +5,17 @@ from command_handler import handle_command
 from utils import send_message_to_soc
 
 def handle_dcui_client(client_socket, address):
-    """Xử lý kết nối DCUI."""
-    print(f"[DCUI] Kết nối từ {address}")
+    "" "DCUI connectivity processing." ""
+    print(f"[DCUI] Connection {address}")
     
-    # Đảm bảo DCUI_BANNER là bytes
+    # Make sure DCUI_BANNER is bytes
     if isinstance(DCUI_BANNER, str):
         banner = DCUI_BANNER.encode()
     else:
         banner = DCUI_BANNER
 
     try:
-        client_socket.send(banner)  # Sử dụng DCUI_BANNER từ config
+        client_socket.send(banner) 
         client_socket.send(b"Enter username: ")
         username = client_socket.recv(1024).decode().strip()
         client_socket.send(b"Enter password: ")
@@ -35,7 +35,7 @@ def handle_dcui_client(client_socket, address):
                     break
                 print(f"[DCUI] {address} - Command: {command}")
 
-                # Sử dụng command_handler để xử lý lệnh
+                # Use Command_handler to handle commands
                 response = handle_command(command, "DCUI", address)
                 client_socket.send(response.encode())
                 client_socket.send(b"dcui> ")
@@ -51,7 +51,7 @@ def run_dcui_server():
     """Khởi động DCUI server giả lập."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         try:
-            sock.bind(('', DCUI_PORT))  # Sử dụng DCUI_PORT từ config
+            sock.bind(('', DCUI_PORT)) 
             sock.listen()
             print(f"[DCUI] Honeypot DCUI đang lắng nghe trên cổng {DCUI_PORT}")
             
