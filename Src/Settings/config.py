@@ -1,6 +1,11 @@
 #Config
-
+TELNET_PORT = 23
+SYSLOG_PORT = 514
+HTTPS_PORT = 443
+VMOTION_PORT = 8000
+ISCSI_PORT = 3260
 SSH_PORT = 2222
+OPENSLP_PORT = 427
 
 # Creds
 VALID_USERS = {
@@ -35,6 +40,13 @@ vSphere Security documentation for more information.\r"""
 
 
 LOG_ROOT = ""
+
+POC_DATABASE = {
+    "ESXiArgs": {
+        "signature": "'arg1' : b'127.0.0.1'", # The characteristic string in the request
+    },
+    # Add other poc here
+}
 
 # SSH Fingerprint 
 from utils import get_ssh_fingerprint_from_file
