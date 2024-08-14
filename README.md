@@ -1,6 +1,35 @@
 # LUAGA
 
-![image](https://github.com/user-attachments/assets/cad77f48-fd26-4251-8226-6427634d5654)
+```python
+╭───────────────── Console ──────────────────╮
+│                                            │
+│ ___  ____  __  __  ____  _  _  ___  _____  │
+│                                            │
+│ ██╗     ██╗   ██╗ █████╗  ██████╗  █████╗  │
+│ ██║     ██║   ██║██╔══██╗██╔════╝ ██╔══██╗ │
+│ ██║     ██║   ██║███████║██║  ███╗███████║ │
+│ ██║     ██║   ██║██╔══██║██║   ██║██╔══██║ │
+│ ███████╗╚██████╔╝██║  ██║╚██████╔╝██║  ██║ │
+│ ╚══════╝ ╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝ │
+│ ___  ____  __  __  ____  _  _  ___  _____  │
+│                                            │
+│         Welcome to ESXi Honeypot!          │
+│                                            │
+╰────────────────────────────────────────────╯
+                     Available Commands                     
+┏━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓
+┃ Options         ┃ Description                            ┃
+┡━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┩
+│ -c, --create    │ Create a new honeypot container        │
+│ -s, --start     │ Start an existing honeypot container   │
+│ -st, --stop     │ Stop a running honeypot container      │
+│ -r, --restart   │ Restart a honeypot container           │
+│ -l, --logs      │ Display logs of a honeypot container   │
+│ -S, --status    │ Show status of all honeypot containers │
+│ -h, --help      │ Display this help message              │
+└─────────────────┴────────────────────────────────────────┘
+
+```
 
 ## Welcome to LUAGA 
 Official repository for LUAGA - VMWare ESXi Honeypot
