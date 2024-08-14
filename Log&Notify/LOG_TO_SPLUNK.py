@@ -4,13 +4,12 @@ import logging
 import threading
 from queue import Queue
 from datetime import datetime
-import requests
-from configure import LOG_FILE, LOG_LEVEL, SPLUNK_HOST, SPLUNK_PORT, MAX_QUEUE_SIZE, SPLUNK_INDEX, SPLUNK_TOKEN, SPLUNK_SOURCE
+import socket
+from config import LOG_ROOT, LOG_FILE, LOG_LEVEL, SPLUNK_HOST, SPLUNK_PORT, MAX_QUEUE_SIZE
 
 # === FUNCTIONS ===
-
 def get_logger():
-    """Khởi tạo và cấu hình logger."""
+    """Initialize and configure the logger."""
     logger = logging.getLogger(__name__)
     logger.setLevel(LOG_LEVEL)
 
@@ -21,28 +20,25 @@ def get_logger():
     file_handler.setFormatter(formatter)
     logger.addHandler(file_handler)
 
-    # Splunk handler (HEC)
+    # Splunk handler (UDP)
     if SPLUNK_HOST and SPLUNK_PORT:
-        splunk_handler = SplunkHecHandler(SPLUNK_HOST, SPLUNK_PORT)
+        splunk_handler = SplunkUdpHandler(SPLUNK_HOST, SPLUNK_PORT)
         splunk_handler.setFormatter(formatter)
         logger.addHandler(splunk_handler)
 
     return logger
 
-class SplunkHecHandler(logging.Handler):
-    """Handler để gửi log đến Splunk qua HEC."""
+class SplunkUdpHandler(logging.Handler):
+    """Handler to send logs to Splunk over UDP."""
 
-    def __init__(self, host, port, token=SPLUNK_TOKEN, index=SPLUNK_INDEX, source=SPLUNK_SOURCE):
+    def __init__(self, host, port):
         super().__init__()
         self.host = host
         self.port = port
-        self.token = token
-        self.index = index
-        self.source = source
-        self.url = f"https://{self.host}:{self.port}/services/collector"
+        self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def emit(self, record):
-        """Gửi log event đến Splunk qua HEC."""
+        """Send log events to Splunk via UDP."""
         log_entry = self.format(record)
         try:
             self.send_to_splunk(log_entry)
@@ -50,31 +46,48 @@ class SplunkHecHandler(logging.Handler):
             print(f"Error sending log to Splunk: {e}")
 
     def send_to_splunk(self, log_entry):
-        """Gửi log entry đến Splunk qua HEC."""
-        headers = {
-            "Authorization": f"Splunk {self.token}",
-            "Content-Type": "application/json"
-        }
-        data = {
-            "event": log_entry,
-            "time": datetime.utcnow().isoformat(),
-            "sourcetype": "python_logger",
-            "index": self.index,
-            "source": self.source
-        }
-        response = requests.post(self.url, headers=headers, data=json.dumps(data))
-        if response.status_code != 200:
-            print(f"Error sending log to Splunk: {response.status_code}, {response.text}")
+        """Send log entry to Splunk over UDP socket."""
+        self.socket.sendto(log_entry.encode(), (self.host, self.port))
 
-def log_attack(**kwargs):
-    """Ghi lại hành vi của attacker.
+def log_command(**kwargs):
+    """Record attacker behavior..
 
-    Ví dụ:
+    Example:
     log_attack(event_type="file_access", filepath="/etc/passwd", username="attacker")
     """
     global logger
     event = {
         "timestamp": datetime.utcnow().isoformat(),
+        **kwargs
+    }
+    logger.info(json.dumps(event))
+
+def log_recon(**kwargs):
+    """Record the attacker's reconnaissance activity."""
+    global logger
+    event = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "event_type": "Reconnaissance activity",
+        **kwargs
+    }
+    logger.info(json.dumps(event))
+
+def log_login(**kwargs):
+    """Record the attacker's login information."""
+    global logger
+    event = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "event_type": "Login_activity",
+        **kwargs
+    }
+    logger.info(json.dumps(event))
+
+def log_exploitation(**kwargs):
+    """Record attacker's exploit activity."""
+    global logger
+    event = {
+        "timestamp": datetime.utcnow().isoformat(),
+        "event_type": "Exploitation_activity",
         **kwargs
     }
     logger.info(json.dumps(event))
