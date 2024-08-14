@@ -26,6 +26,15 @@ def Wget_error(url):
     ]
     return random.choice(errors) + "\n"
 
+def Scp_error(filename):
+    """No, no i dont' want ur files, just ur info"""
+    errors = [
+        f"scp: error tranferring file: {random.choice(['Connection timed out', 'Could not resolve host'])}",
+        f"scp: error transferring file: Size of {filename} exceeds limit",
+        f"scp: error transferring {filename}\n"
+    ]
+    return random.choice(errors) + "\n"
+
 def Python_Interactive_Error():
         """Yeah your script is problem!!!"""
         fake_messages = [

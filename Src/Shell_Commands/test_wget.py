@@ -48,8 +48,8 @@ class ESXiWgetCommand(cmd.SimpleCommand):
 
     def simulate_download(self):
         # Fake contents
-        fake_content = b"Got u man! What do u want?\n"
-        file_size = len(fake_content)
+        # fake_content = b"Got u man! What do u want?\n"
+        file_size = random.randint(1024, 1024)
 
         # create file if not 
         if not self.outfile:
@@ -57,7 +57,7 @@ class ESXiWgetCommand(cmd.SimpleCommand):
             filename = url_parts[-1] if url_parts[-1] else "index.html"
 
         # path/to/download_file
-        filepath = self.fs.resolve_path(filename)
+        #filepath = self.fs.resolve_path(filename)
 
         # Start Downloading
         if not self.quiet:
@@ -86,17 +86,20 @@ class ESXiWgetCommand(cmd.SimpleCommand):
             self.write_output(f"\r100% [{'=' * 20}] {file_size}/{file_size} {speed}K/s\r\n",end='',flush=True)
             self.write_output("\n")
 
+        self.write_output("\n")
+        time.sleep(3)
 
         # Saved download_files
-        try:
-            with self.fs.open(filepath, "wb") as f:
-                f.write(fake_content)
+        # try:
+        #     with self.fs.open(filepath, "wb") as f:
+        #         f.write(fake_content)
 
-            if not self.quiet:
-                self.write_output(f"'{filename}' saved [{file_size}/{file_size}]\r\n",end='',flush=True)
-        except (FileNotFoundError, PermissionError):
-            self.stderr = er.Wget_error(self.url)
-            self.returncode = 1
+        #     if not self.quiet:
+        #         self.write_output(f"'{filename}' saved [{file_size}/{file_size}]\r\n",end='',flush=True)
+        # except (FileNotFoundError, PermissionError):
+
+        self.stderr = er.Wget_error(self.url)
+        self.returncode = 1
 
     def show_help(self):
         self.write_output(

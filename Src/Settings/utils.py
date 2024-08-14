@@ -3,7 +3,7 @@ import paramiko
 
 def send_message_to_soc(message):
     # Dummy implementation for sending a message to a socket or a monitoring system
-    print(f"Sending message: {message}")
+    print(f"Monitoring: {message}")
 
 def log_event(message, level=logging.INFO):
     # Log the event with the specified logging level

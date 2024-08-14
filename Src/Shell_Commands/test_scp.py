@@ -1,7 +1,8 @@
 import ESXi_fs as fs
 import ESXi_command as cmd
-import re
+import error_handler as er
 
+import re
 import os
 import time
 import random
@@ -34,18 +35,18 @@ class ESXiScpCommand(cmd.SimpleCommand):
 
     def simulate_copy(self, source, target):
 
-        fake_content = b"Error!\n"
+        #fake_content = b"Error!\n"
 
         # Create fake filename
         filename = os.path.basename(source)
 
         # Save files
-        filepath = self.fs.resolve_path(filename)
-        with open(filepath, "wb") as f:
-            f.write(fake_content)
+        # filepath = self.fs.resolve_path(filename)
+        # with open(filepath, "wb") as f:
+        #     f.write(fake_content)
 
         # Process
-        file_size = len(fake_content)
+        file_size = random.randint(1024, 1024)
         for i in range(0, 101, 5):
             progress = int(i * file_size / 100)
             bar = "=" * int(i / 5) + " " * (20 - int(i / 5))
@@ -54,7 +55,13 @@ class ESXiScpCommand(cmd.SimpleCommand):
             time.sleep(0.1)
 
         self.write_output(f"\r{source} [{'=' * 20}] 100% {file_size}KB/{file_size}KB {speed}KB/s   00:00    \r\n", end="", flush=True)
-        self.write_output(f"'{filename}' -> '{target}'\r\n")
+        #self.write_output(f"'{filename}' -> '{target}'\r\n")
+
+        self.write_output("\n")                     
+        time.sleep(3)
+
+        self.stderr = er.Scp_error(filename)
+        self.returncode = 1
 
     def show_help(self):
         self.write_output(

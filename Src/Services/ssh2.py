@@ -114,6 +114,7 @@ class Server(paramiko.ServerInterface):
                 password = password,
                 status = "Successfully!"
             )
+            send_message_to_soc(f"[SSH] Attempts with {username}:{password} - Successfully")
             return paramiko.AUTH_SUCCESSFUL
         log_event(f"[SSH] Authentication failed for user: {username}")
         log_login(
@@ -122,6 +123,7 @@ class Server(paramiko.ServerInterface):
             password = password,
             status = "Failed!"
         )
+        send_message_to_soc(f"[SSH] Attempts with {username}:{password} - Failed!")
         return paramiko.AUTH_FAILED
 
     
@@ -216,6 +218,8 @@ def handle_esxi_honeypot(channel, client_ip, fs_honeypot):
                 client_ip=client_ip,
             )
             logging.debug(f"[DEBUG] Command received: {command}")
+            send_message_to_soc(f"[Filesystem] Action in '{os.path.relpath(fs_honeypot.getcwd(), fs_honeypot.root)}', filesystem_path: '{fs_honeypot.getcwd()}' ")
+            send_message_to_soc(f"[Command executed] Command '{command}' used with arguments '{args}'")
             # Find class_command trong COMMAND_MAP
             command_class = COMMAND_MAP.get(command)
             logging.debug(f"[DEBUG] Command class found: {command_class}")

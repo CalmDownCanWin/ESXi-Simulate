@@ -50,7 +50,7 @@ class ESXiLsCommand(cmd):
         path = self.fs.resolve_path(path)
         if path in ["/dev", "/etc", "/bin", "/var", "/lib", "/usr"]:
             path = os.path.join(self.fs.root, path[1:])
-        print(path)
+        #print(path)
         if not self.fs.exists(path):
             self.stderr += f"ls: cannot access '{os.path.basename(path)}': No such file or directory\n"
             self.returncode = 1
@@ -84,11 +84,11 @@ class ESXiLsCommand(cmd):
                             print(f"\n{os.path.join(path, file)}:\n")
                             self.list_directory_contents(os.path.join(path, file))
 
-            except FileNotFoundError:
-                self.stderr += f"ls: cannot access '{path}': No such file or directory\n"
+            except fs.FileNotFoundError:
+                self.stderr += f"ls: cannot access '{os.path.basename(path)}': No such file or directory\n"
                 self.returncode = 1
             except PermissionError:
-                self.stderr += f"ls: cannot open directory '{path}': Permission denied\n"
+                self.stderr += f"ls: cannot open directory '{os.path.basename(path)}': Permission denied\n"
                 self.returncode = 1
 
     def print_short_listing(self, files):
