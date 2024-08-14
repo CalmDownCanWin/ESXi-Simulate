@@ -1,6 +1,6 @@
 # LUAGA
 
-![image](https://github.com/user-attachments/assets/b4a8a659-0740-4ee9-9bf6-b664da382071)
+![image](https://github.com/user-attachments/assets/cad77f48-fd26-4251-8226-6427634d5654)
 
 ## Welcome to LUAGA 
 Official repository for LUAGA - VMWare ESXi Honeypot
@@ -22,10 +22,10 @@ LUAGA - ESXi Honeypot, a deceptive system designed to emulate a VMware ESXi serv
 - **Ransomware Detection**: The honeypot can identify common ESXi ransomware patterns and simulate attacks to gather intelligence on their operation.
 - **Extensibility**: The modular design allows for easy addition of new commands and features.
 
-##Requirements:
+## Requirements:
 
 * Docker
 * Python 3.9+
 * Python Libraries: rich, paramiko, requests
 
-##Learn more
+## How to use 
