@@ -1,4 +1,3 @@
-# Ransomware
-
-![image](https://github.com/user-attachments/assets/53fe2ec2-0b7d-48f3-b977-f1b050b26c30)
+# LUAGA
+![image](https://github.com/user-attachments/assets/b4a8a659-0740-4ee9-9bf6-b664da382071)
 

@@ -202,16 +202,6 @@ def create_flat_vmdk(path, vm_name, size_gb):
     with open(file_path, 'wb') as f:
         f.truncate(size_gb * 1024 * 1024 * 1024)  # 1GB = 1024MB = 1024*1024KB = 1024*1024*1024B
 
-def delete_esx_files(base_path):
-    """Delete files and folders have been created earlier."""
-    try:
-        shutil.rmtree(base_path)
-        print(f"Delete all files and folders in: {base_path}")
-    except FileNotFoundError:
-        print(f"No folder found: {base_path}")
-    except PermissionError:
-        print(f"There is no right to delete folders: {base_path}")
-
 def create_fake_file(file_path, file_size_in_bytes):
     """Create a fake file with a large size on Linux."""
     # Convert file_size_in_bytes into truncate format (for example: 1g, 100m)

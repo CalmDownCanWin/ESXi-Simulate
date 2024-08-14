@@ -1,6 +1,6 @@
 # Cấu hình cho mô phỏng SSH
 OPENSLP_PORT = 427
-SERVER_IP = "192.168.79.127"
+SERVER_IP = "192.168.79.172"
 # Cổng SSH
 
 SSH_PORT = 22

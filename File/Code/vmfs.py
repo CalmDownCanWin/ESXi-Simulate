@@ -13,15 +13,15 @@ from ESXi_config import create_fake_file
 from ESXi_config import create_symlinks
 from ESXi_config import create_directory
 
-# Định nghĩa cấu hình UUID và liên kết cho từng ESXi
+# Definition of Uuid configuration and link for each ESXI
 ESXI_UUIDS = {
     "ESXi_1": {
-        "UUID1": "486b39d0-3b4db665-e593-83a193fc5192",  # Thay đổi UUID1
-        "UUID2": "6673e14e-8e17af66-4ae8-000c299cb5ed",  # Thay đổi UUID2
-        "UUID3": "669d1bdb-d91fa63f-ef8b-000c299cb5ed",  # Thay đổi UUID3
-        "UUID4": "669d1bfa-fc27fe78-39a3-000c299cb5ed",  # Thay đổi UUID4
-        "UUID5": "6676885b-da7c8fb4-8ca7-000c299cb5ed",  # Thay đổi UUID5
-        "UUID6": "f9d5c73b-6342cf19-18aa-76fbe3100cb8",  # Thay đổi UUID6
+        "UUID1": "486b39d0-3b4db665-e593-83a193fc5192",  # Change UUID1
+        "UUID2": "6673e14e-8e17af66-4ae8-000c299cb5ed",  # Change UUID2
+        "UUID3": "669d1bdb-d91fa63f-ef8b-000c299cb5ed",  # Change UUID3
+        "UUID4": "669d1bfa-fc27fe78-39a3-000c299cb5ed",  # Change UUID4
+        "UUID5": "6676885b-da7c8fb4-8ca7-000c299cb5ed",  # Change UUID5
+        "UUID6": "f9d5c73b-6342cf19-18aa-76fbe3100cb8",  # Change UUID6
     },
     "ESXi_2": {
         "UUID1": "486b-708e3598436286a4adde-c5192",
@@ -52,70 +52,70 @@ ESXI_UUIDS = {
 }
 
 def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubuntu=True,create_FreeBSD=True,create_window_server=True,create_MacOS=True,create_Kali_Centos=True, print_uuids=True):
-    """Tạo cấu trúc thư mục mô phỏng ESXi với UUID riêng biệt và tùy chọn cấu hình."""
+    """Create an ESXI simulation folder structure with separate uuid and configuration options."""
 
-    # Lấy cấu hình UUID và liên kết cho ESXi cụ thể
+    # Get Uuid configuration and link for specific ESXI
     esxi_config = ESXI_UUIDS.get(esxi_name)
     if not esxi_config:
-        print(f"Lỗi: Không tìm thấy cấu hình cho ESXi '{esxi_name}'.")
+        print(f"Error: No configuration for ESXI '{esxi_name}'.")
         return
 
-    # Định nghĩa symlink tùy thuộc vào tên ESXi
+    # Definition Symlink depends on the name ESXI
     if esxi_name == "ESXi_1":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DevOpsDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_1
-            "SREDataStore": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_1
-            "TeamDataStore": esxi_config["UUID5"],  # Thay đổi tên DataStore cho ESXi_1
+            "DevOpsDataStore": esxi_config["UUID3"],  # Change name DataStore cho ESXi_1
+            "SREDataStore": esxi_config["UUID4"],  # Change name DataStore cho ESXi_1
+            "TeamDataStore": esxi_config["UUID5"],  # Change name DataStore cho ESXi_1
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_2":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "ProjectDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_2
+            "ProjectDataStore": esxi_config["UUID3"],  # Change name DataStore cho ESXi_2
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_3":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "DataCenter": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_3
-            "DataHub": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_3
+            "DataCenter": esxi_config["UUID3"],  # Change name DataStore cho ESXi_3
+            "DataHub": esxi_config["UUID4"],  # Change name DataStore cho ESXi_3
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_4":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "ProjectAlphaDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_4
-            "BetaCluster": esxi_config["UUID4"],  # Thay đổi tên DataStore cho ESXi_4
+            "ProjectAlphaDataStore": esxi_config["UUID3"],  # Change name DataStore cho ESXi_4
+            "BetaCluster": esxi_config["UUID4"],  # Change name DataStore cho ESXi_4
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     elif esxi_name == "ESXi_5":
         esxi_config["SYMLINKS"] = {
             "BOOTBANK1": esxi_config["UUID1"],
             "BOOTBANK2": esxi_config["UUID6"],
-            "ProductionDataStore": esxi_config["UUID3"],  # Thay đổi tên DataStore cho ESXi_5
+            "ProductionDataStore": esxi_config["UUID3"],  # Change name DataStore cho ESXi_5
             f"OSDATA-{esxi_config['UUID2']}": esxi_config["UUID2"],
         }
     else:
-        print(f"Lỗi: Không hỗ trợ ESXi '{esxi_name}'.")
+        print(f"Error: No support for ESXI '{esxi_name}'.")
         return
 
-    # Thư mục vmfs
+    # Folder vmfs
     vmfs_path = os.path.join(base_path, "vmfs")
     os.makedirs(vmfs_path, exist_ok=True)
 
-    # Thư mục vmfs/volumes
+    # Folder vmfs/volumes
     volumes_path = os.path.join(vmfs_path, "volumes")
     os.makedirs(volumes_path, exist_ok=True)
 
     device_symlinks = {"devices": "/dev/"}
     create_symlinks(vmfs_path,device_symlinks)
 
-    # Tạo thư mục cho các UUID
+    # Create Folder cho các UUID
     for uuid_name, uuid_str in esxi_config.items():
         if uuid_name.startswith("UUID"):
             uuid_path = os.path.join(volumes_path, uuid_str)
@@ -124,7 +124,7 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
             # Set permission for UUID folder
             os.chmod(uuid_path, stat.S_IRWXU | stat.S_IRGRP | stat.S_IROTH)
 
-            # Thêm file/folder tùy chỉnh vào mỗi UUID (ví dụ)
+            # Add custom file/folder to each uuid
             if uuid_name == "UUID1":
                 bootbank1_files = {
                     "atlantic.v00": 1414,
@@ -206,14 +206,9 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
                 for uuidn in UUID2_Folder:
                     create_directory(os.path.join(uuid_path,uuidn))
 
-                # content = """# Nội dung cho OSDATA"""
-                # create_config_file(uuid_path, f"OSDATA-{uuid_str}", content)
-                # OSDATA_symlinks = {f"OSDATA-{uuid_str}": "UUID6"}
-                # create_symlinks(volumes_path,OSDATA_symlinks)
             elif uuid_name == "UUID6":
                 create_config_file(uuid_path, "boot.cfg", generate_random_string(12))
             elif uuid_name == "UUID3" and (create_windows or create_kali_ubuntu or create_FreeBSD or create_Kali_Centos or create_MacOS or create_window_server):
-                # Thêm file/folder cho UUID3 (ví dụ: datastore)
                 file = {
                     ".fbb.sf",
                     ".fdc.sf",
@@ -237,7 +232,6 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
                 if create_MacOS:  
                     create_MacOS_vms(base_path, 1, uuid_str)
             elif uuid_name == "UUID4" and (create_windows or create_kali_ubuntu or create_FreeBSD or create_Kali_Centos or create_MacOS or create_window_server):
-                # Thêm file/folder cho UUID3 (ví dụ: datastore)
                 file = {
                     ".fbb.sf",
                     ".fdc.sf",
@@ -261,7 +255,6 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
                 if create_MacOS:  
                     create_MacOS_vms(base_path, 2, uuid_str)
             elif uuid_name == "UUID5" and (create_windows or create_kali_ubuntu or create_FreeBSD or create_Kali_Centos or create_MacOS or create_window_server):
-                # Thêm file/folder cho UUID3 (ví dụ: datastore)
                 file = {
                     ".fbb.sf",
                     ".fdc.sf",
@@ -286,39 +279,39 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
                     create_FreeBSD_vms(base_path, 2, uuid_str)
                     
     
-    # Tạo liên kết tượng trưng
+    # Create symbolic link
     create_symlinks(volumes_path, esxi_config["SYMLINKS"])
     
-    # In ra kết quả ls -la
+    # Print out LS -LA results
     if print_uuids:
-        print(f"Kết quả ls -la cho ESXi '{esxi_name}':")
+        print(f"LS -LA results for ESXI '{esxi_name}':")
         result = subprocess.run(['ls', '-la', volumes_path], capture_output=True, text=True)
 
-        # Xử lý kết quả ls -la
+        # Processing LS -LA results
         for line in result.stdout.splitlines():
-            if "->" in line:  # Chỉ xử lý liên kết tượng trưng
+            if "->" in line:  # Only symbolic link processing
                 parts = line.split("->")
                 link_name = parts[0].strip().split()[-1]
                 target_uuid = esxi_config["SYMLINKS"][link_name]
                 line = line.replace(parts[1].strip(), target_uuid)
 
-                # Kiểm tra xem UUID đích có tồn tại trong esxi_config hay không
-                if target_uuid in esxi_config:  # Sửa lỗi ở đây
+                # Check if the target uuid exists in eSxi_config or not
+                if target_uuid in esxi_config: 
                     line = line.replace(parts[1].strip(), esxi_config[target_uuid])
 
-            print(line)  # In dòng (đã sửa hoặc giữ nguyên)
+            print(line) 
 
-    # In ra các UUID nếu được yêu cầu
+    # Print out uuid if required
     if print_uuids:
-        print(f"Các UUID cho ESXi '{esxi_name}':")
+        print(f"Uuid for ESXI '{esxi_name}':")
         for uuid_name, uuid_str in esxi_config.items():
             if uuid_name.startswith("UUID"):
                 print(f"{uuid_name}: {uuid_str}")
                 
 
 def create_windows_vms(base_path, num_vms, target_uuid):
-    """Tạo máy ảo Windows."""
-    vmx_content = """# Nội dung file .vmx cho Windows"""
+    """Create virtual Windows machine."""
+    vmx_content = """# Content of .vmx file for Windows"""
     for _ in range(num_vms):
         version_window = random.choice(["7","8","10","11"])
         number = f"{version_window}"
@@ -326,41 +319,40 @@ def create_windows_vms(base_path, num_vms, target_uuid):
         name = "vmware"
         vm_path = os.path.join(base_path, 'vmfs', 'volumes', target_uuid, vm_name_Window)
         os.makedirs(vm_path, exist_ok=True)
-        # Tạo file VMX
+        # Create file VMX
         create_config_file(vm_path, f"{vm_name_Window}.vmx", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmx"),1024 * 1024 * 1024 * 10)
-        # Tạo file log
+        # Create file log
         create_log_file(vm_path,name + ".log")
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 8)
-        # Tạo file VMDK
+        # Create file VMDK
         create_vmdk_file(vm_path, vm_name_Window)
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmdk"),1024 * 1024 * 1024 * 30)
-        # Tạo file flat.VMDK
-        create_flat_vmdk(vm_path, vm_name_Window, size_gb= 100)
-        # Tạo file .vmx.bak (có thể được sử dụng trong quá trình restore)
+        # Create file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name_Window, size_gb= 90)
         create_config_file(vm_path, f"{vm_name_Window}.vmx.bak", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmx.bak"),1024 * 1024 * 1024 * 10)
-        #Tạo file .nvram 
+        #Create file .nvram 
         create_config_file(vm_path,f"{vm_name_Window}.nvram",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.nvram"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmsd
+        #Create file vmsd
         create_config_file(vm_path,f"{vm_name_Window}.vmsd",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmsd"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmsn
+        #Create file vmsn
         create_config_file(vm_path,f"{vm_name_Window}.vmsn",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmsn"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmtx
+        #Create file vmtx
         create_config_file(vm_path,f"{vm_name_Window}.vmtx",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmtx"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmxf
+        #Create file vmxf
         create_config_file(vm_path,f"{vm_name_Window}.vmxf",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmxf"),1024 * 1024 * 1024 * 10)
 
-        print("Đã tạo foler " + vm_name_Window)
+        print(" Create folder " + vm_name_Window)
 
 def create_window_server_vms(base_path, num_vms, target_uuid):
-    """Tạo máy ảo Windows."""
-    vmx_content = """# Nội dung file .vmx cho Windows"""
+    """Create virtual Windows machine.""" 
+    vmx_content = """#Content Of Vmx File For Windows Server """
     for _ in range(num_vms):
         version_window = random.choice(["2006","2016","2019","2012"])
         number = f"{version_window}"
@@ -368,172 +360,171 @@ def create_window_server_vms(base_path, num_vms, target_uuid):
         name = "vmware"
         vm_path = os.path.join(base_path, 'vmfs', 'volumes', target_uuid, vm_name_Window)
         os.makedirs(vm_path, exist_ok=True)
-        # Tạo file VMX
+        # Create file VMX
         create_config_file(vm_path, f"{vm_name_Window}.vmx", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmx"),1024 * 1024 * 1024 * 10)
-        # Tạo file log
+        # Create file log
         create_log_file(vm_path,name + ".log")
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 20)
-        # Tạo file VMDK
+        # Create file VMDK
         create_vmdk_file(vm_path, vm_name_Window)
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmdk"),1024 * 1024 * 1024 * 60)
-        # Tạo file flat.VMDK
+        # Create file flat.VMDK
         create_flat_vmdk(vm_path, vm_name_Window, size_gb= 80)
-        # Tạo file .vmx.bak (có thể được sử dụng trong quá trình restore)
         create_config_file(vm_path, f"{vm_name_Window}.vmx.bak", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmx.bak"),1024 * 1024 * 1024 * 20)
-        #Tạo file .nvram 
+        #Create file .nvram 
         create_config_file(vm_path,f"{vm_name_Window}.nvram",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.nvram"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmsd
+        #Create file vmsd
         create_config_file(vm_path,f"{vm_name_Window}.vmsd",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmsd"),1024 * 1024 * 1024 * 5)
-        #Tạo file vmsn
+        #Create file vmsn
         create_config_file(vm_path,f"{vm_name_Window}.vmsn",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmsn"),1024 * 1024 * 1024 * 8)
-        #Tạo file vmtx
+        #Create file vmtx
         create_config_file(vm_path,f"{vm_name_Window}.vmtx",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmtx"),1024 * 1024 * 1024 * 1)
-        #Tạo file vmxf
+        #Create file vmxf
         create_config_file(vm_path,f"{vm_name_Window}.vmxf",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name_Window}.vmxf"),1024 * 1024 * 1024 * 2)
 
-        print("Đã tạo foler " + vm_name_Window)
+        print(" Create folder " + vm_name_Window)
 
 def create_kali_ubuntu_vms(base_path, num_vms, target_uuid):
-    vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
+    vmx_content = """# Content of .vmx file for Kali-Linux/ubuntu"""
     #Kali or Ubuntu
     for _ in range(num_vms):
-        # Chọn ngẫu nhiên loại máy ảo
+        # Randomly select the type of virtual machine
         vm_type = random.choice(["Kali-Linux","Ubuntu",])
         vm_name = f"{vm_type}"
         name = "vmware"
-        # Tạo thư mục VM
+        # Create Folder VM
         if vm_type == "Kali-Linux":
             vm_path = os.path.join(base_path, 'vmfs', 'volumes', target_uuid, vm_name)
             os.makedirs(vm_path, exist_ok=True)
-            # Tạo file VMX
+            # Create file VMX
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
-            # Tạo file log
+            # Create file log
             create_log_file(vm_path,name + ".log")
             create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
-            # Tạo file VMDK
+            # Create file VMDK
             create_vmdk_file(vm_path, vm_name)
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 30)
-            # Tạo file flat.VMDK
-            create_flat_vmdk(vm_path, vm_name, size_gb= 100)
-            #Tạo file vmx.lck
+            # Create file flat.VMDK
+            create_flat_vmdk(vm_path, vm_name, size_gb= 70)
+            #Create file vmx.lck
             create_config_file(vm_path, f"{vm_name}.vmx.lck", vmx_content)
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx.lck"),1024 * 1024 * 1024 * 9)
-            #Tạo file .nvram 
+            #Create file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
-            #Tạo file vmsd
+            #Create file vmsd
             create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
-            #Tạo file vswp
+            #Create file vswp
             create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vswp",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 9)
             create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
-            #Tạo file vmsn
+            #Create file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 6)
-            #Tạo file vmtx
+            #Create file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
-            #Tạo file vmxf
+            #Create file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
-            print("Đã tạo folder " + vm_name)
+            print(" Create folder " + vm_name)
 
 
         elif vm_type == "Ubuntu":
             vm_path = os.path.join(base_path, 'vmfs', 'volumes',target_uuid, vm_name)
             os.makedirs(vm_path, exist_ok=True)
-            # Tạo file VMX
+            # Create file VMX
             create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
-            # Tạo file log
+            # Create file log
             create_log_file(vm_path,name + ".log")
             create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
-            # Tạo file VMDK
+            # Create file VMDK
             create_vmdk_file(vm_path, vm_name)
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 27)
-            # Tạo file flat.VMDK
-            create_flat_vmdk(vm_path, vm_name, size_gb= 100)
-            #Tạo file .nvram 
+            # Create file flat.VMDK
+            create_flat_vmdk(vm_path, vm_name, size_gb= 60)
+            #Create file .nvram 
             create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
-            #Tạo file vmsd
+            #Create file vmsd
             create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vmsd",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
             create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
-            #Tạo file vmsn
+            #Create file vmsn
             create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 9)
-            #Tạo file vmtx
+            #Create file vmtx
             create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
-            #Tạo file vmxf
+            #Create file vmxf
             create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
             create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
-            print("Đã tạo folder " + vm_name)
+            print(" Create folder " + vm_name)
             
 def create_Kali_Centos_vms(base_path, num_vms, target_uuid):
-    vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
+    vmx_content = """# Content of .vmx file for Kali/Centos"""
     #Kali or Ubuntu
     for _ in range(num_vms):
-        # Chọn ngẫu nhiên loại máy ảo
+        # Randomly select the type of virtual machine
         vm_type = random.choice(["Kali","Centos"])
         vm_name = f"{vm_type}"
         name = "vmware"
-        # Tạo thư mục VM
+        # Create Folder VM
         vm_path = os.path.join(base_path, 'vmfs', 'volumes', target_uuid, vm_name)
         os.makedirs(vm_path, exist_ok=True)
-        # Tạo file VMX
+        # Create file VMX
         create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
-        # Tạo file log
+        # Create file log
         create_log_file(vm_path,name + ".log")
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
-        # Tạo file VMDK
+        # Create file VMDK
         create_vmdk_file(vm_path, vm_name)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 30)
-        # Tạo file flat.VMDK
-        create_flat_vmdk(vm_path, vm_name, size_gb= 100)
-        #Tạo file vmx.lck
+        # Create file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name, size_gb= 73)
+        #Create file vmx.lck
         create_config_file(vm_path, f"{vm_name}.vmx.lck", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx.lck"),1024 * 1024 * 1024 * 9)
-        #Tạo file .nvram 
+        #Create file .nvram 
         create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
-        #Tạo file vmsd
+        #Create file vmsd
         create_config_file(vm_path,f"{vm_name}.vmsd",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
-        #Tạo file vswp
+        #Create file vswp
         create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vswp",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 9)
         create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmsn
+        #Create file vmsn
         create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 7)
-        #Tạo file vmtx
+        #Create file vmtx
         create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
-        #Tạo file vmxf
+        #Create file vmxf
         create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
-        print("Đã tạo folder " + vm_name)
+        print(" Create folder " + vm_name)
 
 def create_MacOS_vms(base_path, num_vms, target_uuid):
-    vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
+    vmx_content = """# Content of .vmx file for MacOS"""
     #Kali or Ubuntu
     for _ in range(num_vms):
         version_window = random.choice(["12","10.5","10.9","10.15","10","11"])
@@ -542,39 +533,39 @@ def create_MacOS_vms(base_path, num_vms, target_uuid):
         name = "vmware"
         vm_path = os.path.join(base_path, 'vmfs', 'volumes',target_uuid, vm_name)
         os.makedirs(vm_path, exist_ok=True)
-        # Tạo file VMX
+        # Create file VMX
         create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 9)
-        # Tạo file log
+        # Create file log
         create_log_file(vm_path,name + ".log")
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 10)
-        # Tạo file VMDK
+        # Create file VMDK
         create_vmdk_file(vm_path, vm_name)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 27)
-        # Tạo file flat.VMDK
-        create_flat_vmdk(vm_path, vm_name, size_gb= 100)
-        #Tạo file .nvram 
+        # Create file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name, size_gb= 68)
+        #Create file .nvram 
         create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
-        #Tạo file vmsd
+        #Create file vmsd
         create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vmsd",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
         create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 10)
-        #Tạo file vmsn
+        #Create file vmsn
         create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 6)
-        #Tạo file vmtx
+        #Create file vmtx
         create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
-        #Tạo file vmxf
+        #Create file vmxf
         create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
-        print("Đã tạo folder " + vm_name)
+        print(" Create folder " + vm_name)
 
 def create_FreeBSD_vms(base_path, num_vms, target_uuid):
-    vmx_content = """# Nội dung file .vmx cho Kali/Ubuntu"""
+    vmx_content = """# Content of .vmx file for FreeBSD"""
     #Kali or Ubuntu
     for _ in range(num_vms):
         version_window = random.choice(["12","13","Pre-11","11"])
@@ -583,33 +574,33 @@ def create_FreeBSD_vms(base_path, num_vms, target_uuid):
         name = "vmware"
         vm_path = os.path.join(base_path, 'vmfs', 'volumes',target_uuid, vm_name)
         os.makedirs(vm_path, exist_ok=True)
-        # Tạo file VMX
+        # Create file VMX
         create_config_file(vm_path, f"{vm_name}.vmx", vmx_content)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmx"),1024 * 1024 * 1024 * 10)
-        # Tạo file log
+        # Create file log
         create_log_file(vm_path,name + ".log")
         create_fake_file(os.path.join(vm_path,f"{name}.log"),1024 * 1024 * 1024 * 20)
-        # Tạo file VMDK
+        # Create file VMDK
         create_vmdk_file(vm_path, vm_name)
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmdk"),1024 * 1024 * 1024 * 50)
-        # Tạo file flat.VMDK
-        create_flat_vmdk(vm_path, vm_name, size_gb= 100)
-        #Tạo file .nvram 
+        # Create file flat.VMDK
+        create_flat_vmdk(vm_path, vm_name, size_gb= 75)
+        #Create file .nvram 
         create_config_file(vm_path,f"{vm_name}.nvram",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.nvram"),1024 * 1024 * 1024 * 3)
-        #Tạo file vmsd
+        #Create file vmsd
         create_config_file(vm_path,f"{vm_name}-{generate_random_string(5)}.vmsd",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsd"),1024 * 1024 * 1024 * 9)
         create_config_file(vm_path,"vmx-"f"{vm_name}-{generate_random_string(20)}.vswp",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vswp"),1024 * 1024 * 1024 * 5)
-        #Tạo file vmsn
+        #Create file vmsn
         create_config_file(vm_path,f"{vm_name}.vmsn",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmsn"),1024 * 1024 * 1024 * 5)
-        #Tạo file vmtx
+        #Create file vmtx
         create_config_file(vm_path,f"{vm_name}.vmtx",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmtx"),1024 * 1024 * 1024 * 1)
-        #Tạo file vmxf
+        #Create file vmxf
         create_config_file(vm_path,f"{vm_name}.vmxf",generate_random_string(1024))
         create_fake_file(os.path.join(vm_path,f"{vm_name}.vmxf"),1024 * 1024 * 1024 * 1)
 
-        print("Đã tạo folder " + vm_name)
+        print(" Create folder " + vm_name)

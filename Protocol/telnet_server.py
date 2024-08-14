@@ -55,7 +55,7 @@ def run_telnet_server():
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
         sock.bind(('', TELNET_PORT))
         sock.listen()
-        log_event(f"[TELNET] Honeypot Telnet listening on port {TELNET_PORT}")
+        log_event(f"[TELNET] Telnet listening on port {TELNET_PORT}")
         while True:
             client_socket, address = sock.accept()
             threading.Thread(target=handle_telnet_client, args=(client_socket, address)).start()
