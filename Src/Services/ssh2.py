@@ -6,6 +6,7 @@ import os
 import shlex
 import time
 import random
+import argparse
 
 from datetime import datetime
 
@@ -70,8 +71,6 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s'
 )
 
-# IP
-IP_ADDRESSES = [""]
 
 # RSA_key for IP
 IP_TRACKER_FILE = os.path.join(LOG_ROOT, 'ip_tracker.txt')
@@ -419,8 +418,10 @@ def run_ssh_server(ip_address):
             log_event(f"[SSH] Error accepting connection: {e}", level=logging.ERROR)
 
 if __name__ == "__main__":
-    for ip in IP_ADDRESSES:
-        try:
-            threading.Thread(target=run_ssh_server, args=(ip,)).start()
-        except KeyboardInterrupt:
-            print(f"\nTerminated.....")
+    parser = argparse.ArgumentParser()
+    parser.add_argumentmentument('-a', '--address', type=str, required=True, help='IP Address')
+    args = parser.parse_args()
+    try:
+        threading.Thread(target=run_ssh_server, args=(args.address,)).start()
+    except KeyboardInterrupt:
+        print(f"\nTerminated.....")
