@@ -9,9 +9,9 @@ import time
 import re
 import argparse
 
-from Settings.config import OPENSLP_PORT, POC_DATABASE, LOG_ROOT
+from Settings.config import OPENSLP_PORT, LOG_ROOT,POC_DATABASE
 from Settings.utils import send_message_to_soc, log_event
-from ssh2 import handle_esxi_honeypot, fs_honeypot
+from Logs.Log_to_Splunk import log_recon, log_exploitation
 
 # --- OpenSLP Deception ---
 
@@ -31,28 +31,21 @@ FAKE_SERVICES = [
 
 # --- ESXi Shell Mocking ---
 def handle_esxi_shell(client_socket, address):
-    """Emulate ESXI Shell."""
+    """Simulate ESXi_shell"""
     log_event(f"[ESXi Shell] Connection from {address}")
 
-    # Tạo pseudo-terminal và thực thi shell của honeypot
     master, slave = pty.openpty()
-    shell_command = ["/bin/bash"]  # Thay đổi command nếu cần
+    shell_command = ["/bin/bash"] 
 
     shell_process = subprocess.Popen(shell_command, stdin=slave, stdout=slave, stderr=slave)
 
-    # Chuyển hướng input/output giữa socket và pseudo-terminal
     while True:
         try:
-            # Đọc dữ liệu từ socket (attacker)
             data = client_socket.recv(1024)
             if not data:
                 break
-            # Ghi dữ liệu vào pseudo-terminal (honeypot shell)
             os.write(master, data)
-
-            # Đọc output từ pseudo-terminal
             output = os.read(master, 1024)
-            # Gửi output đến socket (attacker)
             client_socket.send(output)
         except Exception as e:
             log_event(f"[ESXi Shell] Error: {e}", level=logging.ERROR)
@@ -128,71 +121,91 @@ def handle_esxi_shell(client_socket, address):
 #         log_event(f"[OpenSLP] Error handling request: {e}", level=logging.ERROR)
 
 def handle_openslp_exploit(client_socket, address):
-    """Simulate exploiting vulnerability and spawning shell!"""
+    """Simulate exploiting vulerability and spawning shell"""
     client_ip = address[0]
-    print(f"[OpenSLP Exploit] Kết nối từ {address}")
-    log_event(f"[OpenSLP Exploit] Kết nối từ {address}")
+    print(f"[OpenSLP Exploit] Connection from{address}")
+    log_event(f"[OpenSLP Exploit] Connection from {address}")
 
-    # Mô phỏng thời gian khai thác lỗ hổng
+    # Exploiting
     delay = random.uniform(2, 5) 
     for i in range(int(delay)):
         print(f"[OpenSLP Exploit] Exploiting... {int(delay - i)}s remaining", end='\r')
         time.sleep(1)
-    print(" " * 50, end='\r') # Xóa dòng trước 
+    print(" " * 50, end='\r') 
 
     try:
-        # Mô phỏng thành công khai thác
         print(f"[OpenSLP Exploit] Exploit successful! Spawning shell for {address}...")
         log_event(f"[OpenSLP Exploit] Exploit successful! Spawning shell for {address}...")
 
-        # Tạo shell giả lập
-        handle_esxi_honeypot(client_socket, client_ip, fs_honeypot)
+        # Emulate shell here 
+        #handle_esxi_honeypot(client_socket, client_ip, fs_honeypot)
 
     except Exception as e:
         log_event(f"[OpenSLP Exploit] Error: {e}", level=logging.ERROR)
         client_socket.close()
-
-
+MARKER = b"\xef\xbe\xad\xde"
 def handle_openslp_request(client_socket, address):
-    """Request is coming!"""
+    """Handle request"""
 
+    client_ip = address[0]
+
+    log_recon(
+        client_ip = client_ip,
+        port = address[1],
+    )
     try:
         data = client_socket.recv(1024)
         log_event(f"[OpenSLP] checking file of payload: {len(data)} > 10")
 
-        # Kiểm tra PoC dựa trên signature
+        # Check signature
         request_str = data.decode('utf-8', errors='ignore')
         for poc_name, poc_info in POC_DATABASE.items():
             if "signature" in poc_info and re.search(poc_info["signature"], request_str):
                 log_event(f"[OpenSLP] Detected PoC: {poc_name} from {address} with signature: {poc_info['signature']}")
                 send_message_to_soc(f"[OpenSLP] Detected PoC: {poc_name} from {address} with signature: {poc_info['signature']}")
-                # Ghi log vào honeypot.log
+
                 with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
                     f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Detected PoC: {poc_name}\n")
                 with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
                     f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
-                # Bắt đầu thread xử lý shell của ESXi giả mạo
-                threading.Thread(target=handle_esxi_shell, args=(client_socket, address)).start()
+                
+                # Emulate shell
+                #threading.Thread(target=handle_esxi_shell, args=(client_socket, address)).start()
                 return
         
-        # Phân tích yêu cầu và trích xuất thông tin
+        # Analyze payload
         request_parts = request_str.split(" ")
         request_type = request_parts[0]
         
-        # Xử lý các request OpenSLP thông thường
         if request_type == "SrvRqst":
-            # Yêu cầu tìm kiếm dịch vụ
             service = random.choice(FAKE_SERVICES)
             fake_response = f"SrvRply {service['service_type']} {service['service_url']} {service['attributes']}\r\n".encode()
         elif request_type == "AttrRqst":
-            # Yêu cầu lấy thuộc tính của service
             fake_response = b"AttrRply (attr1=fake),(attr2=value)\r\n"
         else:
-            fake_response = b"OpenSLP-Error: Unsupported request type\r\n"
+            if len(data) > 10:
+                client_socket.send(MARKER)
+                log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
+                log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
+                payload = data.hex()
+
+                with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
+                    f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {payload}\n")
+
+                log_exploitation(
+                client_ip = client_ip,
+                payload = payload,
+                threat = poc_name
+                )
+
+                handle_openslp_exploit(client_socket, address)
+                return    
+            else:
+            	fake_response = b"OpenSLP-Error: Unsupported request type\r\n"
 
         client_socket.send(fake_response)
 
-        # Thêm try-except để xử lý lỗi giải mã
+        # Unicode
         try:
             request_str = data.decode('utf-8')
         except UnicodeDecodeError:
@@ -205,20 +218,23 @@ def handle_openslp_request(client_socket, address):
                     log_event(f"[OpenSLP] Error decoding request: Unable to decode data.", level=logging.ERROR)
                     return
 
-        if len(data) > 10:
-            log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
-            # Ghi payload vào file honeypot.log
-            with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
-                f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
+        # if len(data) > 10:
+        #     client_socket.send(MARKER)
+        #     log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
+        #     log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
+        #     # Ghi payload vào file honeypot.log
+        #     with open("honeypot.log", "a") as f:
+        #         f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
 
-            # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
-            handle_openslp_exploit(client_socket, address)
-            return      
+        #     # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
+        #     handle_openslp_exploit(client_socket, address)
+        #     return      
 
         log_event(f"[OpenSLP] Request from {address}: {request_str}")  # Ghi log request
         send_message_to_soc(f"[OpenSLP] Request from {address}: {request_str}")
+        
 
-        # Kiểm tra PoC
+        # check PoC
         for poc_name, poc_info in POC_DATABASE.items():
             if "signature" in poc_info and poc_info["signature"] in request_str:
                 log_event(f"[OpenSLP] Detected PoC: {poc_name} from {address}")
@@ -226,10 +242,6 @@ def handle_openslp_request(client_socket, address):
             elif "service_type" in poc_info and poc_info["service_type"] in request_str:
                 log_event(f"[OpenSLP] Detected PoC: {poc_name} from {address}")
                 send_message_to_soc(f"[OpenSLP] Detected PoC: {poc_name} from {address}")
-
-        # Kiểm tra xem payload có lớn hơn 10 byte hay không
-
-
 
     except UnicodeDecodeError as e:
         log_event(f"[OpenSLP] Error decoding request from {address}: {e}", level=logging.ERROR)
