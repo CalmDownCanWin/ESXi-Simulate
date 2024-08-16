@@ -4,7 +4,7 @@ import random
 import time
 import logging
 from config import TELNET_PORT, TELNET_BANNER, VALID_USERS
-from utils import send_message_to_soc
+from Settings.utils import send_message_to_soc
 
 # Configure logging
 logging.basicConfig(
