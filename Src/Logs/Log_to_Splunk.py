@@ -5,23 +5,19 @@ import threading
 from queue import Queue
 from datetime import datetime
 import socket
-from config import LOG_ROOT
+from Settings.config import LOG_ROOT, SPLUNK_HOST, SPLUNK_PORT
 
-# === CẤU HÌNH ===
+# === CONFIGURATION ===
 
-# Cấu hình chung
+# General configuration
 LOG_LEVEL = os.environ.get("LOG_LEVEL", "INFO").upper()
 LOG_FILE = os.path.join(LOG_ROOT, 'attack_logs.json')
 MAX_QUEUE_SIZE = 10000
 
-# Cấu hình Splunk (UDP)
-#SPLUNK_HOST = os.environ.get("SPLUNK_HOST", "") 
-#SPLUNK_PORT = int(os.environ.get("SPLUNK_PORT", ""))  #  Port mặc định cho Syslog
-
 # === FUNCTIONS ===
 
 def get_logger():
-    """Khởi tạo và cấu hình logger."""
+    """Initialize and configure the logger."""
     logger = logging.getLogger(__name__)
     logger.setLevel(LOG_LEVEL)
 
@@ -33,15 +29,15 @@ def get_logger():
     logger.addHandler(file_handler)
 
     # Splunk handler (UDP)
-    """if SPLUNK_HOST and SPLUNK_PORT:
+    if SPLUNK_HOST and SPLUNK_PORT:
         splunk_handler = SplunkUdpHandler(SPLUNK_HOST, SPLUNK_PORT)
         splunk_handler.setFormatter(formatter)
-        logger.addHandler(splunk_handler)"""
+        logger.addHandler(splunk_handler)
 
     return logger
 
 class SplunkUdpHandler(logging.Handler):
-    """Handler để gửi log đến Splunk qua UDP."""
+    """Handler for sending logs to Splunk via UDP."""
 
     def __init__(self, host, port):
         super().__init__()
@@ -50,7 +46,7 @@ class SplunkUdpHandler(logging.Handler):
         self.socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
     def emit(self, record):
-        """Gửi log event đến Splunk qua UDP."""
+        """Send log event to Splunk via UDP."""
         log_entry = self.format(record)
         try:
             self.send_to_splunk(log_entry)
@@ -58,13 +54,14 @@ class SplunkUdpHandler(logging.Handler):
             print(f"Error sending log to Splunk: {e}")
 
     def send_to_splunk(self, log_entry):
-        """Gửi log entry đến Splunk qua UDP socket."""
+        """Send log entry to Splunk via UDP socket."""
+        # Assuming Splunk is configured to receive logs over UDP on port 514 (adjust if needed)
         self.socket.sendto(log_entry.encode(), (self.host, self.port))
 
 def log_command(**kwargs):
-    """Ghi lại hành vi của attacker.
+    """Log attacker's command behavior.
 
-    Ví dụ:
+    Example:
     log_attack(event_type="file_access", filepath="/etc/passwd", username="attacker")
     """
     global logger
@@ -75,7 +72,7 @@ def log_command(**kwargs):
     logger.info(json.dumps(event))
 
 def log_recon(**kwargs):
-    """Ghi lại hoạt động reconnaissance của attacker."""
+    """Log attacker's reconnaissance activity."""
     global logger
     event = {
         "timestamp": datetime.utcnow().isoformat(),
@@ -85,7 +82,7 @@ def log_recon(**kwargs):
     logger.info(json.dumps(event))
 
 def log_login(**kwargs):
-    """Ghi lại các thông tin đăng nhập của attacker."""
+    """Log attacker's login information."""
     global logger
     event = {
         "timestamp": datetime.utcnow().isoformat(),
@@ -95,7 +92,7 @@ def log_login(**kwargs):
     logger.info(json.dumps(event))
 
 def log_exploitation(**kwargs):
-    """Ghi lại hoạt động khai thác của attacker."""
+    """Log attacker's exploitation activity."""
     global logger
     event = {
         "timestamp": datetime.utcnow().isoformat(),
@@ -104,7 +101,18 @@ def log_exploitation(**kwargs):
     }
     logger.info(json.dumps(event))
 
-# === KHỞI TẠO ===
+
+def log_event(message, level=logging.INFO):
+    """Logs a message to the Splunk handler (if configured) and the file handler.
+
+    Args:
+        message (str): The message to log.
+        level (int, optional): The logging level (INFO, DEBUG, etc.). Defaults to logging.INFO.
+    """
+    logger.log(level, message)
+
+
+# === INITIALIZATION ===
 logger = get_logger()
 log_queue = Queue(maxsize=MAX_QUEUE_SIZE)
 log_thread = threading.Thread(target=logger.info, args=(log_queue,))

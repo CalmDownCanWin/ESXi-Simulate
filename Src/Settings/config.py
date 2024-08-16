@@ -6,7 +6,7 @@ VMOTION_PORT = 8000
 ISCSI_PORT = 3260
 SSH_PORT = 2222
 OPENSLP_PORT = 4227
-
+SERVER_IP = ""
 # Creds
 VALID_USERS = {
     "root": "root",
@@ -15,10 +15,10 @@ VALID_USERS = {
 }
 
 # path to RSA key pub
-RSA_PUB_KEY_PATH = "/app/Services"  
+RSA_PUB_KEY_PATH = "/app/Services/abc.pub"  
 
 # path to RSA key
-RSA_KEY_PATH = "/app/Services"
+RSA_KEY_PATH = "/app/Services/abc"
 
 #SSH Banner
 SSH_BANNER = b"""OpenSSH 8.3 (protocol 2.0)"""
@@ -38,9 +38,6 @@ see www.vmware.com/go/sysadmintools for details.\r
 The ESXi Shell can be disabled by an administrative user. See the\r
 vSphere Security documentation for more information.\r"""
 
-
-LOG_ROOT = "/app/Logs"
-
 POC_DATABASE = {
     "ESXiArgs": {
         "signature": "'arg1' : b'127.0.0.1'", # The characteristic string in the request
@@ -51,4 +48,8 @@ POC_DATABASE = {
 # SSH Fingerprint 
 from utils import get_ssh_fingerprint_from_file
 SSH_FINGERPRINT = get_ssh_fingerprint_from_file(RSA_KEY_PATH)
+
+LOG_ROOT = '/app/Logs'  # Path to your log directory 
+SPLUNK_HOST = '208.100.26.134'  # Replace with your Splunk server's address 
+SPLUNK_PORT = 514   # Default port for Splunk UDP input (adjust if needed)
 
