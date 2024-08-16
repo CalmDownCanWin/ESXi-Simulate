@@ -10,7 +10,7 @@ from ESXi_config import create_flat_vmdk
 from ESXi_config import create_log_file
 from ESXi_config import generate_random_string
 from ESXi_config import create_fake_file
-from ESXi_config import create_symlinks
+# from ESXi_config import create_symlinks
 from ESXi_config import create_directory
 
 # Definition of Uuid configuration and link for each ESXI
@@ -112,8 +112,10 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
     volumes_path = os.path.join(vmfs_path, "volumes")
     os.makedirs(volumes_path, exist_ok=True)
 
-    device_symlinks = {"devices": "/dev/"}
-    create_symlinks(vmfs_path,device_symlinks)
+    create_config_file(vmfs_path,"devices",generate_random_string(10))
+
+    # device_symlinks = {"devices": "/dev/"}
+    # create_symlinks(vmfs_path,device_symlinks)
 
     # Create Folder cho các UUID
     for uuid_name, uuid_str in esxi_config.items():
@@ -280,7 +282,7 @@ def create_esx_vmfs(base_path, esxi_name, create_windows=True, create_kali_ubunt
                     
     
     # Create symbolic link
-    create_symlinks(volumes_path, esxi_config["SYMLINKS"])
+    # create_symlinks(volumes_path, esxi_config["SYMLINKS"])
     
     # Print out LS -LA results
     if print_uuids:
