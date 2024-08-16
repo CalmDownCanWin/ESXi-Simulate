@@ -13,7 +13,7 @@ from datetime import datetime
 
 from Settings.config import SSH_PORT, VALID_USERS, SERVER_BANNER, RSA_KEY_PATH, RSA_PUB_KEY_PATH, LOG_ROOT
 from Settings.utils import send_message_to_soc, log_event, DisconnectException
-from Log.Log_to_Splunk import log_command, log_recon, log_login
+from Logs.Log_to_Splunk import log_command, log_recon, log_login
 
 from Shell_Commands import ESXi_fs as fs
 from Shell_Commands.test_cat import ESXiCatCommand
