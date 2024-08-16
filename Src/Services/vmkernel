@@ -2,8 +2,8 @@ import socket
 import threading
 import random
 import time
-from config import VMOTION_PORT, ISCSI_PORT
-from utils import send_message_to_soc, generate_random_mac
+from Settings.config import VMOTION_PORT, ISCSI_PORT
+from Settings.utils import send_message_to_soc, generate_random_mac
 
 # --- vMotion Deception ---
 
