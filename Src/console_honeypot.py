@@ -172,7 +172,7 @@ def show_logs():
         if status == "running":
             log_file = Prompt.ask("Log File", choices=["attack_logs.json", "honeypot.log"], default="honeypot.log")
             try:
-                subprocess.run(["docker", "exec", hostname, "cat", f"/app/Log/{log_file}"], check=True)
+                subprocess.run(["docker", "exec", hostname, "cat", f"/app/Logs/{log_file}"], check=True)
             except subprocess.CalledProcessError:
                 print(f"[red]Error retrieving logs from '{log_file}' for honeypot '{hostname}'.[/]")
         else:
