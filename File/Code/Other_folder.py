@@ -42,6 +42,12 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
         "bootpart4kn.gz": 2147,
         "local.tgz": 2452,
         "local.tgz.ve": 245,
+        "altbootbank": 2,
+        "scratch": 2,
+        "store": 2,
+        "sbin": 2,
+        "locker": 2,
+        "productLocker": 2,
     }
     for bname, bsize in boot_file.items():
         create_config_file(base_path,bname,generate_random_string(bsize))
@@ -51,7 +57,6 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
         "productLocker": "/locker/packages/vmtoolsRepo",
         "scratch": "/var/lib/vmware/osdata",
         "store": "/var/lib/vmware/osdata/store",
-        "altbootbank": "/vmfs/volumes/f9d5c73b-6342cf19-18aa-76fbe3100cb8",
         "bootbank": "/vmfs/volumes/486b39d0-3b4db665-e593-83a193fc5192",
         "sbin": "/bin",
         
