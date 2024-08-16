@@ -1,8 +1,8 @@
 import socket
 import threading
-from config import DCUI_PORT, DCUI_BANNER
+from Settings.config import DCUI_PORT, DCUI_BANNER
 from command_handler import handle_command
-from utils import send_message_to_soc
+from Settings.utils import send_message_to_soc
 
 def handle_dcui_client(client_socket, address):
     """DCUI connection handling."""
