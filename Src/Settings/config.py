@@ -15,10 +15,10 @@ VALID_USERS = {
 }
 
 # path to RSA key pub
-RSA_PUB_KEY_PATH = ""  
+RSA_PUB_KEY_PATH = "/app/Services"  
 
 # path to RSA key
-RSA_KEY_PATH = ""
+RSA_KEY_PATH = "/app/Services"
 
 #SSH Banner
 SSH_BANNER = b"""OpenSSH 8.3 (protocol 2.0)"""
@@ -39,7 +39,7 @@ The ESXi Shell can be disabled by an administrative user. See the\r
 vSphere Security documentation for more information.\r"""
 
 
-LOG_ROOT = ""
+LOG_ROOT = "/app/Logs"
 
 POC_DATABASE = {
     "ESXiArgs": {

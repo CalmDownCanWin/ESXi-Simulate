@@ -379,7 +379,7 @@ def handle_client(client_socket, client_address):
             #time.sleep(7)
             chan.send(SERVER_BANNER + b"\r\n\n")
             
-            fs_honeypot = fs.SimpleFS(root="")
+            fs_honeypot = fs.SimpleFS(root="/app/data")
             handle_esxi_honeypot(chan, client_ip, fs_honeypot)
             
             
