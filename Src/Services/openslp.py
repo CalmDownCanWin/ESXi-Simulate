@@ -7,27 +7,14 @@ import threading
 import random
 import time
 import re
-import sys
+import argparse
+
+from Settings.config import OPENSLP_PORT, POC_DATABASE, LOG_ROOT
+from Settings.utils import send_message_to_soc, log_event
 from ssh2 import handle_esxi_honeypot, fs_honeypot
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'Shell_Commands')))  # Thêm thư mục cha vào đường dẫn
-
-import ESXi_fs as fs  # Bây giờ bạn sẽ có thể import ESXi_fs
-from scapy.all import *
-from config import OPENSLP_PORT, SERVER_IP, POC_DATABASE
-from utils import send_message_to_soc, log_event
-from ssh2 import handle_esxi_honeypot, fs_honeypot
-
-REVERSE_SHELL_REGEXES = [
-    r"nc -e /bin/sh (.*?) (\d+)",
-    r"bash -i >& /dev/tcp/(.*?)/(\d+) 0>&1",
-    r"python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect((\"(.*?)\",)?(\d+));os.dup2(s.fileno(),0); os.dup2(s.fileno(),1); os.dup2(s.fileno(),2);p=subprocess.call([\"/bin/sh\",\"-i\"]);'",
-    # regex reverse shell
-]    
-
 
 # --- OpenSLP Deception ---
 
-# Danh sách các service giả mạo
 FAKE_SERVICES = [
     {
         "service_type": "service:test",
@@ -39,26 +26,13 @@ FAKE_SERVICES = [
         "service_url": "https://fake-esxi.local/example",
         "attributes": "(attr3=val3)",
     },
-    # Thêm các service giả mạo khác
+    
 ]
 
 # --- ESXi Shell Mocking ---
-def extract_ip_port(request_str):
-    """Trích xuất địa chỉ IP và cổng từ payload reverse shell."""
-    for regex in REVERSE_SHELL_REGEXES:
-        match = re.search(regex, request_str)
-        if match:
-            try:
-                attacker_ip = match.group(1)
-                attacker_port = int(match.group(2))
-                return attacker_ip, attacker_port
-            except:
-                return None, None
-    return None, None
-
 def handle_esxi_shell(client_socket, address):
-    """Mô phỏng shell của ESXi."""
-    log_event(f"[ESXi Shell] Kết nối từ {address}")
+    """Emulate ESXI Shell."""
+    log_event(f"[ESXi Shell] Connection from {address}")
 
     # Tạo pseudo-terminal và thực thi shell của honeypot
     master, slave = pty.openpty()
@@ -86,47 +60,6 @@ def handle_esxi_shell(client_socket, address):
 
     shell_process.terminate()
     client_socket.close()
-    
-def handle_fake_shell(client_socket, address):
-    """Xử lý shell giả lập."""
-    log_event(f"[Fake Shell] Kết nối từ {address}")
-
-    client_ip = address[0]
-    fs_instance = fs.SimpleFS(root="")  # Tạo instance filesystem giả lập
-
-    # Mô phỏng shell
-    try:
-        channel = client_socket  # Sử dụng socket trực tiếp làm channel
-        channel.send(b"Welcome to the fake shell!\r\n")
-        channel.send(b"[root@fake-esxi:~] # ")  # Prompt giả mạo
-
-        while True:
-            try:
-                command = channel.recv(1024).decode().strip()
-                if not command:
-                    break
-                if command.lower() == 'exit':
-                    channel.send(b"Goodbye!\r\n")
-                    break
-
-                log_event(f"[Fake Shell] {address} - Command: {command}")
-                send_message_to_soc(f"[Fake Shell] {address} - Command: {command}")
-
-                # Sử dụng command_handler để xử lý lệnh
-                response = handle_command(command, "SSH", address)  # Giả sử sử dụng command_handler của SSH
-
-                # Mô phỏng độ trễ ngẫu nhiên
-                time.sleep(random.uniform(0.1, 0.5))
-
-                channel.send(response.encode() + b"\r\n")
-                channel.send(b"[root@fake-esxi:~] # ") 
-            except Exception as e:
-                logging.exception(f"[Fake Shell] Error during command processing:")
-                break
-    except Exception as e:
-        logging.exception(f"[Fake Shell] Error handling connection from {address}:")
-    finally:
-        client_socket.close()
 
 # def handle_openslp_request_udp(data, address):
 #     """Xử lý yêu cầu OpenSLP giả mạo (UDP)."""
@@ -195,7 +128,7 @@ def handle_fake_shell(client_socket, address):
 #         log_event(f"[OpenSLP] Error handling request: {e}", level=logging.ERROR)
 
 def handle_openslp_exploit(client_socket, address):
-    """Mô phỏng khai thác lỗ hổng OpenSLP và tạo shell."""
+    """Simulate exploiting vulnerability and spawning shell!"""
     client_ip = address[0]
     print(f"[OpenSLP Exploit] Kết nối từ {address}")
     log_event(f"[OpenSLP Exploit] Kết nối từ {address}")
@@ -213,14 +146,15 @@ def handle_openslp_exploit(client_socket, address):
         log_event(f"[OpenSLP Exploit] Exploit successful! Spawning shell for {address}...")
 
         # Tạo shell giả lập
-        #handle_esxi_honeypot(client_socket, client_ip, fs_honeypot)
+        handle_esxi_honeypot(client_socket, client_ip, fs_honeypot)
 
     except Exception as e:
         log_event(f"[OpenSLP Exploit] Error: {e}", level=logging.ERROR)
         client_socket.close()
-MARKER = b"\xef\xbe\xad\xde"
+
+
 def handle_openslp_request(client_socket, address):
-    """Xử lý yêu cầu OpenSLP giả mạo (TCP)."""
+    """Request is coming!"""
 
     try:
         data = client_socket.recv(1024)
@@ -233,21 +167,17 @@ def handle_openslp_request(client_socket, address):
                 log_event(f"[OpenSLP] Detected PoC: {poc_name} from {address} with signature: {poc_info['signature']}")
                 send_message_to_soc(f"[OpenSLP] Detected PoC: {poc_name} from {address} with signature: {poc_info['signature']}")
                 # Ghi log vào honeypot.log
-                with open("honeypot.log", "a") as f:
+                with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
                     f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Detected PoC: {poc_name}\n")
-                with open("honeypot.log", "a") as f:
+                with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
                     f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
                 # Bắt đầu thread xử lý shell của ESXi giả mạo
-                #threading.Thread(target=handle_esxi_shell, args=(client_socket, address)).start()
+                threading.Thread(target=handle_esxi_shell, args=(client_socket, address)).start()
                 return
         
         # Phân tích yêu cầu và trích xuất thông tin
         request_parts = request_str.split(" ")
         request_type = request_parts[0]
-        print ("request_type:",request_type)
-        attacker_ip, attacker_port = extract_ip_port(request_str)
-        print("attack ip: ",attacker_ip)
-        
         
         # Xử lý các request OpenSLP thông thường
         if request_type == "SrvRqst":
@@ -258,27 +188,7 @@ def handle_openslp_request(client_socket, address):
             # Yêu cầu lấy thuộc tính của service
             fake_response = b"AttrRply (attr1=fake),(attr2=value)\r\n"
         else:
-            if len(data) > 10:
-                client_socket.send(MARKER)
-                log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
-                log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
-                # Ghi payload vào file honeypot.log
-                with open("honeypot.log", "a") as f:
-                    f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
-
-                # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
-                if attacker_ip and attacker_port:
-                    log_event(f"[OpenSLP] Detected reverse shell attempt to {attacker_ip}:{attacker_port}")
-                    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-                        sock.connect((attacker_ip, attacker_port))
-                        client_ip = address[0]
-                        fs_instance = fs.SimpleFS(root="/home/iaw301/")
-                        threading.Thread(target=handle_fake_shell, args=(sock, address)).start() # Sử dụng sock mới
-                        return
-                handle_openslp_exploit(client_socket, address)
-                return    
-            else:
-            	fake_response = b"OpenSLP-Error: Unsupported request type\r\n"
+            fake_response = b"OpenSLP-Error: Unsupported request type\r\n"
 
         client_socket.send(fake_response)
 
@@ -295,21 +205,18 @@ def handle_openslp_request(client_socket, address):
                     log_event(f"[OpenSLP] Error decoding request: Unable to decode data.", level=logging.ERROR)
                     return
 
-        # if len(data) > 10:
-        #     client_socket.send(MARKER)
-        #     log_event(f"[OpenSLP] Sent marker to {address} (payload size: {len(data)})")
-        #     log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
-        #     # Ghi payload vào file honeypot.log
-        #     with open("honeypot.log", "a") as f:
-        #         f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
+        if len(data) > 10:
+            log_event(f"[OpenSLP] Detected potential ESXi exploit attempt.")
+            # Ghi payload vào file honeypot.log
+            with open(os.path.join(LOG_ROOT,"honeypot.log"), "a") as f:
+                f.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] - {address}: Payload: {data.hex()}\n")
 
-        #     # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
-        #     handle_openslp_exploit(client_socket, address)
-        #     return      
+            # Chuyển sang xử lý mô phỏng khai thác lỗ hổng
+            handle_openslp_exploit(client_socket, address)
+            return      
 
         log_event(f"[OpenSLP] Request from {address}: {request_str}")  # Ghi log request
         send_message_to_soc(f"[OpenSLP] Request from {address}: {request_str}")
-        
 
         # Kiểm tra PoC
         for poc_name, poc_info in POC_DATABASE.items():
@@ -322,19 +229,20 @@ def handle_openslp_request(client_socket, address):
 
         # Kiểm tra xem payload có lớn hơn 10 byte hay không
 
+
+
     except UnicodeDecodeError as e:
         log_event(f"[OpenSLP] Error decoding request from {address}: {e}", level=logging.ERROR)
     except Exception as e:
         log_event(f"[OpenSLP] Error handling request: {e}", level=logging.ERROR)
 
-
-def run_openslp_server():
-    """Khởi động OpenSLP server giả mạo."""
+def run_openslp_server(SERVER_IP):
+    """Start Server"""
     # Khởi tạo server TCP
     sock_tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock_tcp.bind((SERVER_IP, OPENSLP_PORT))
     sock_tcp.listen(1)
-    print(f"[OpenSLP] OpenSLP giả mạo đang lắng nghe trên cổng {OPENSLP_PORT} (TCP)")
+    print(f"[OpenSLP] OpenSLP is listening on port {OPENSLP_PORT} (TCP)")
     log_event(f"[OpenSLP] OpenSLP server started on port {OPENSLP_PORT} (TCP)")
 
     while True:
@@ -348,4 +256,10 @@ def run_openslp_server():
 
 
 if __name__ == "__main__":
-    run_openslp_server()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-a', '--address', type=str, required=True, help='IP Address')
+    args = parser.parse_args()
+    try:
+        threading.Thread(target=run_openslp_server, args=(args.address,)).start()
+    except KeyboardInterrupt:
+        print(f"\nTerminated.....")
