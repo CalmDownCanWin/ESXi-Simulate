@@ -57,17 +57,6 @@ def create_hosts_file(path):
 
     create_config_file(path, "hosts", content)
 
-def create_fake_datastore(base_path, datastore_name,size_gb):
-    """Simulate the Datastore by creating folders and files. """
-    datastore_path = os.path.join(base_path, "vmfs", "volumes", datastore_name)
-    os.makedirs(datastore_path, exist_ok=True)
-    # Check if there is a file in Datastore_path directory
-    if os.listdir(datastore_path):
-        return 
-    filename = str(uuid.uuid4())  #Create random uuid
-    with open(os.path.join(datastore_path, filename), 'w') as f:
-        f.write(f"Fake Size: {size_gb} GB\n")  # More fake size information
-
 def create_sshd_config(path, fake_port=None, allowed_ips=None):
     """Create file/etc/ssh/sshd_config."""
     content = f"""

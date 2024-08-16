@@ -3,7 +3,6 @@ import os
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
-from ESXi_config import create_symlinks
 
 
 
@@ -51,18 +50,5 @@ crx.v00       i40en.v00     k.b00         lsuv2_ls.v00  nfnic.v00     nvmetcp.v0
     }
     for bname, bsize in boot_file.items():
         create_config_file(base_path,bname,generate_random_string(bsize))
-
-    my_symlinks = {
-        "locker": "/var/lib/vmware/osdata/locker",
-        "productLocker": "/locker/packages/vmtoolsRepo",
-        "scratch": "/var/lib/vmware/osdata",
-        "store": "/var/lib/vmware/osdata/store",
-        "bootbank": "/vmfs/volumes/486b39d0-3b4db665-e593-83a193fc5192",
-        "sbin": "/bin",
-        
-        
-        
-        }
-    create_symlinks(base_path,my_symlinks)
 
 
