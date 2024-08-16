@@ -63,6 +63,10 @@ LUAGA - ESXi Honeypot, a deceptive system designed to emulate a VMware ESXi serv
   ```cmd
   git clone https://github.com/TTSB3K30/ESXi-Simulate.git
   ```
-- Go to folder `File/Code` and run `Main.py` to create Filesystem 
+- Go to folder `File/Code` and run `Main.py` to create Filesystem
+- Make sure that you create SSH key-pair in `Src/Services` with:
+  ```cmd
+  ssh-keygen -t rsa
+  ```
 - Go to `Src` and build image with `Dockerfile`
 - Run `console` to build your ESXI-Honeypot
