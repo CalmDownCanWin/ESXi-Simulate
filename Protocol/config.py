@@ -6,6 +6,11 @@ HTTPS_PORT = 443
 VMOTION_PORT = 8000
 ISCSI_PORT = 3260
 
+DCUI_PORT = 5900
+DCUI_BANNER = b"""
+DCUI: VMware ESXi 7.5.0 (Build 5969303)
+"""
+
 # Valid user and corresponding password
 SSH_PORT = 22
 VALID_USERS = {
