@@ -61,7 +61,7 @@ def handle_esxi_shell(client_socket, address):
     client_socket.close()
 
 def handle_openslp_exploit(client_socket, address):
-    "" "Simulation of OpenSLP gap and creating shell." ""
+    """Simulation of OpenSLP gap and creating shell."""
     client_ip = address[0]
     print(f"[OpenSLP Exploit] Connection {address}")
     log_event(f"[OpenSLP Exploit] Connection {address}")
@@ -86,7 +86,7 @@ def handle_openslp_exploit(client_socket, address):
         client_socket.close()
 MARKER = b"\xef\xbe\xad\xde"
 def handle_openslp_request(client_socket, address):
-    "" "Processing fake OpenSLP requirements (TCP)." ""
+    """Processing fake OpenSLP requirements (TCP)."""
 
     try:
         data = client_socket.recv(1024)
@@ -169,7 +169,7 @@ def handle_openslp_request(client_socket, address):
 
 
 def run_openslp_server():
-    "" "Open OpenSLP server fake." "" "
+    """Open OpenSLP server fake."""
     # Starting TCP server
     sock_tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     sock_tcp.bind((SERVER_IP, OPENSLP_PORT))
