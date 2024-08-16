@@ -7,6 +7,7 @@ from ESXi_config import create_directory
 from ESXi_config import create_hosts_file
 from ESXi_config import create_vmware_lic
 from ESXi_config import generate_random_string
+# from ESXi_config import create_symlinks
 
 def create_esx_etc(base_path,IP,config_type):
 
@@ -111,6 +112,11 @@ vSphere Security documentation for more information.
     }
     for vmname in etc_vmware_file:
         create_config_file(vmware_path,vmname,generate_random_string(12))
+
+    # my_symlinks = {
+    #     "pci.ids": "/usr/share/hwdata/pci.ids",
+    #     }
+    # create_symlinks(vmware_path,my_symlinks)
 
     #Folder vmwauth
     vmwauth_path = os.path.join(vmware_path, "vmwauth")
