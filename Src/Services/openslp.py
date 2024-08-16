@@ -257,7 +257,7 @@ def run_openslp_server(SERVER_IP):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argumentmentument('-a', '--address', type=str, required=True, help='IP Address')
+    parser.add_argument('-a', '--address', type=str, required=True, help='IP Address')
     args = parser.parse_args()
     try:
         threading.Thread(target=run_openslp_server, args=(args.address,)).start()
