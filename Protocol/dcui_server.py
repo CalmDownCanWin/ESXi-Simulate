@@ -5,9 +5,9 @@ from command_handler import handle_command
 from utils import send_message_to_soc
 
 def handle_dcui_client(client_socket, address):
-    """Xử lý kết nối DCUI."""
-    print(f"[DCUI] Kết nối từ {address}")
-    client_socket.send(DCUI_BANNER)  # Sử dụng DCUI_BANNER từ config
+    """DCUI connection handling."""
+    print(f"[DCUI] Connect from {address}")
+    client_socket.send(DCUI_BANNER) 
     client_socket.send(b"Enter username: ")
     username = client_socket.recv(1024).decode().strip()
     client_socket.send(b"Enter password: ")
@@ -24,21 +24,21 @@ def handle_dcui_client(client_socket, address):
             if not command:
                 break
 
-            # Sử dụng command_handler để xử lý lệnh
+            # Use command_handler to handle commands
             response = handle_command(command, "DCUI", address)
             client_socket.send(response.encode())
             client_socket.send(b"dcui> ")
         except Exception as e:
-            print(f"[DCUI] Lỗi: {e}")
+            print(f"[DCUI] Erro: {e}")
             break
     client_socket.close()
 
 def run_dcui_server():
-    """Khởi động DCUI server giả lập."""
+    """Start the DCUI emulator server."""
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-        sock.bind(('', DCUI_PORT))  # Sử dụng DCUI_PORT từ config
+        sock.bind(('', DCUI_PORT))
         sock.listen()
-        print(f"[DCUI] Honeypot DCUI đang lắng nghe trên cổng {DCUI_PORT}")
+        print(f"[DCUI] DCUI honeypot is listening on port {DCUI_PORT}")
         while True:
             client_socket, address = sock.accept()
             threading.Thread(target=handle_dcui_client, args=(client_socket, address)).start()
