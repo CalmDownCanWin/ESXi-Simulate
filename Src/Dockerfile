@@ -11,7 +11,8 @@ COPY setup.py /app
 #RUN apt-get update && apt-get install -y dnsutils 
 RUN pip install --no-cache-dir rich paramiko requests && \
     pip install . && \
-    rm -rf build *.egg-info
+    rm -rf build *.egg-info &&  \
+    pip install scapy
 
 # Filesystem 
 RUN mkdir /app/data
@@ -22,7 +23,7 @@ RUN mkdir /app/data
 
 ENV PYTHONPATH=/app/Shell_Commands:/app/Services:/app/Settings:/app/Logs 
 
-EXPOSE 2222 4227
+EXPOSE 2222 4227 514
 
 #RUNNING Honeypot
 CMD ["bash"] 
