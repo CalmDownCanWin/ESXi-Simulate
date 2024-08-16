@@ -47,7 +47,7 @@ class DeceptionHTTPServer(HTTPServer):
                                       keyfile=SSL_KEY)   
 
 def run_deception_server(port=HTTP_PORT): 
-    """Khởi động HTTP server cho deception."""
+    """Start HTTP server for deception."""
     server_address = ('', port)
     httpd = DeceptionHTTPServer(server_address, DeceptionHTTPRequestHandler)
     print(f"HTTP Server is listening to the gate {port}")
