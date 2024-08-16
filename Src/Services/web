@@ -4,7 +4,7 @@ import threading
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse, parse_qs
 import json
-from config import HTTP_PORT, FAKE_ESXI_INFO, SSL_CERT, SSL_KEY
+from Settings.config import HTTP_PORT, FAKE_ESXI_INFO, SSL_CERT, SSL_KEY
 
 class DeceptionHTTPRequestHandler(BaseHTTPRequestHandler):
     def do_GET(self):
