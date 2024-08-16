@@ -68,5 +68,6 @@ LUAGA - ESXi Honeypot, a deceptive system designed to emulate a VMware ESXi serv
   ```cmd
   ssh-keygen -t rsa
   ```
+- Add your key into `Src/config.py`
 - Go to `Src` and build image with `Dockerfile`
 - Run `console` to build your ESXI-Honeypot
