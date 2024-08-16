@@ -4,7 +4,7 @@ import random
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
-from ESXi_config import create_symlinks
+# from ESXi_config import create_symlinks
 
 
 
@@ -62,12 +62,13 @@ def create_esx_var(base_path):
         "sdrsInjector.pid",
         "storageRM.pid",
         "utmp",
+        "log",
     }
     for rfilen in r_file:
         create_config_file(run,rfilen,generate_random_string(1))
 
-    run_symlinks = {"log": "/scratch/log",}
-    create_symlinks(run,run_symlinks)
+    # run_symlinks = {"log": "/scratch/log",}
+    # create_symlinks(run,run_symlinks)
 
     cron = os.path.join(base_path,"var","spool","cron","crontabs")
     create_config_file(cron,".#root",generate_random_string(65))
@@ -133,18 +134,22 @@ def create_esx_var(base_path):
         "vltd.log": 1,
         "vvold.log": 1,
         "Xorg.log": 1,
+        "cache": 1,
+        "core": 1,
+        "tmp": 1,
+        "vmware": 1,
     }
     for filename, size in log_file.items():
         create_config_file(log_path,filename,generate_random_string(size))
     
-    my_symlinks = {
-        "cache": "/var/lib/vmware/osdata/cache",
-        "core": "/scratch/core",
-        "tmp": "/scratch/var/tmp/",
-        "vmware": "/scratch/vmware",
-    }
-    var = os.path.join(base_path,"var")
-    create_symlinks(var,my_symlinks)
+    # my_symlinks = {
+    #     "cache": "/var/lib/vmware/osdata/cache",
+    #     "core": "/scratch/core",
+    #     "tmp": "/scratch/var/tmp/",
+    #     "vmware": "/scratch/vmware",
+    # }
+    # var = os.path.join(base_path,"var")
+    # create_symlinks(var,my_symlinks)
 
 
 

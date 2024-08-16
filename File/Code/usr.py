@@ -3,7 +3,7 @@ import os
 from ESXi_config import create_directory
 from ESXi_config import create_config_file
 from ESXi_config import generate_random_string
-from ESXi_config import create_symlinks
+# from ESXi_config import create_symlinks
 
 def create_esx_usr(base_path):
     usr = os.path.join(base_path,"usr")
@@ -11,11 +11,11 @@ def create_esx_usr(base_path):
     create_config_file(usr,"bin",generate_random_string(1))
     create_config_file(usr,"sbin",generate_random_string(1))
 
-    my_symlinks = {
-        "bin": "/bin",
-        "sbin": "/bin",
-        }
-    create_symlinks(usr,my_symlinks)
+    # my_symlinks = {
+    #     "bin": "/bin",
+    #     "sbin": "/bin",
+    #     }
+    # create_symlinks(usr,my_symlinks)
 
 #Folder /usr/lib
     lib = os.path.join(usr,"lib")
