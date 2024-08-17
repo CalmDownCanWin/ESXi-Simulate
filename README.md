@@ -1,4 +1,4 @@
-# **LUAGA**
+# LUAGA
 
 ```python
 ╭───────────────── Console ──────────────────╮
@@ -31,10 +31,10 @@
 
 ```
 
-## Welcome to **LUAGA** 
+## Welcome to LUAGA
 Official repository for LUAGA - VMWare ESXi Honeypot
 
-## What is **LUAGA** 
+## What is LUAGA 
 LUAGA - ESXi Honeypot, a deceptive system designed to emulate a VMware ESXi server to attract and analyze ransomware attacks targeting this platform.
 
 ## Key Features 
@@ -64,10 +64,11 @@ LUAGA - ESXi Honeypot, a deceptive system designed to emulate a VMware ESXi serv
   git clone https://github.com/TTSB3K30/ESXi-Simulate.git
   ```
 - Go to folder `File/Code` and run `Main.py` to create Filesystem
+  
 - Make sure that you create SSH key-pair in `Src/Services` with:
   ```cmd
   ssh-keygen -t rsa
   ```
-- Add your key into `Src/config.py`
+- Add your key into `Src/Services/config.py`
 - Go to `Src` and build image with `Dockerfile`
 - Run `console` to build your ESXI-Honeypot
