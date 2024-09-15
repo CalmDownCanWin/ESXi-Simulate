@@ -1,4 +1,4 @@
-# VMWare ESXi Honeypot
+# ESXi Honeypot
 
 ```python
 ╭───────────────── Console ──────────────────╮
