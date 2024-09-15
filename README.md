@@ -1,4 +1,4 @@
-# LUAGA
+# VMWare ESXi Honeypot
 
 ```python
 ╭───────────────── Console ──────────────────╮
@@ -30,12 +30,6 @@
 └─────────────────┴────────────────────────────────────────┘
 
 ```
-
-## Welcome to LUAGA
-Official repository for LUAGA - VMWare ESXi Honeypot
-
-## What is LUAGA 
-LUAGA - ESXi Honeypot, a deceptive system designed to emulate a VMware ESXi server to attract and analyze ransomware attacks targeting this platform.
 
 ## Key Features 
 
